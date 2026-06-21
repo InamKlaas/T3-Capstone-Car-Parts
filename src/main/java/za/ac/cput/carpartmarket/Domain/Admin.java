@@ -2,7 +2,7 @@ package za.ac.cput.carpartmarket.Domain;
 
 public class Admin {
 
-    private Long adminId;
+    private String adminId;
     private String user;
     private String role;
     private String permissions;
@@ -31,12 +31,12 @@ public class Admin {
     }
 
     public static class Builder{
-        private Long adminId;
+        private String adminId;
         private String user;
         private String role;
         private String permissions;
 
-        public Builder setAdminId(Long adminId) {
+        public Builder setAdminId(String adminId) {
             this.adminId = adminId;
             return this;
         }
