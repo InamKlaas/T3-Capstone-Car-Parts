@@ -3,17 +3,16 @@ package za.ac.cput.carpartmarket.Domain;
 
 import jakarta.persistence.*;
 
-@Entity
-@Table(name = "seller")
+
 public class Seller {
 
-    @Id
+
     private Long sellerId;
 
-    @Embedded
+
     private Name sellerName;
 
-    @Embedded
+
     private User user;
 
     private String permissions;
