@@ -1,35 +1,40 @@
 package za.ac.cput.carpartmarket.Domain;
 
-public class User {
 
-    private String userId;
-    private String firstName;
-    private String lastName;
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Id;
+
+public class User {
+    @Id
+    private Long userid;
+
+    @Embedded
+    private Name name;
+
     private String email;
     private String password;
-    private String phoneNumber;
+    private double phoneNumber;
     private String createdAt;
 
-    private User(Builder builder){
-        this.userId = builder.userId;
-        this.firstName = builder.firstName;
-        this.lastName = builder.lastName;
+    protected User() {
+
+    }
+
+    public User(Builder builder) {
+        this.userid = builder.userid;
+        this.name = builder.name;
         this.email = builder.email;
         this.password = builder.password;
         this.phoneNumber = builder.phoneNumber;
         this.createdAt = builder.createdAt;
     }
 
-    public String getUserId() {
-        return userId;
+    public Long getUserid() {
+        return userid;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
+    public Name getName() {
+        return name;
     }
 
     public String getEmail() {
@@ -40,7 +45,7 @@ public class User {
         return password;
     }
 
-    public String getPhoneNumber() {
+    public double getPhoneNumber() {
         return phoneNumber;
     }
 
@@ -48,27 +53,33 @@ public class User {
         return createdAt;
     }
 
-    public static class Builder{
-        private String userId;
-        private String firstName;
-        private String lastName;
+    @Override
+    public String toString() {
+        return "User{" +
+                "userid=" + userid +
+                ", name=" + name +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", phoneNumber=" + phoneNumber +
+                ", createdAt='" + createdAt + '\'' +
+                '}';
+    }
+
+    public static class Builder {
+        private Long userid;
+        private Name name;
         private String email;
         private String password;
-        private String phoneNumber;
+        private double phoneNumber;
         private String createdAt;
 
-        public Builder setUserId(String userId) {
-            this.userId = userId;
+        public Builder setUserid(Long userid) {
+            this.userid = userid;
             return this;
         }
 
-        public Builder setFirstName(String firstName) {
-            this.firstName = firstName;
-            return this;
-        }
-
-        public Builder setLastName(String lastName) {
-            this.lastName = lastName;
+        public Builder setName(Name name) {
+            this.name = name;
             return this;
         }
 
@@ -82,7 +93,7 @@ public class User {
             return this;
         }
 
-        public Builder setPhoneNumber(String phoneNumber) {
+        public Builder setPhoneNumber(double phoneNumber) {
             this.phoneNumber = phoneNumber;
             return this;
         }
@@ -92,10 +103,9 @@ public class User {
             return this;
         }
 
-        public Builder copy(User user){
-            this.userId = user.userId;
-            this.firstName = user.firstName;
-            this.lastName = user.lastName;
+        public Builder copy(User user) {
+            this.userid = user.userid;
+            this.name = user.name;
             this.email = user.email;
             this.password = user.password;
             this.phoneNumber = user.phoneNumber;
@@ -103,20 +113,7 @@ public class User {
             return this;
         }
 
-        @Override
-        public String toString() {
-            return "Builder{" +
-                    "userId='" + userId + '\'' +
-                    ", firstName='" + firstName + '\'' +
-                    ", lastName='" + lastName + '\'' +
-                    ", email='" + email + '\'' +
-                    ", password='" + password + '\'' +
-                    ", phoneNumber='" + phoneNumber + '\'' +
-                    ", createdAt='" + createdAt + '\'' +
-                    '}';
-        }
-
-        public User build(){
+        public User build() {
             return new User(this);
         }
     }

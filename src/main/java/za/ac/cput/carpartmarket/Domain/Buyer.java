@@ -3,7 +3,7 @@ package za.ac.cput.carpartmarket.Domain;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "buyers")
+@Table(name = "buyer")
 public class Buyer {
 
     @Id
@@ -11,25 +11,27 @@ public class Buyer {
     private Long buyerId;
 
     @Embedded
+    private Name buyerName;
+
+    @Embedded
     private User user;
 
-
-    private Buyer(Builder builder) {
-        this.buyerId = builder.buyerId;
-        this.user = builder.user;
-
-    }
 
     protected Buyer() {
     }
 
-    private Buyer(Builder builder) {
+    public Buyer(Builder builder) {
         this.buyerId = builder.buyerId;
+        this.buyerName = builder.buyerName;
         this.user = builder.user;
     }
 
     public Long getBuyerId() {
         return buyerId;
+    }
+
+    public Name getBuyerName() {
+        return buyerName;
     }
 
     public User getUser() {
@@ -39,18 +41,26 @@ public class Buyer {
     @Override
     public String toString() {
         return "Buyer{" +
-                "buyerId=" + buyerId +
-                ", user=" + '}';
+                "buyerid=" + buyerId +
+                ", buyerName=" + buyerName +
+                ", user=" + user +
+                '}';
 
     }
         public static class Builder {
             private Long buyerId;
+            private Name buyerName;
             private User user;
 
             public Builder setBuyerId(Long buyerId) {
                 this.buyerId = buyerId;
                 return this;
             }
+            public Builder setBuyerName(Name buyerName) {
+                this.buyerName= buyerName;
+                return this;
+            }
+
 
             public Builder setUser(User user) {
                 this.user = user;
@@ -60,7 +70,8 @@ public class Buyer {
             public Builder copy() {
                 return new Builder()
                         .setBuyerId(this.buyerId)
-                        .setUser(this.user)
+                        .setBuyerName(this.buyerName)
+                        .setUser(this.user);
 
             }
 
@@ -69,4 +80,3 @@ public class Buyer {
             }
         }
     }
-}
