@@ -1,9 +1,5 @@
 package za.ac.cput.carpartmarket.Domain;
 
-import jakarta.persistence.Embeddable;
-
-
-@Embeddable
 public class Name {
     private String firstName;
     private String lastName;
