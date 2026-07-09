@@ -66,8 +66,8 @@ public class Admin {
 
         @Override
         public String toString() {
-            return "Builder{" +
-                    "adminId=" + adminId +
+            return "Admin{" +
+                    "adminId='" + adminId + '\'' +
                     ", user='" + user + '\'' +
                     ", role='" + role + '\'' +
                     ", permissions='" + permissions + '\'' +

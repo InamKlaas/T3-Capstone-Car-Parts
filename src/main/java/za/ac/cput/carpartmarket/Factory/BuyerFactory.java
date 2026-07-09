@@ -1,9 +1,9 @@
-package za.ac.cput.carpartmarket.factory;
+package za.ac.cput.carpartmarket.Factory;
 
 import za.ac.cput.carpartmarket.Domain.Buyer;
 import za.ac.cput.carpartmarket.Domain.Name;
 import za.ac.cput.carpartmarket.Domain.User;
-import za.ac.cput.carpartmarket.util.Helper;
+import za.ac.cput.carpartmarket.Util.Helper;
 
 public class BuyerFactory {
 

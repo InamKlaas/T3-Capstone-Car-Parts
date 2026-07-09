@@ -9,7 +9,7 @@ public class User {
 
     private String email;
     private String password;
-    private double phoneNumber;
+    private String phoneNumber;
     private String createdAt;
 
     protected User() {
@@ -41,7 +41,7 @@ public class User {
         return password;
     }
 
-    public double getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
@@ -66,7 +66,7 @@ public class User {
         private Name name;
         private String email;
         private String password;
-        private double phoneNumber;
+        private String phoneNumber;
         private String createdAt;
 
         public Builder setUserid(Long userid) {
@@ -89,7 +89,7 @@ public class User {
             return this;
         }
 
-        public Builder setPhoneNumber(double phoneNumber) {
+        public Builder setPhoneNumber(String phoneNumber) {
             this.phoneNumber = phoneNumber;
             return this;
         }
