@@ -1,8 +1,8 @@
-package za.ac.cput.carpartmarket.factory;
+package za.ac.cput.carpartmarket.Factory;
 
 import za.ac.cput.carpartmarket.Domain.Order;
 import za.ac.cput.carpartmarket.Domain.Transaction;
-import za.ac.cput.carpartmarket.util.Helper;
+import za.ac.cput.carpartmarket.Util.Helper;
 
 import java.time.LocalDateTime;
 

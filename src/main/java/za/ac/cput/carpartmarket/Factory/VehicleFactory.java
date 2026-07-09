@@ -1,7 +1,7 @@
-package za.ac.cput.carpartmarket.factory;
+package za.ac.cput.carpartmarket.Factory;
 
 import za.ac.cput.carpartmarket.Domain.Vehicle;
-import za.ac.cput.carpartmarket.util.Helper;
+import za.ac.cput.carpartmarket.Util.Helper;
 
 public class VehicleFactory {
 

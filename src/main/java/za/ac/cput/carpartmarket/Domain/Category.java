@@ -53,7 +53,7 @@ public class Category {
 
         @Override
         public String toString() {
-            return "Builder{" +
+            return "Category{" +
                     "categoryId='" + categoryId + '\'' +
                     ", categoryName='" + categoryName + '\'' +
                     ", description='" + description + '\'' +

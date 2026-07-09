@@ -1,6 +1,8 @@
-package za.ac.cput.carpartmarket.util;
+package za.ac.cput.carpartmarket.Util;
 
 import org.apache.commons.validator.routines.EmailValidator;
+
+import java.util.UUID;
 
 public class Helper {
     public static boolean isEmptyOrNull(String str){
@@ -37,5 +39,15 @@ public class Helper {
             return false;
         }
         return mobile.matches("\\d{10}");
+    }
+
+    public static boolean isNullOrEmpty(String user) {
+        return user == null || user.trim().isEmpty();
+    }
+
+
+
+    public static String generateId() {
+        return UUID.randomUUID().toString();
     }
 }
