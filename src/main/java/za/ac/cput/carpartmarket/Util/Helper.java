@@ -5,6 +5,14 @@ import org.apache.commons.validator.routines.EmailValidator;
 import java.util.UUID;
 
 public class Helper {
+
+    private static Helper instance;
+    public static Helper getInstance(){
+        if(instance == null){
+            instance = new Helper();
+        }
+        return instance;
+    }
     public static boolean isEmptyOrNull(String str){
         if(str == null || str.isEmpty()){
             return true;
@@ -34,6 +42,7 @@ public class Helper {
     }
 
 
+
     public static boolean isValidMobile(String mobile) {
         if (mobile == null) {
             return false;
@@ -45,9 +54,14 @@ public class Helper {
         return user == null || user.trim().isEmpty();
     }
 
-
-
     public static String generateId() {
         return UUID.randomUUID().toString();
+    }
+
+    public static boolean isValidPostalCode(int postalCode){
+        if (postalCode < 1000 || postalCode > 9999){
+            return false;
+        }
+        return true;
     }
 }
