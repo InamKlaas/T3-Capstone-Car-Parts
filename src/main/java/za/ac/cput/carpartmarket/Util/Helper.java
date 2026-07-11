@@ -64,4 +64,11 @@ public class Helper {
         }
         return true;
     }
+
+    public static boolean isValidCvv(int cvv){
+        if (cvv < 100 || cvv > 999){
+            return false;
+        }
+        return true;
+    }
 }
