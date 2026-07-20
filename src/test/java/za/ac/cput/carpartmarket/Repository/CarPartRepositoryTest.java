@@ -2,6 +2,9 @@ package za.ac.cput.carpartmarket.Repository;
 
 import org.junit.jupiter.api.*;
 
+import za.ac.cput.carpartmarket.Domain.CarPart;
+import za.ac.cput.carpartmarket.Factory.CarPartFactory;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
