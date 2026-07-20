@@ -1,18 +1,21 @@
 package za.ac.cput.carpartmarket.Domain;
 
+import jakarta.persistence.Id;
+
 public class PaymentMethod {
+    @Id
     private String methodId;
     private Buyer buyer;
     private String type;
     private String provider;
-    private int lastDigits;
+    private int cvv;
 
     public PaymentMethod(Builder builder){
         this.methodId = builder.methodId;
         this.buyer = builder.buyer;
         this.type = builder.type;
         this.provider = builder.provider;
-        this.lastDigits = builder.lastDigits;
+        this.cvv = builder.cvv;
     }
 
     public String getMethodId() {
@@ -31,8 +34,8 @@ public class PaymentMethod {
         return provider;
     }
 
-    public int getLastDigits() {
-        return lastDigits;
+    public int getcvv() {
+        return cvv;
     }
 
     @Override
@@ -42,7 +45,7 @@ public class PaymentMethod {
                 ", buyer=" + buyer +
                 ", type='" + type + '\'' +
                 ", provider='" + provider + '\'' +
-                ", lastDigits=" + lastDigits +
+                ", cvv=" + cvv +
                 '}';
     }
 
@@ -51,7 +54,7 @@ public class PaymentMethod {
         private Buyer buyer;
         private String type;
         private String provider;
-        private int lastDigits;
+        private int cvv;
 
         public Builder setMethodId(String methodId) {
             this.methodId = methodId;
@@ -73,8 +76,8 @@ public class PaymentMethod {
             return this;
         }
 
-        public Builder setLastDigits(int lastDigits) {
-            this.lastDigits = lastDigits;
+        public Builder setcvv(int cvv) {
+            this.cvv = cvv;
             return this;
         }
 
@@ -83,7 +86,7 @@ public class PaymentMethod {
             this.buyer = paymentMethod.buyer;
             this.type = paymentMethod.type;
             this.provider = paymentMethod.provider;
-            this.lastDigits = paymentMethod.lastDigits;
+            this.cvv = paymentMethod.cvv;
             return this;
         }
 
