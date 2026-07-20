@@ -1,18 +1,10 @@
 package za.ac.cput.carpartmarket.Repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import za.ac.cput.carpartmarket.Domain.User;
 
 import java.util.List;
 
-public interface IUserRepository {
+public interface IUserRepository extends JpaRepository<User,Long> {
 
-    User create(User user);
-
-    User read(Long userId);
-
-    User update(User user);
-
-    boolean delete(Long userId);
-
-    List<User> getAll();
 }
