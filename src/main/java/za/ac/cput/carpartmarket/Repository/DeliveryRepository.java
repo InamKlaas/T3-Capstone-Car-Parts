@@ -1,5 +1,7 @@
 package za.ac.cput.carpartmarket.Repository;
 
+import za.ac.cput.carpartmarket.Domain.Delivery;
+
 import java.util.ArrayList;
 import java.util.List;
 
