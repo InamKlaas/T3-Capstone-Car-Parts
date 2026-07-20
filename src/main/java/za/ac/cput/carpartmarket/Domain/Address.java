@@ -1,6 +1,9 @@
 package za.ac.cput.carpartmarket.Domain;
 
+import jakarta.persistence.Id;
+
 public class Address {
+    @Id
     private String streetNumber;
     private Long userId;
     private String suburb;
