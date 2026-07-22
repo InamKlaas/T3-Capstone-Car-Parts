@@ -1,5 +1,6 @@
 package za.ac.cput.carpartmarket.Factory;
 
+import za.ac.cput.carpartmarket.Domain.CarPart;
 import za.ac.cput.carpartmarket.Util.Helper;
 
 public class CarPartFactory {

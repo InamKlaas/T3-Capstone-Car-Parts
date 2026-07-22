@@ -1,18 +1,11 @@
 package za.ac.cput.carpartmarket.Repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import za.ac.cput.carpartmarket.Domain.Admin;
 
 import java.util.List;
 
-public interface IAdminRepository {
+public interface IAdminRepository extends JpaRepository<Admin,String> {
 
-    Admin create(Admin admin);
 
-    Admin read(String adminId);
-
-    Admin update(Admin admin);
-
-    boolean delete(String adminId);
-
-    List<Admin> getAll();
 }
