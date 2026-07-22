@@ -1,9 +1,11 @@
 package za.ac.cput.carpartmarket.Service;
 
-public interface IService <T,ID>{
+public interface IService <T, ID> {
     T create(T t);
-    T read(ID id);
-    T update(T t);
-    void delete(ID id);
 
+    T read(ID id);
+
+    T update(T t);
+
+    boolean delete(ID id);
 }
