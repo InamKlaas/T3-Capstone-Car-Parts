@@ -1,16 +1,10 @@
 package za.ac.cput.carpartmarket.Repository;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import za.ac.cput.carpartmarket.Domain.CarPart;
+
 import java.util.List;
 
-public interface ICarPartRepository {
+public interface ICarPartRepository extends JpaRepository<CarPart,Long> {
 
-    CarPart create(CarPart carPart);
-
-    CarPart read(Long carPartId);
-
-    CarPart update(CarPart carPart);
-
-    boolean delete(Long carPartId);
-
-    List<CarPart> getAll();
 }
