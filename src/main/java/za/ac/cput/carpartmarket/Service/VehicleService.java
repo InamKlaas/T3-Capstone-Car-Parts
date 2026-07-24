@@ -26,8 +26,9 @@ public class VehicleService implements IVehicleService{
     }
 
     @Override
-    public void delete(Long vehicleId) {
+    public boolean delete(Long vehicleId) {
         repository.deleteById(vehicleId);
+        return true;
 
     }
 }
