@@ -5,3 +5,5 @@ import za.ac.cput.carpartmarket.Domain.Order;
 
 public interface OrderRepository extends JpaRepository<Order,Long> {
 }
+
+
