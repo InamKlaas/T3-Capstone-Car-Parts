@@ -1,7 +1,10 @@
 package za.ac.cput.carpartmarket.Domain;
 
+import jakarta.persistence.Id;
+
 public class Delivery {
 
+    @Id
     private Long deliveryId;
     private Long orderId;
     private Long addressId;
