@@ -1,6 +1,9 @@
 package za.ac.cput.carpartmarket.Domain;
 
+import jakarta.persistence.Id;
+
 public class CarPart {
+    @Id
     private Long carPartId;
     private String partName;
     private String description;
@@ -137,5 +140,3 @@ public class CarPart {
         }
     }
 }
-
-

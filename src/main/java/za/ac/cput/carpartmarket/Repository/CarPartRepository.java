@@ -7,4 +7,5 @@ import za.ac.cput.carpartmarket.Domain.CarPart;
 @Repository
 public interface CarPartRepository extends JpaRepository<CarPart, Long> {
 
+    CarPart findByPartName(String partName);
 }
