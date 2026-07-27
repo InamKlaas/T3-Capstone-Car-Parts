@@ -7,4 +7,5 @@ import za.ac.cput.carpartmarket.Domain.Delivery;
 @Repository
 public interface DeliveryRepository extends JpaRepository<Delivery, Long> {
 
+    Delivery findByTrackingNumber(String trackingNumber);
 }
