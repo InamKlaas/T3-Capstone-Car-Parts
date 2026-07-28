@@ -1,14 +1,22 @@
 package za.ac.cput.carpartmarket.Domain;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
+@Entity
 public class PaymentMethod {
     @Id
     private String methodId;
+    @ManyToOne
+    @JoinColumn(name = "buyer_name")
     private Buyer buyer;
     private String type;
     private String provider;
     private int cvv;
+
+    public PaymentMethod() {}
 
     public PaymentMethod(Builder builder){
         this.methodId = builder.methodId;

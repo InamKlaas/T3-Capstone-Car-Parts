@@ -1,11 +1,17 @@
 package za.ac.cput.carpartmarket.Domain;
 
-public class Admin {
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
+@Entity
+public class Admin {
+@Id
     private String adminId;
     private String user;
     private String role;
     private String permissions;
+
+    public Admin() {}
 
     private Admin(Builder builder){
         this.adminId = builder.adminId;

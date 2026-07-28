@@ -1,8 +1,12 @@
 package za.ac.cput.carpartmarket.Domain;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
+@Entity
 
 public class OrderItem {
+    @Id
     private Long orderItemId;
     private Long orderId;
     private Long partId;

@@ -13,11 +13,10 @@ class SellerFactoryTest {
                 113L,
                 NameFactory.createName("John", "Doe"),
                 UserFactory.createUser(
-                        102L,
                         NameFactory.createName("John", "Doe"),
                         "john@cput.ac.za",
                         "password123",
-                        084567891,
+                        "084567891",
                         "15-01-2021"
                 ),
                 "ADMIN,SELLER"
@@ -34,11 +33,10 @@ class SellerFactoryTest {
                 null,
                 NameFactory.createName("John", "Doe"),
                 UserFactory.createUser(
-                        102L,
                         NameFactory.createName("John", "Doe"),
                         "john@cput.ac.za",
                         "password123",
-                        084567891,
+                        "084567891",
                         "15-01-2021"
                 ),
                 "ADMIN,SELLER"
@@ -55,11 +53,10 @@ class SellerFactoryTest {
                 113L,
                 null,
                 UserFactory.createUser(
-                        102L,
                         NameFactory.createName("John", "Doe"),
                         "john@cput.ac.za",
                         "password123",
-                        084567891,
+                        "084567891",
                         "15-01-2021"
                 ),
                 "ADMIN,SELLER"
@@ -90,11 +87,10 @@ class SellerFactoryTest {
                 113L,
                 NameFactory.createName("John", "Doe"),
                 UserFactory.createUser(
-                        102L,
                         NameFactory.createName("John", "Doe"),
                         "john@cput.ac.za",
                         "password123",
-                        084567891,
+                        "084567891",
                         "15-01-2021"
                 ),
                 null

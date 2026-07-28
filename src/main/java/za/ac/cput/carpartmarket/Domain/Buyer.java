@@ -1,18 +1,17 @@
 package za.ac.cput.carpartmarket.Domain;
 
+import jakarta.persistence.*;
+
+@Entity
 
 public class Buyer {
-
-
-
+    @Id
     private Long buyerId;
-
-
+    @Embedded
     private Name buyerName;
-
-
+    @OneToOne
+    @JoinColumn(name = "user_id")
     private User user;
-
 
     protected Buyer() {
     }

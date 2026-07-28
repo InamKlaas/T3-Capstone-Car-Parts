@@ -1,10 +1,15 @@
 package za.ac.cput.carpartmarket.Domain;
 
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
 
 public class User {
-
+@Id
     private Long userid;
-
+@Embedded
     private Name name;
 
     private String email;
