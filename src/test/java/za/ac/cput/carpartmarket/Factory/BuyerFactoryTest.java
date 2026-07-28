@@ -13,11 +13,10 @@ class BuyerFactoryTest {
                 112L,
                 NameFactory.createName("Vera", "Doja"),
                 UserFactory.createUser(
-                        101L,
                         NameFactory.createName("Vera", "Doja"),
                         "vera@cput.ac.za",
                         "beberexa",
-                        012457896,
+                        "012457896",
                         "23-09-2020"
                 )
         );
@@ -33,11 +32,10 @@ class BuyerFactoryTest {
                 null,
                 NameFactory.createName("Vera", "Doja"),
                 UserFactory.createUser(
-                        101L,
                         NameFactory.createName("Vera", "Doja"),
                         "vera@cput.ac.za",
                         "beberexa",
-                        012457896,
+                        "012457896",
                         "23-09-2020"
                 )
         );
@@ -53,11 +51,10 @@ class BuyerFactoryTest {
                 112L,
                 null,
                 UserFactory.createUser(
-                        101L,
                         NameFactory.createName("Vera", "Doja"),
                         "vera@cput.ac.za",
                         "beberexa",
-                        012457896,
+                        "012457896",
                         "23-09-2020"
                 )
         );

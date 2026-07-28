@@ -27,7 +27,8 @@ import za.ac.cput.carpartmarket.Repository.IBuyerRepository;
         }
 
         @Override
-        public void delete(Long l) {
+        public boolean delete(Long l) {
             repository.deleteById(l);
+            return true;
         }
     }

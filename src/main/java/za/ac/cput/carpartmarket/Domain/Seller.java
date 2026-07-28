@@ -2,17 +2,18 @@ package za.ac.cput.carpartmarket.Domain;
 
 
 import jakarta.persistence.*;
-
+@Entity
 
 public class Seller {
 
-
+@Id
     private Long sellerId;
 
 
     private Name sellerName;
 
-
+@OneToOne
+@JoinColumn(name = "user_id")
     private User user;
 
     private String permissions;

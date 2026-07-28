@@ -1,7 +1,8 @@
 package za.ac.cput.carpartmarket.Domain;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-
+@Entity
 public class Delivery {
 
     @Id
