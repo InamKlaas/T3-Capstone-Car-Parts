@@ -5,8 +5,10 @@ import org.springframework.stereotype.Service;
 import za.ac.cput.carpartmarket.Domain.Category;
 import za.ac.cput.carpartmarket.Repository.ICategoryRepository;
 
+import java.util.List;
+
 @Service
-public class CategoryService implements ICategoryService{
+public class CategoryService implements ICategoryService {
 
     @Autowired
     private ICategoryRepository repository;
@@ -17,23 +19,8 @@ public class CategoryService implements ICategoryService{
     }
 
     @Override
-    public CategoryService create(CategoryService categoryService) {
-        return null;
-    }
-
-    @Override
-    public CategoryService read(Long aLong) {
-        return null;
-    }
-
-    @Override
-    public Category read(String string) {
-        return repository.findById(string).orElse(null);
-    }
-
-    @Override
-    public CategoryService update(CategoryService categoryService) {
-        return null;
+    public Category read(String id) {
+        return repository.findById(id).orElse(null);
     }
 
     @Override
@@ -42,8 +29,13 @@ public class CategoryService implements ICategoryService{
     }
 
     @Override
-    public boolean delete(Long l) {
-        repository.deleteById(String.valueOf(l));
+    public boolean delete(String id) {
+        repository.deleteById(id);
         return true;
+    }
+
+    @Override
+    public List<Category> getAll() {
+        return repository.findAll();
     }
 }
