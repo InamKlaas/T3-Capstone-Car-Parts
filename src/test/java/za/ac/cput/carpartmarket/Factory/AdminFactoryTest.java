@@ -9,60 +9,48 @@ class AdminFactoryTest {
 
     @Test
     void createAdmin_validData_returnsAdmin(){
-        Admin admin = AdminFactory.createAdmin("A001", "john.doe", "SUPER_ADMIN");
+        Admin admin = AdminFactory.createAdmin("john.doe", "SUPER_ADMIN", "READ_WRITE");
 
         assertNotNull(admin);
-        assertEquals("A001", admin.getAdminId());
+        assertNotNull(admin.getAdminId());
         assertEquals("john.doe", admin.getUser());
         assertEquals("SUPER_ADMIN", admin.getRole());
         assertEquals("READ_WRITE", admin.getPermissions());
     }
 
     @Test
-    void createAdmin_nullAdminId_returnsNull(){
-        Admin admin = AdminFactory.createAdmin(null, "john.doe", "SUPER_ADMIN");
-        assertNull(admin);
-    }
-
-    @Test
-    void createAdmin_emptyAdminId_returnsNull(){
-        Admin admin = AdminFactory.createAdmin("  ", "john.doe", "SUPER_ADMIN");
-        assertNull(admin);
-    }
-
-    @Test
     void createAdmin_nullUser_returnsNull(){
-        Admin admin = AdminFactory.createAdmin("A001", null, "SUPER_ADMIN");
+        Admin admin = AdminFactory.createAdmin(null, "SUPER_ADMIN", "READ_WRITE");
         assertNull(admin);
     }
 
     @Test
     void createAdmin_emptyUser_returnsNull(){
-        Admin admin = AdminFactory.createAdmin("A001", "", "SUPER_ADMIN");
+        Admin admin = AdminFactory.createAdmin("  ", "SUPER_ADMIN", "READ_WRITE");
         assertNull(admin);
     }
 
     @Test
     void createAdmin_nullRole_returnsNull(){
-        Admin admin = AdminFactory.createAdmin("A001", "john.doe", null);
+        Admin admin = AdminFactory.createAdmin("john.doe", null, "READ_WRITE");
         assertNull(admin);
     }
 
     @Test
     void createAdmin_emptyRole_returnsNull(){
-        Admin admin = AdminFactory.createAdmin("A001", "john.doe", "   ");
+        Admin admin = AdminFactory.createAdmin("john.doe", "   ", "READ_WRITE");
         assertNull(admin);
     }
 
     @Test
     void createAdmin_nullPermissions_returnsNull(){
-        Admin admin = AdminFactory.createAdmin("A001", "john.doe", "SUPER_ADMIN");
+        Admin admin = AdminFactory.createAdmin("john.doe", "SUPER_ADMIN", null);
         assertNull(admin);
     }
 
     @Test
     void createAdmin_emptyPermissions_returnsNull(){
-        Admin admin = AdminFactory.createAdmin("A001", "john.doe", "SUPER_ADMIN");
+        Admin admin = AdminFactory.createAdmin("john.doe", "SUPER_ADMIN", "");
         assertNull(admin);
     }
 }

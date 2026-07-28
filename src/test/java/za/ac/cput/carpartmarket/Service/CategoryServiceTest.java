@@ -25,7 +25,7 @@ class CategoryServiceTest {
     @Test
     @Order(1)
     void a_create(){
-        category = CategoryFactory.createCategory("C001", "Engine Parts");
+        category = CategoryFactory.createCategory("Engine Parts", "Parts related to engines");
         assertNotNull(category);
 
         Category created = categoryService.create(category);
