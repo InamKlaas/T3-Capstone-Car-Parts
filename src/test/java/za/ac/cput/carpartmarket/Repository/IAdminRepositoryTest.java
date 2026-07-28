@@ -1,4 +1,4 @@
-package za.ac.cput.carpartmarket.Service;
+package za.ac.cput.carpartmarket.Repository;
 
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -10,15 +10,16 @@ import za.ac.cput.carpartmarket.Domain.Admin;
 import za.ac.cput.carpartmarket.Factory.AdminFactory;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class AdminServiceTest {
+class IAdminRepositoryTest {
 
     @Autowired
-    private IAdminService adminService;
+    private IAdminRepository adminRepository;
 
     private static Admin admin;
 
@@ -28,12 +29,12 @@ class AdminServiceTest {
         admin = AdminFactory.createAdmin("john.doe", "SUPER_ADMIN", "READ_WRITE");
         assertNotNull(admin);
 
-        Admin created = adminService.create(admin);
-        assertNotNull(created);
-        assertEquals(admin.getAdminId(), created.getAdminId());
-        admin = created;
+        Admin saved = adminRepository.save(admin);
+        assertNotNull(saved);
+        assertEquals(admin.getAdminId(), saved.getAdminId());
+        admin = saved;
 
-        System.out.println(created);
+        System.out.println(saved);
     }
 
     @Test
@@ -41,11 +42,11 @@ class AdminServiceTest {
     void b_read(){
         assertNotNull(admin);
 
-        Admin read = adminService.read(admin.getAdminId());
-        assertNotNull(read);
-        assertEquals(admin.getAdminId(), read.getAdminId());
+        Optional<Admin> found = adminRepository.findById(admin.getAdminId());
+        assertTrue(found.isPresent());
+        assertEquals(admin.getAdminId(), found.get().getAdminId());
 
-        System.out.println(read);
+        System.out.println(found.get());
     }
 
     @Test
@@ -59,7 +60,7 @@ class AdminServiceTest {
                 .setPermissions("READ_ONLY")
                 .build();
 
-        Admin saved = adminService.update(updated);
+        Admin saved = adminRepository.save(updated);
         assertNotNull(saved);
         assertEquals("MODERATOR", saved.getRole());
         assertEquals("READ_ONLY", saved.getPermissions());
@@ -71,7 +72,7 @@ class AdminServiceTest {
     @Test
     @Order(4)
     void d_getAll(){
-        List<Admin> admins = adminService.getAll();
+        List<Admin> admins = adminRepository.findAll();
         assertNotNull(admins);
         assertFalse(admins.isEmpty());
 
@@ -83,10 +84,8 @@ class AdminServiceTest {
     void e_delete(){
         assertNotNull(admin);
 
-        boolean deleted = adminService.delete(admin.getAdminId());
-        assertTrue(deleted);
-
-        Admin read = adminService.read(admin.getAdminId());
-        assertNull(read);
+        adminRepository.deleteById(admin.getAdminId());
+        Optional<Admin> found = adminRepository.findById(admin.getAdminId());
+        assertFalse(found.isPresent());
     }
 }
