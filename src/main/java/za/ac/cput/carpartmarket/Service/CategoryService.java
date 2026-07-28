@@ -22,8 +22,13 @@ public class CategoryService implements ICategoryService{
     }
 
     @Override
-    public CategoryService read(String string) {
-        return repository.findById(String).orElse(null);
+    public CategoryService read(Long aLong) {
+        return null;
+    }
+
+    @Override
+    public Category read(String string) {
+        return repository.findById(string).orElse(null);
     }
 
     @Override

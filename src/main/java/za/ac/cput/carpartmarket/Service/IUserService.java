@@ -1,7 +1,14 @@
 package za.ac.cput.carpartmarket.Service;
 
-import org.apache.commons.logging.Log;
 import za.ac.cput.carpartmarket.Domain.User;
 
-public interface IUserService extends IService<User, Log>{
+public interface IUserService {
+
+    User create(User user);
+
+    User read(Long id);
+
+    User update(User user);
+
+    boolean delete(Long id);
 }
