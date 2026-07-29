@@ -1,10 +1,19 @@
 package za.ac.cput.carpartmarket.Domain;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+
 import java.time.LocalDateTime;
+@Entity
 
 public class Order {
+    @Id
     private Long orderId;
     private LocalDateTime orderDate;
+    @ManyToOne
+    @JoinColumn(name = "buyer_id")
     private Buyer buyer;
     private double totalAmount;
     private String status;

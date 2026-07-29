@@ -1,6 +1,12 @@
 package za.ac.cput.carpartmarket.Domain;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
+
 public class Vehicle {
+    @Id
     private Long vehicleId;
     private String model;
     private int year;
