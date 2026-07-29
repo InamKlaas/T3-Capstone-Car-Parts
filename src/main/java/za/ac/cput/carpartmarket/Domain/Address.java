@@ -1,6 +1,8 @@
 package za.ac.cput.carpartmarket.Domain;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+@Entity
 
 public class Address {
     @Id
@@ -11,6 +13,9 @@ public class Address {
     private String province;
     private int postalCode;
     private String country;
+
+    public Address() {
+    }
 
     public Address (Builder builder){
         this.streetNumber = builder.streetNumber;

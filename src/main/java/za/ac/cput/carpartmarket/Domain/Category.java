@@ -1,10 +1,16 @@
 package za.ac.cput.carpartmarket.Domain;
 
-public class Category {
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
+@Entity
+public class Category {
+@Id
     private String categoryId;
     private String categoryName;
     private String description;
+
+    public Category(){}
 
     private Category(Builder builder){
         this.categoryId = builder.categoryId;
