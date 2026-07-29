@@ -1,13 +1,11 @@
 package za.ac.cput.carpartmarket.Domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 @Entity
 
+@Table(name = "orders")  // Change from "order"
 public class Order {
     @Id
     private Long orderId;
