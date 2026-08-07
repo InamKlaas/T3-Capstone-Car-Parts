@@ -6,17 +6,20 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 import java.time.LocalDateTime;
-@Entity
 
+@Entity
 public class Transaction {
     @Id
-    private Long id;
     private Long transactionId;
     private LocalDateTime transactionDate;
     @ManyToOne
-    @JoinColumn(name = "order_id")
+    @JoinColumn(name = "order_order_id")
     private Order order;
     private double amount;
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
 
     protected Transaction(){
 

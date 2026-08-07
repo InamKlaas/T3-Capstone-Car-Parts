@@ -5,33 +5,34 @@ import za.ac.cput.carpartmarket.Domain.CarPart;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CarPartFactoryTest {
+ class CarPartFactoryTest {
 
-    @Test
-    void createCarPart() {
 
-        CarPart carPart = CarPartFactory.createCarPart(
-                "Brake Pad",
-                "High performance brake pad",
-                "Toyota Corolla",
-                1001L
-        );
+     @Test
+     void createCarPart() {
 
-        assertNotNull(carPart);
+         CarPart carPart = CarPartFactory.createCarPart(
+                 "Brake Pad",
+                 "High performance brake pad",
+                 "Toyota Corolla",
+                 1001L
+         );
 
-        System.out.println(carPart);
-    }
+         assertNotNull(carPart);
 
-    @Test
-    void createCarPartWithNullPartName() {
+         System.out.println(carPart);
+     }
 
-        CarPart carPart = CarPartFactory.createCarPart(
-                "",
-                "High performance brake pad",
-                "Toyota Corolla",
-                1001L
-        );
+     @Test
+     void createCarPartWithNullPartName() {
 
-        assertNull(carPart);
-    }
-}
+         CarPart carPart = CarPartFactory.createCarPart(
+                 "",
+                 "High performance brake pad",
+                 "Toyota Corolla",
+                 1001L
+         );
+
+         assertNull(carPart);
+     }
+ }
