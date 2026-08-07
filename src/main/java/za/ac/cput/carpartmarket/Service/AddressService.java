@@ -1,11 +1,13 @@
 package za.ac.cput.carpartmarket.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import za.ac.cput.carpartmarket.Domain.Address;
 import za.ac.cput.carpartmarket.Repository.AddressRepository;
 
 import java.util.List;
 
+@Service
 public class AddressService implements IAddressService{
 
     private AddressRepository repository;
