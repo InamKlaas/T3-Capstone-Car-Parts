@@ -5,15 +5,20 @@ import za.ac.cput.carpartmarket.Util.Helper;
 
 public class CarPartFactory {
 
-    public static CarPart createCarPart(String partName, String description, String model, Long sellerId) {
+    public static CarPart createCarPart(Long carPartId, String partName, String description, Double price, int stockQuantity, String model, Long categoryId, Long sellerId) {
 
-        if (Helper.isNullOrEmpty(partName) || Helper.isNullOrEmpty(description) || Helper.isNullOrEmpty(model) || Helper.isEmptyOrNull(sellerId))
+        if (Helper.isNullOrEmpty(partName) || Helper.isNullOrEmpty(description) || Helper.isNullOrEmpty(model) || Helper.isEmptyOrNull(sellerId)){
             return null;
+        }
 
         return new CarPart.Builder()
+                .setCarPartId(carPartId)
                 .setPartName(partName)
                 .setDescription(description)
+                .setPrice(price)
+                .setStockQuantity(stockQuantity)
                 .setModel(model)
+                .setCategoryId(categoryId)
                 .setSellerId(sellerId)
                 .build();
     }

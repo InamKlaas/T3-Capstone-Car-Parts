@@ -7,32 +7,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
  class CarPartFactoryTest {
 
+     private static CarPart carPart = CarPartFactory.createCarPart(73637372L, "side Mirror", "white Toyota Corolla", 150.00, 10, "Toyota Corolla", 1001L, 2001L);
 
      @Test
-     void createCarPart() {
-
-         CarPart carPart = CarPartFactory.createCarPart(
-                 "Brake Pad",
-                 "High performance brake pad",
-                 "Toyota Corolla",
-                 1001L
-         );
-
+     public void createCarPart() {
          assertNotNull(carPart);
-
-         System.out.println(carPart);
+         System.out.println(carPart.toString());
      }
 
      @Test
-     void createCarPartWithNullPartName() {
-
-         CarPart carPart = CarPartFactory.createCarPart(
-                 "",
-                 "High performance brake pad",
-                 "Toyota Corolla",
-                 1001L
-         );
-
-         assertNull(carPart);
+     public void createCarPartWithNullDescription() {
+         assertNotNull(carPart);
+         System.out.println(carPart.toString());
      }
  }

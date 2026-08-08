@@ -19,10 +19,14 @@ class DeliveryServiceTest {
     private DeliveryService deliveryService;
 
     private static Delivery delivery = DeliveryFactory.createDelivery(
-            "Courier Guy",
+            9483L,
+            373383L,
+            9393L,
+            "Pending",
             "TRK123456",
             "2026-06-30",
-            "Pending"
+            "In Transit",
+            15.00
     );
 
     @Test

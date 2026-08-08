@@ -13,10 +13,14 @@ class DeliveryFactoryTest {
     void createDelivery() {
 
         Delivery delivery = DeliveryFactory.createDelivery(
-                "Courier Guy",
+                9483L,
+                373383L,
+                9393L,
+                "Pending",
                 "TRK123456",
                 "2026-06-30",
-                "Pending"
+                "In Transit",
+                15.00
         );
 
         assertNotNull(delivery);
@@ -28,10 +32,14 @@ class DeliveryFactoryTest {
     void createDeliveryWithNullCourierName() {
 
         Delivery delivery = DeliveryFactory.createDelivery(
-                "",
+                9483L,
+                373383L,
+                9393L,
+                "Pending",
                 "TRK123456",
                 "2026-06-30",
-                "Pending"
+                "In Transit",
+                15.00
         );
 
         assertNull(delivery);
