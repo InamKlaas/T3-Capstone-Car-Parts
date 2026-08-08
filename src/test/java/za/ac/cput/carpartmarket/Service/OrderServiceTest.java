@@ -9,30 +9,24 @@ import za.ac.cput.carpartmarket.Domain.Order;
 import za.ac.cput.carpartmarket.Factory.BuyerFactory;
 import za.ac.cput.carpartmarket.Factory.NameFactory;
 import za.ac.cput.carpartmarket.Factory.OrderFactory;
-import za.ac.cput.carpartmarket.Factory.UserFactory;
 
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class OrderServiceTest {
 
     @Autowired
-   private OrderService orderService;
+    private OrderService orderService;
 
     private static Order order = OrderFactory.createOrder(
             501L,
             BuyerFactory.createBuyer(
                     112L,
                     NameFactory.createName("Vera", "Doja"),
-                    UserFactory.createUser(
-                            NameFactory.createName("Vera", "Doja"),
-                            "vera@cput.ac.za",
-                            "beberexa",
-                            "012457896",
-                            "23-09-2020"
-                    )
+                    "Car Parts"
             ),
             "pending",
             LocalDateTime.of(2020, 9, 23, 0, 0),
@@ -49,7 +43,7 @@ class OrderServiceTest {
 
     @Test
     void read() {
-        Order order1= orderService.read(order.getOrderId());
+        Order order1 = orderService.read(order.getOrderId());
         assertNotNull(order1);
         System.out.println(order1);
     }
@@ -64,6 +58,5 @@ class OrderServiceTest {
     @Test
     void delete() {
         orderService.delete(order.getOrderId());
-
     }
 }

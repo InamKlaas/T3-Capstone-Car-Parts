@@ -11,25 +11,18 @@ class TransactionFactoryTest {
     @Test
     void createTransaction() {
 
-
         Transaction transaction = TransactionFactory.createTransaction(
                 12L,
-                LocalDateTime.of(2020,3,22,0,0),
+                LocalDateTime.of(2020, 3, 22, 0, 0),
                 OrderFactory.createOrder(
                         334L,
                         BuyerFactory.createBuyer(
                                 4L,
                                 NameFactory.createName("Vera", "Doja"),
-                                UserFactory.createUser(
-                                        NameFactory.createName("Vera", "Doja"),
-                                        "vera@cput.ac.za",
-                                        "beberexa",
-                                        "0784521012",
-                                        "23-02-2020"
-                                )
+                                "Car Parts"
                         ),
                         "pending",
-                        LocalDateTime.of(2020,3,23,0,0),
+                        LocalDateTime.of(2020, 3, 23, 0, 0),
                         2345678.00,
                         2L
                 ),
@@ -40,5 +33,4 @@ class TransactionFactoryTest {
 
         System.out.println(transaction);
     }
-
 }

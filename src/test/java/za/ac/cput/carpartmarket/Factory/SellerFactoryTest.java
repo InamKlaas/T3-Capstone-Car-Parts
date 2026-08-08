@@ -12,14 +12,7 @@ class SellerFactoryTest {
         Seller seller = SellerFactory.createSeller(
                 113L,
                 NameFactory.createName("John", "Doe"),
-                UserFactory.createUser(
-                        NameFactory.createName("John", "Doe"),
-                        "john@cput.ac.za",
-                        "password123",
-                        "084567891",
-                        "15-01-2021"
-                ),
-                "ADMIN,SELLER"
+                "Car Parts"
         );
 
         assertNotNull(seller);
@@ -28,23 +21,16 @@ class SellerFactoryTest {
     }
 
     @Test
-    void createSellerWithNullSellerid() {
+    void createSellerWithNullUserid() {
         Seller seller = SellerFactory.createSeller(
                 null,
                 NameFactory.createName("John", "Doe"),
-                UserFactory.createUser(
-                        NameFactory.createName("John", "Doe"),
-                        "john@cput.ac.za",
-                        "password123",
-                        "084567891",
-                        "15-01-2021"
-                ),
-                "ADMIN,SELLER"
+                "Car Parts"
         );
 
         assertNull(seller);
 
-        System.out.println("Seller creation failed: Sellerid is null");
+        System.out.println("Seller creation failed: userid is null");
     }
 
     @Test
@@ -52,14 +38,7 @@ class SellerFactoryTest {
         Seller seller = SellerFactory.createSeller(
                 113L,
                 null,
-                UserFactory.createUser(
-                        NameFactory.createName("John", "Doe"),
-                        "john@cput.ac.za",
-                        "password123",
-                        "084567891",
-                        "15-01-2021"
-                ),
-                "ADMIN,SELLER"
+                "Car Parts"
         );
 
         assertNull(seller);
@@ -68,36 +47,15 @@ class SellerFactoryTest {
     }
 
     @Test
-    void createSellerWithNullUser() {
+    void createSellerWithNullSellingPart() {
         Seller seller = SellerFactory.createSeller(
                 113L,
                 NameFactory.createName("John", "Doe"),
-                null,
-                "ADMIN,SELLER"
-        );
-
-        assertNull(seller);
-
-        System.out.println("Seller creation failed: User is null");
-    }
-
-    @Test
-    void createSellerWithNullPermissions() {
-        Seller seller = SellerFactory.createSeller(
-                113L,
-                NameFactory.createName("John", "Doe"),
-                UserFactory.createUser(
-                        NameFactory.createName("John", "Doe"),
-                        "john@cput.ac.za",
-                        "password123",
-                        "084567891",
-                        "15-01-2021"
-                ),
                 null
         );
 
         assertNull(seller);
 
-        System.out.println("Seller creation failed: Permissions is null");
+        System.out.println("Seller creation failed: sellingPart is null");
     }
 }

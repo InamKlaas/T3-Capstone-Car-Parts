@@ -4,28 +4,18 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 @Entity
-public class Admin {
-@Id
-    private String adminId;
-    private String user;
+public class Admin extends User {
+
     private String role;
     private String permissions;
 
-    public Admin() {}
+    protected Admin() {
+    }
 
-    private Admin(Builder builder){
-        this.adminId = builder.adminId;
-        this.user = builder.user;
+    private Admin(Builder builder) {
+        this.userid =builder.userid;
         this.role = builder.role;
         this.permissions = builder.permissions;
-    }
-
-    public String getAdminId() {
-        return adminId;
-    }
-
-    public String getUser() {
-        return user;
     }
 
     public String getRole() {
@@ -36,19 +26,21 @@ public class Admin {
         return permissions;
     }
 
-    public static class Builder{
-        private String adminId;
-        private String user;
+    @Override
+    public String toString() {
+        return "Admin{" +
+                "role='" + role + '\'' +
+                ", permissions='" + permissions + '\'' +
+                '}';
+    }
+
+    public static class Builder {
+        private Long userid;
         private String role;
         private String permissions;
 
-        public Builder setAdminId(String adminId) {
-            this.adminId = adminId;
-            return this;
-        }
-
-        public Builder setUser(String user) {
-            this.user = user;
+        public Builder setUserid(Long userid) {
+            this.userid = userid;
             return this;
         }
 
@@ -62,25 +54,13 @@ public class Admin {
             return this;
         }
 
-        public Builder copy(Admin admin){
-            this.adminId = admin.adminId;
-            this.user = admin.user;
+        public Builder copy(Admin admin) {
+            this.userid = admin.userid;
             this.role = admin.role;
             this.permissions = admin.permissions;
             return this;
         }
-
-        @Override
-        public String toString() {
-            return "Admin{" +
-                    "adminId='" + adminId + '\'' +
-                    ", user='" + user + '\'' +
-                    ", role='" + role + '\'' +
-                    ", permissions='" + permissions + '\'' +
-                    '}';
-        }
-
-        public Admin build(){
+        public Admin build() {
             return new Admin(this);
         }
     }
