@@ -24,13 +24,13 @@ class AdminServiceTest {
 
     @Test
     @Order(1)
-    void a_create(){
-        admin = AdminFactory.createAdmin("john.doe", "SUPER_ADMIN", "READ_WRITE");
+    void a_create() {
+        admin = AdminFactory.createAdmin(101L, "SUPER_ADMIN", "READ_WRITE");
         assertNotNull(admin);
 
         Admin created = adminService.create(admin);
         assertNotNull(created);
-        assertEquals(admin.getAdminId(), created.getAdminId());
+        assertEquals(admin.getUserid(), created.getUserid());
         admin = created;
 
         System.out.println(created);
@@ -38,19 +38,19 @@ class AdminServiceTest {
 
     @Test
     @Order(2)
-    void b_read(){
+    void b_read() {
         assertNotNull(admin);
 
-        Admin read = adminService.read(admin.getAdminId());
+        Admin read = adminService.read(admin.getUserid());
         assertNotNull(read);
-        assertEquals(admin.getAdminId(), read.getAdminId());
+        assertEquals(admin.getUserid(), read.getUserid());
 
         System.out.println(read);
     }
 
     @Test
     @Order(3)
-    void c_update(){
+    void c_update() {
         assertNotNull(admin);
 
         Admin updated = new Admin.Builder()
@@ -70,7 +70,7 @@ class AdminServiceTest {
 
     @Test
     @Order(4)
-    void d_getAll(){
+    void d_getAll() {
         List<Admin> admins = adminService.getAll();
         assertNotNull(admins);
         assertFalse(admins.isEmpty());
@@ -80,13 +80,13 @@ class AdminServiceTest {
 
     @Test
     @Order(5)
-    void e_delete(){
+    void e_delete() {
         assertNotNull(admin);
 
-        boolean deleted = adminService.delete(admin.getAdminId());
+        boolean deleted = adminService.delete(admin.getUserid());
         assertTrue(deleted);
 
-        Admin read = adminService.read(admin.getAdminId());
+        Admin read = adminService.read(admin.getUserid());
         assertNull(read);
     }
 }
