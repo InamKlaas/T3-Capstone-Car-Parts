@@ -33,7 +33,7 @@ class SellerServiceTest {
 
     @Test
     void read() {
-        Seller seller1 = sellerService.read(seller.getSellerId());
+        Seller seller1 = sellerService.read(seller.getUserid());
         assertNotNull(seller1);
         System.out.println(seller1);
     }
@@ -53,6 +53,6 @@ class SellerServiceTest {
 
     @Test
     void delete() {
-        sellerService.delete(seller.getSellerId());
+        sellerService.delete(seller.getUserid());
     }
 }
