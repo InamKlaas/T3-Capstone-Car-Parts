@@ -4,67 +4,93 @@ package za.ac.cput.carpartmarket.Domain;
 import jakarta.persistence.*;
 @Entity
 
-public class Seller extends User {
+public class Seller {
 
-    @Embedded
+@Id
+    private Long sellerId;
+
+
     private Name sellerName;
-    private String sellingPart;
 
+@OneToOne
+@JoinColumn(name = "user_id")
+    private User user;
+
+    private String permissions;
 
     protected Seller() {
     }
 
-    public Seller(Builder builder){
-        this.userid = builder.userid;
+    public Seller(Builder builder) {
+        this.sellerId = builder.sellerId;
         this.sellerName = builder.sellerName;
-        this.sellingPart = builder.sellingPart;
+        this.user = builder.user;
+        this.permissions = builder.permissions;
     }
 
-    public Name getSellerName() {
+    public Long getSellerId() {
+        return sellerId;
+    }
+    
+    public Name getSellerName(){
         return sellerName;
     }
+    
+    
+    public User getUser() {
+        return user;
+    }
 
-    public String getSellingPart() {
-        return sellingPart;
+    public String getPermissions() {
+        return permissions;
     }
 
     @Override
     public String toString() {
         return "Seller{" +
-                "sellerName=" + sellerName +
-                ", sellingPart='" + sellingPart + '\'' +
+                "sellerId=" + sellerId +
+                ", sellerName=" + sellerName +
+                ", user=" + user +
+                ", permissions=" + permissions + '\'' +
                 '}';
     }
 
-    public static class Builder{
-        private Long userid;
+    public static class Builder {
+        private Long sellerId;
+        private User user;
         private Name sellerName;
-        private String sellingPart;
+        private String permissions;
 
-        public Builder setUserid(Long userid) {
-            this.userid = userid;
+        public Builder setSellerId(Long sellerId) {
+            this.sellerId = sellerId;
             return this;
         }
-
+        
         public Builder setSellerName(Name sellerName) {
             this.sellerName = sellerName;
             return this;
         }
-
-        public Builder setSellingPart(String sellingPart) {
-            this.sellingPart = sellingPart;
+        
+        public Builder setUser(User user) {
+            this.user = user;
             return this;
         }
 
-        public Builder copy(Seller seller){
-            this.sellerName = seller.sellerName;
-            this.sellingPart = seller.sellingPart;
+        public Builder setPermissions(String permissions) {
+            this.permissions = permissions;
             return this;
         }
-         public Seller build(){
+
+        public Builder copy() {
+            return new Builder()
+                    .setSellerId(this.sellerId)
+                    .setSellerName(this.sellerName)
+                    .setUser(this.user)
+                    .setPermissions(this.permissions);
+        }
+
+        public Seller build() {
             return new Seller(this);
-         }
+        }
     }
-
 }
-
