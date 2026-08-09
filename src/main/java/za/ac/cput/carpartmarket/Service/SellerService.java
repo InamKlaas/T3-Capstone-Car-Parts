@@ -2,7 +2,9 @@ package za.ac.cput.carpartmarket.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import za.ac.cput.carpartmarket.Domain.Name;
 import za.ac.cput.carpartmarket.Domain.Seller;
+import za.ac.cput.carpartmarket.Domain.User;
 import za.ac.cput.carpartmarket.Repository.ISellerRepository;
 
 @Service
@@ -31,4 +33,6 @@ public class SellerService implements ISellerService {
         repository.deleteById(l);
         return false;
     }
+
+
 }
