@@ -17,13 +17,11 @@ class VehicleFactoryTest {
     @Test
     void createVehicleWithInvalidYear(){
         Vehicle vehicle = VehicleFactory.createVehicle(223L,0,"BMW","TwinPower-inline4","Diesel");
-        assertNotNull(vehicle);
-        System.out.println(vehicle);
+        assertNull(vehicle);
     }
     @Test
     void createVehicleWithNullModel(){
         Vehicle vehicle = VehicleFactory.createVehicle(234L, 2020,null,"TwinPower-inline4","Diesel");
-        assertNotNull(vehicle);
-        System.out.println(vehicle);
+        assertNull(vehicle);
     }
 }

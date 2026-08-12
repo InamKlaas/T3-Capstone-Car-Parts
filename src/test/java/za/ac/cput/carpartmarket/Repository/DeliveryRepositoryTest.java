@@ -30,7 +30,6 @@ class DeliveryRepositoryTest {
     @Test
     @Order(3)
     public void testCreateDeliveryThatFails() {
-        assertNotNull(D3);
-        System.out.println(D3.toString());
+        assertNull(D3);
     }
 }

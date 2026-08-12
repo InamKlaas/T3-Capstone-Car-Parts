@@ -35,6 +35,7 @@ class OrderServiceTest {
     );
 
     @Test
+    @org.junit.jupiter.api.Order(1)
     void create() {
         Order order1 = orderService.create(order);
         assertNotNull(order1);
@@ -42,6 +43,7 @@ class OrderServiceTest {
     }
 
     @Test
+    @org.junit.jupiter.api.Order(2)
     void read() {
         Order order1 = orderService.read(order.getOrderId());
         assertNotNull(order1);
@@ -49,6 +51,7 @@ class OrderServiceTest {
     }
 
     @Test
+    @org.junit.jupiter.api.Order(3)
     void update() {
         Order order1 = orderService.read(order.getOrderId());
         assertNotNull(order1);
@@ -56,6 +59,7 @@ class OrderServiceTest {
     }
 
     @Test
+    @org.junit.jupiter.api.Order(4)
     void delete() {
         orderService.delete(order.getOrderId());
     }
