@@ -6,6 +6,7 @@ import za.ac.cput.carpartmarket.Domain.Buyer;
 import za.ac.cput.carpartmarket.Domain.PaymentMethod;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class PaymentMethodFactoryTest {
 
@@ -24,7 +25,6 @@ public class PaymentMethodFactoryTest {
     @Test
     @Order(2)
     public void createPaymentMethodWithWrongCvvFormat(){
-        assertNotNull(b2);
-        System.out.println(b2.toString());
+        assertNull(b2);
     }
 }

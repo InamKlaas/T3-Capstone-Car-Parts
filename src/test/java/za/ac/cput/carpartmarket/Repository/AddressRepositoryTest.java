@@ -30,9 +30,7 @@ class AddressRepositoryTest {
     @Test
     @Order(3)
     public void testCreateAddressThatFails(){
-        //fail
-        assertNotNull(A3);
-        System.out.println(A3.toString());
+        assertNull(A3);
     }
 
 }

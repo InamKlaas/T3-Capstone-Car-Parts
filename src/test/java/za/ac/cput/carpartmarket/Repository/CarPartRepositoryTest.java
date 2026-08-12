@@ -30,7 +30,6 @@ class CarPartRepositoryTest {
     @Test
     @Order(3)
     public void testCreateCarPartThatFails() {
-        assertNotNull(C3);
-        System.out.println(C3.toString());
+        assertNull(C3);
     }
 }
