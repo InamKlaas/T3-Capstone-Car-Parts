@@ -6,21 +6,18 @@ import za.ac.cput.carpartmarket.Util.Helper;
 
 public class AdminFactory {
 
-    public static Admin createAdmin(String user, String role, String permissions){
-
-        if(Helper.isNullOrEmpty(user) ||
-                Helper.isNullOrEmpty(role) ||
-                Helper.isNullOrEmpty(permissions)){
+    public static Admin createAdmin(Long userid,String role, String permissions) {
+        if (userid ==null ||
+        Helper.isNullOrEmpty(role)||
+        Helper.isNullOrEmpty(permissions)) {
             return null;
         }
-
-        String adminId = Helper.generateId();
-
         return new Admin.Builder()
-                .setAdminId(adminId)
-                .setUser(user)
+                .setUserid(userid)
                 .setRole(role)
                 .setPermissions(permissions)
                 .build();
+
     }
+
 }

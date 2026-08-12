@@ -12,13 +12,7 @@ class BuyerFactoryTest {
         Buyer buyer = BuyerFactory.createBuyer(
                 112L,
                 NameFactory.createName("Vera", "Doja"),
-                UserFactory.createUser(
-                        NameFactory.createName("Vera", "Doja"),
-                        "vera@cput.ac.za",
-                        "beberexa",
-                        "012457896",
-                        "23-09-2020"
-                )
+                "Car Parts"
         );
 
         assertNotNull(buyer);
@@ -31,18 +25,12 @@ class BuyerFactoryTest {
         Buyer buyer = BuyerFactory.createBuyer(
                 null,
                 NameFactory.createName("Vera", "Doja"),
-                UserFactory.createUser(
-                        NameFactory.createName("Vera", "Doja"),
-                        "vera@cput.ac.za",
-                        "beberexa",
-                        "012457896",
-                        "23-09-2020"
-                )
+                "Car Parts"
         );
 
         assertNull(buyer);
 
-        System.out.println("Buyer creation failed: Buyerid is null");
+        System.out.println("Buyer creation failed: userid is null");
     }
 
     @Test
@@ -50,13 +38,7 @@ class BuyerFactoryTest {
         Buyer buyer = BuyerFactory.createBuyer(
                 112L,
                 null,
-                UserFactory.createUser(
-                        NameFactory.createName("Vera", "Doja"),
-                        "vera@cput.ac.za",
-                        "beberexa",
-                        "012457896",
-                        "23-09-2020"
-                )
+                "Car Parts"
         );
 
         assertNull(buyer);

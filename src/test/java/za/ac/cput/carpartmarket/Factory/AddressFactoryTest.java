@@ -23,14 +23,12 @@ public class AddressFactoryTest {
     @Test
     @Order(2)
     public void createAddressWithWrongPostalCodeFormat(){
-        assertNotNull(a2);
-        System.out.println(a2.toString());
+        assertNull(a2);
     }
 
     @Test
     @Order(3)
     public void createAddressWithNullStreetNumber(){
-        assertNotNull(a3);
-        System.out.println(a3.toString());
+        assertNull(a3);
     }
 }
