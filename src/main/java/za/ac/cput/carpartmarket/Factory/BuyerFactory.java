@@ -7,21 +7,21 @@ import za.ac.cput.carpartmarket.Util.Helper;
 
 public class BuyerFactory {
 
-    public static Buyer createBuyer(Long buyerId, Name buyerName, User user) {
-        if (Helper.isEmptyOrNull(buyerId)) {
-            return null;
-        }
-        if (buyerName == null) {
-            return null;
-        }
-        if (user == null) {
+    public static Buyer createBuyer(Long userid, Name buyerName, String buyingPart) {
+        if (userid == null){
             return null;
         }
 
+        if(buyerName == null){
+            return null;
+        }
+        if(Helper.isNullOrEmpty(buyingPart)){
+            return null;
+        }
         return new Buyer.Builder()
-                .setBuyerId(buyerId)
+                .setUserid(userid)
                 .setBuyerName(buyerName)
-                .setUser(user)
+                .setBuyingPart(buyingPart)
                 .build();
     }
 }

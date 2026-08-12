@@ -7,18 +7,21 @@ import java.util.UUID;
 public class Helper {
 
     private static Helper instance;
+
     public static Helper getInstance(){
         if(instance == null){
             instance = new Helper();
         }
         return instance;
     }
+
     public static boolean isEmptyOrNull(String str){
         if(str == null || str.isEmpty()){
             return true;
         }
         return false;
     }
+
     public static boolean isEmptyOrNull(Long value){
         return value == null || value <=0;
     }
@@ -33,6 +36,7 @@ public class Helper {
     public static boolean isNotEmptyOrNull(Long value){
         return value != null && value >0;
     }
+    
     public static boolean isValidEmail(String email){
         EmailValidator emailValidator = EmailValidator.getInstance();
         if(!emailValidator.isValid(email)){
@@ -40,8 +44,6 @@ public class Helper {
         }
         return false;
     }
-
-
 
     public static boolean isValidMobile(String mobile) {
         if (mobile == null) {

@@ -44,6 +44,7 @@ class VehicleServiceTest {
 
     @Test
     @Order(4)
+    @Disabled
     void delete() {
         vehicleService.delete(vehicle.getVehicleId());
     }

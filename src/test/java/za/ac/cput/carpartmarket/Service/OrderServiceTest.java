@@ -9,30 +9,24 @@ import za.ac.cput.carpartmarket.Domain.Order;
 import za.ac.cput.carpartmarket.Factory.BuyerFactory;
 import za.ac.cput.carpartmarket.Factory.NameFactory;
 import za.ac.cput.carpartmarket.Factory.OrderFactory;
-import za.ac.cput.carpartmarket.Factory.UserFactory;
 
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class OrderServiceTest {
 
     @Autowired
-   private OrderService orderService;
+    private OrderService orderService;
 
     private static Order order = OrderFactory.createOrder(
             501L,
             BuyerFactory.createBuyer(
                     112L,
                     NameFactory.createName("Vera", "Doja"),
-                    UserFactory.createUser(
-                            NameFactory.createName("Vera", "Doja"),
-                            "vera@cput.ac.za",
-                            "beberexa",
-                            "012457896",
-                            "23-09-2020"
-                    )
+                    "Car Parts"
             ),
             "pending",
             LocalDateTime.of(2020, 9, 23, 0, 0),
@@ -41,6 +35,7 @@ class OrderServiceTest {
     );
 
     @Test
+    @org.junit.jupiter.api.Order(1)
     void create() {
         Order order1 = orderService.create(order);
         assertNotNull(order1);
@@ -48,13 +43,15 @@ class OrderServiceTest {
     }
 
     @Test
+    @org.junit.jupiter.api.Order(2)
     void read() {
-        Order order1= orderService.read(order.getOrderId());
+        Order order1 = orderService.read(order.getOrderId());
         assertNotNull(order1);
         System.out.println(order1);
     }
 
     @Test
+    @org.junit.jupiter.api.Order(3)
     void update() {
         Order order1 = orderService.read(order.getOrderId());
         assertNotNull(order1);
@@ -62,8 +59,8 @@ class OrderServiceTest {
     }
 
     @Test
+    @org.junit.jupiter.api.Order(4)
     void delete() {
         orderService.delete(order.getOrderId());
-
     }
 }

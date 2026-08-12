@@ -22,7 +22,7 @@ public class AdminService implements IAdminService {
     }
 
     @Override
-    public Admin read(String id) {
+    public Admin read(Long id) {
         return this.repository.findById(id).orElse(null);
     }
 
@@ -32,7 +32,7 @@ public class AdminService implements IAdminService {
     }
 
     @Override
-    public boolean delete(String id) {
+    public boolean delete(Long id) {
         this.repository.deleteById(id);
         return true;
     }

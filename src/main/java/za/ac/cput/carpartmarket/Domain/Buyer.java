@@ -4,75 +4,65 @@ import jakarta.persistence.*;
 
 @Entity
 
-public class Buyer {
-    @Id
-    private Long buyerId;
+public class Buyer extends User {
+
     @Embedded
     private Name buyerName;
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    private String buyingPart;
 
     protected Buyer() {
     }
 
-    public Buyer(Builder builder) {
-        this.buyerId = builder.buyerId;
+    public Buyer(Builder builder){
+        this.userid = builder.userid;
         this.buyerName = builder.buyerName;
-        this.user = builder.user;
-    }
-
-    public Long getBuyerId() {
-        return buyerId;
+        this.buyingPart = builder.buyingPart;
     }
 
     public Name getBuyerName() {
         return buyerName;
     }
 
-    public User getUser() {
-        return user;
+    public String getBuyingPart() {
+        return buyingPart;
     }
 
     @Override
     public String toString() {
         return "Buyer{" +
-                "buyerid=" + buyerId +
-                ", buyerName=" + buyerName +
-                ", user=" + user +
+                "buyerName=" + buyerName +
+                ", buyingPart='" + buyingPart + '\'' +
                 '}';
-
     }
-        public static class Builder {
-            private Long buyerId;
-            private Name buyerName;
-            private User user;
 
-            public Builder setBuyerId(Long buyerId) {
-                this.buyerId = buyerId;
-                return this;
-            }
-            public Builder setBuyerName(Name buyerName) {
-                this.buyerName= buyerName;
-                return this;
-            }
+    public static class Builder{
+        private Long userid;
+        private Name buyerName;
+        private String buyingPart;
 
+        public Builder setUserid(Long userid) {
+            this.userid = userid;
+            return this;
+        }
+        public Builder setBuyerName(Name buyerName) {
+            this.buyerName = buyerName;
+            return this;
+        }
+        public Builder setBuyingPart(String buyingPart) {
+            this.buyingPart = buyingPart;
+            return this;
+        }
 
-            public Builder setUser(User user) {
-                this.user = user;
-                return this;
-            }
-
-            public Builder copy() {
-                return new Builder()
-                        .setBuyerId(this.buyerId)
-                        .setBuyerName(this.buyerName)
-                        .setUser(this.user);
-
-            }
-
-            public Buyer build() {
-                return new Buyer(this);
-            }
+        public Builder copy(Buyer buyer){
+            this.userid = buyer.userid;
+            this.buyerName = buyer.buyerName;
+            this.buyingPart = buyer.buyingPart;
+            return this;
+        }
+        public Buyer build(){
+            return new Buyer(this);
         }
     }
+}
+
+

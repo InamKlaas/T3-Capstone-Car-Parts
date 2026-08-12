@@ -16,13 +16,7 @@ class OrderFactoryTest {
                 BuyerFactory.createBuyer(
                         112L,
                         NameFactory.createName("Vera", "Doja"),
-                        UserFactory.createUser(
-                                NameFactory.createName("Vera", "Doja"),
-                                "vera@cput.ac.za",
-                                "beberexa",
-                                "012457896",
-                                "23-09-2020"
-                        )
+                        "Car Parts"
                 ),
                 "pending",
                 LocalDateTime.of(2020, 9, 23, 0, 0),
@@ -34,5 +28,4 @@ class OrderFactoryTest {
 
         System.out.println(order);
     }
-
 }
