@@ -1,11 +1,9 @@
 package za.ac.cput.carpartmarket.Service;
 
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import za.ac.cput.carpartmarket.Domain.Buyer;
 import za.ac.cput.carpartmarket.Domain.Transaction;
 import za.ac.cput.carpartmarket.Factory.*;
 
@@ -21,23 +19,39 @@ class TransactionServiceTest {
     @Autowired
     TransactionService transactionService;
 
-    private static Transaction transaction = TransactionFactory.createTransaction(
-            12L,
-            LocalDateTime.of(2020, 3, 22, 0, 0),
-            OrderFactory.createOrder(
-                    334L,
-                    BuyerFactory.createBuyer(
-                            4L,
-                            NameFactory.createName("Vera", "Doja"),
-                            "Car Parts"
-                    ),
-                    "pending",
-                    LocalDateTime.of(2020, 3, 23, 0, 0),
-                    2345678.00,
-                    2L
-            ),
-            4445678.00
-    );
+    private static Transaction transaction;
+
+    @BeforeAll
+    static void setUp(@Autowired BuyerService buyerService, @Autowired OrderService orderService){
+        Buyer buyer = BuyerFactory.createBuyer(
+                4L,
+                NameFactory.createName("Vera","Doja"),
+                "Car pads"
+        );
+
+        Buyer savedBuyer = buyerService.create(buyer);
+
+        za.ac.cput.carpartmarket.Domain.Order order = OrderFactory.createOrder(
+                334L,
+                savedBuyer,
+                "pending",
+                LocalDateTime.of(2020, 3, 23, 0, 0),
+                2345678.00,
+                2L
+        );
+
+        za.ac.cput.carpartmarket.Domain.Order savedOrder = orderService.create(order);
+
+        transaction = TransactionFactory.createTransaction(
+                12L,
+                LocalDateTime.of(2020, 3, 22, 0, 0),
+                savedOrder,
+                4445678.00
+        );
+    }
+
+
+
 
     @Test
     @Order(1)
