@@ -16,23 +16,25 @@ public class VehicleController {
         this.vehicleService = vehicleService;
     }
 
-    @PostMapping("/create")
+    @PostMapping
     public Vehicle create(@RequestBody Vehicle vehicle){
         return vehicleService.create(vehicle);
     }
 
-    @GetMapping("/read/{vehicleId}")
-    public Vehicle read(@PathVariable("vehicleId") Long vehicleId){
+    @GetMapping("/{id}")
+    public Vehicle read(@PathVariable("id") Long vehicleId){
         return vehicleService.read(vehicleId);
     }
 
-    @PutMapping("/update")
+    @PutMapping
     public Vehicle update(@RequestBody Vehicle vehicle){
         return vehicleService.update(vehicle);
     }
 
-    @DeleteMapping("/delete/{vehicleId}")
-    public void deleteById(@PathVariable("vehicleId") Long vehicleId){
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable("id") Long vehicleId){
         vehicleService.delete(vehicleId);
     }
+
+
 }

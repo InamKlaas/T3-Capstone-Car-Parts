@@ -1,5 +1,6 @@
 package za.ac.cput.carpartmarket.Service;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -8,45 +9,63 @@ import org.springframework.boot.test.context.SpringBootTest;
 import za.ac.cput.carpartmarket.Domain.Address;
 import za.ac.cput.carpartmarket.Factory.AddressFactory;
 
-//import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.MethodName.class)
 class AddressServiceTest {
 
     @Autowired
     private AddressService service;
-    private static Address address = AddressFactory.createAddress("65", 98765421012345L, "Belhar", "Cape Town", "Western Cape", 5084, "South Africa");
+
+    private static Address address = AddressFactory.createAddress(
+            "65",
+            98765421012345L,
+            "Belhar",
+            "Cape Town",
+            "Western Cape",
+            5084,
+            "South Africa"
+    );
 
     @Test
     void a_create() {
         Address created = service.create(address);
         assertNotNull(created);
-        System.out.println(created);
+        System.out.println("Created: " + created);
     }
 
     @Test
     void b_read() {
         Address read = service.read(address.getStreetNumber());
         assertNotNull(read);
-        System.out.println(read);
+        System.out.println("Read: " + read);
     }
 
     @Test
     void c_update() {
-        Address newAddress = new Address.Builder().copy(address).setUserId(98765421012345L).build();
+        // Change the suburb to verify that update works properly
+        Address newAddress = new Address.Builder()
+                .copy(address)
+                .setSuburb("Belhar Ext 1")
+                .build();
+
         Address updated = service.update(newAddress);
         assertNotNull(updated);
-        System.out.println();
-    }
-
-    @Test
-    void d_delete() {
-        service.delete(address.getStreetNumber());
+        assertEquals("Belhar Ext 1", updated.getSuburb());
+        System.out.println("Updated: " + updated);
     }
 
     @Test
     void e_getall() {
-        System.out.println(service.getall());
+        System.out.println("All Addresses: " + service.getall());
+    }
+
+    @Test
+    @Disabled
+    void d_delete() {
+        boolean deleted = service.delete(address.getStreetNumber());
+        assertTrue(deleted);
+        System.out.println("Deleted: " + address.getStreetNumber());
     }
 }
