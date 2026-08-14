@@ -16,23 +16,23 @@ public class TransactionController {
         this.transactionService = transactionService;
     }
 
-    @PostMapping("/create")
+    @PostMapping
     public Transaction create(@RequestBody Transaction transaction){
         return transactionService.create(transaction);
     }
 
-    @GetMapping("/read/{transactionId}")
-    public Transaction read(@PathVariable("transactionId") Long transactionId){
+    @GetMapping("/{id}")
+    public Transaction read(@PathVariable("id") Long transactionId){
         return transactionService.read(transactionId);
     }
 
-    @PutMapping("/update")
+    @PutMapping
     public Transaction update(@RequestBody Transaction transaction){
         return transactionService.update(transaction);
     }
 
-    @DeleteMapping("/delete/{transactionId}")
-    public void delete(@PathVariable("transactionId") Long transactionId){
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable("id") Long transactionId){
         transactionService.delete(transactionId);
     }
 }
