@@ -16,7 +16,7 @@ public class VehicleController {
         this.vehicleService = vehicleService;
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public Vehicle create(@RequestBody Vehicle vehicle){
         return vehicleService.create(vehicle);
     }
