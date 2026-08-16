@@ -10,7 +10,6 @@ public class PaymentMethod {
     @Id
     private String methodId;
     @ManyToOne
-    @JoinColumn(name = "buyer_name")
     private Buyer buyer;
     private String type;
     private String provider;
