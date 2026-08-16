@@ -1,12 +1,13 @@
 package za.ac.cput.carpartmarket.Controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import za.ac.cput.carpartmarket.Domain.Delivery;
 import za.ac.cput.carpartmarket.Service.DeliveryService;
 
 import java.util.List;
 
+@RestController
+@RequestMapping("/delivery")
 public class DeliveryController {
 
     private DeliveryService service;

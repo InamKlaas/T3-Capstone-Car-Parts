@@ -35,7 +35,7 @@ class DeliveryFactoryTest {
                 9483L,
                 373383L,
                 9393L,
-                "Pending",
+                "Courier Guy",
                 "TRK123456",
                 "2026-06-30",
                 "In Transit",
