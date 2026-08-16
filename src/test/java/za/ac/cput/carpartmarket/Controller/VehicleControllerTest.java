@@ -13,13 +13,12 @@ import za.ac.cput.carpartmarket.Domain.Vehicle;
 import za.ac.cput.carpartmarket.Factory.VehicleFactory;
 
 import static org.junit.jupiter.api.Assertions.*;
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureTestRestTemplate
 @TestMethodOrder(MethodOrderer.MethodName.class)
 class VehicleControllerTest {
 
     private static Vehicle vehicle = VehicleFactory.createVehicle(
-            1L,
             2020,
             "BMW",
             "V4",
