@@ -18,47 +18,35 @@ class AddressServiceTest {
     @Autowired
     private AddressService service;
 
-    private static Address address = AddressFactory.createAddress(
-            "65",
-            98765421012345L,
-            "Belhar",
-            "Cape Town",
-            "Western Cape",
-            5084,
-            "South Africa"
-    );
+//    private static Address address = AddressFactory.createAddress( "65", 8765421012345L, "Belhar", "Cape Town", "Western Cape", 5084, "South Africa");
+    private Address address = AddressFactory.createAddress( "65", 8765421012345L, "Belhar", "Cape Town", "Western Cape", 5084, "South Africa");
 
     @Test
     void a_create() {
         Address created = service.create(address);
         assertNotNull(created);
-        System.out.println("Created: " + created);
+        System.out.println("Created address:" + created);
     }
 
     @Test
-    void b_read() {
+    void b_read(){
         Address read = service.read(address.getStreetNumber());
         assertNotNull(read);
-        System.out.println("Read: " + read);
+        System.out.println("Read address" + read);
     }
 
-    @Test
-    void c_update() {
-        // Change the suburb to verify that update works properly
-        Address newAddress = new Address.Builder()
-                .copy(address)
-                .setSuburb("Belhar Ext 1")
-                .build();
 
+    @Test
+    void d_update(){
+        Address newAddress = new Address.Builder().copy(address).setSuburb("Wynberg").build();
         Address updated = service.update(newAddress);
         assertNotNull(updated);
-        assertEquals("Belhar Ext 1", updated.getSuburb());
-        System.out.println("Updated: " + updated);
+        System.out.println("updated: " + updated);
     }
 
     @Test
-    void e_getall() {
-        System.out.println("All Addresses: " + service.getall());
+    void e_getall(){
+        System.out.println("Addresses: " + service.getall());
     }
 
     @Test

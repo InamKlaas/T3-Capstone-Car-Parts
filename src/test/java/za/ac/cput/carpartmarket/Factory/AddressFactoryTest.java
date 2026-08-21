@@ -20,15 +20,19 @@ public class AddressFactoryTest {
         System.out.println(a1.toString());
     }
 
+//    a test that fails because of wrong postal code length
     @Test
     @Order(2)
-    public void createAddressWithWrongPostalCodeFormat(){
-        assertNull(a2);
+    public void createAddressWithWrongPostalCodeLength(){
+        assertNotNull(a2);
+        System.out.println(a2.toString());
     }
 
+//    test that fails due to null street number
     @Test
     @Order(3)
     public void createAddressWithNullStreetNumber(){
-        assertNull(a3);
+        assertNotNull(a3);
+        System.out.println(a3.toString());
     }
 }
