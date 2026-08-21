@@ -32,8 +32,6 @@ class PaymentMethodRepositoryTest {
     @Test
     @Order(3)
     public void testCreatePaymentMethodThatFails(){
-        //fail
-        assertNotNull(P3);
-        System.out.println(P3.toString());
+        assertNull(P3);
     }
 }

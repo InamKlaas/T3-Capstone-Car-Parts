@@ -6,25 +6,20 @@ import za.ac.cput.carpartmarket.Util.Helper;
 
 public class SellerFactory {
 
-    public static Seller createSeller(
-            Long sellerId,
-            Name sellerName,
-            String sellingPart) {
+    public static Seller createSeller(Long userid, Name sellerName, String sellingPart) {
 
-        if (sellerId == null) {
+        if (userid == null) {
             return null;
         }
-
         if (sellerName == null) {
             return null;
         }
-
         if (Helper.isNullOrEmpty(sellingPart)) {
             return null;
         }
 
         return new Seller.Builder()
-                .setSellerId(sellerId)
+                .setUserid(userid)
                 .setSellerName(sellerName)
                 .setSellingPart(sellingPart)
                 .build();

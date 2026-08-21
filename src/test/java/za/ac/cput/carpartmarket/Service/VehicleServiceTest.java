@@ -15,7 +15,7 @@ class VehicleServiceTest {
     @Autowired
     private VehicleService vehicleService;
 
-    private static Vehicle vehicle = VehicleFactory.createVehicle(201L,2020,"BMW","TwinPower-inline4","Diesel");
+    private static Vehicle vehicle = VehicleFactory.createVehicle(2020,"BMW2","TwinPower-inline4","Diesel");
 
 
     @Test

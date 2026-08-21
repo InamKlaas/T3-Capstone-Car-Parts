@@ -9,21 +9,19 @@ class VehicleFactoryTest {
 
     @Test
     void createVehicle() {
-        Vehicle vehicle = VehicleFactory.createVehicle(201L,2020,"BMW","TwinPower-inline4","Diesel");
+        Vehicle vehicle = VehicleFactory.createVehicle(2020,"BMW","TwinPower-inline4","Diesel");
         assertNotNull(vehicle);
         System.out.println(vehicle);
     }
 
     @Test
     void createVehicleWithInvalidYear(){
-        Vehicle vehicle = VehicleFactory.createVehicle(223L,0,"BMW","TwinPower-inline4","Diesel");
-        assertNotNull(vehicle);
-        System.out.println(vehicle);
+        Vehicle vehicle = VehicleFactory.createVehicle(0,"BMW","TwinPower-inline4","Diesel");
+        assertNull(vehicle);
     }
     @Test
     void createVehicleWithNullModel(){
-        Vehicle vehicle = VehicleFactory.createVehicle(234L, 2020,null,"TwinPower-inline4","Diesel");
-        assertNotNull(vehicle);
-        System.out.println(vehicle);
+        Vehicle vehicle = VehicleFactory.createVehicle(2020,null,"TwinPower-inline4","Diesel");
+        assertNull(vehicle);
     }
 }

@@ -5,48 +5,45 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
 import za.ac.cput.carpartmarket.Domain.CarPart;
 import za.ac.cput.carpartmarket.Factory.CarPartFactory;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class CarPartServiceTest {
 
     @Autowired
-    private CarPartService carPartService;
+    private CarPartService service;
+    private static CarPart carPart1 = CarPartFactory.createCarPart(73637372L, "side Mirror", "white Toyota Corolla", 150.00, 10, "Toyota Corolla", 1001L, 2001L);
 
-    private static CarPart carPart = CarPartFactory.createCarPart(
-            "Brake Pad",
-            "High performance brake pad",
-            "Toyota Corolla",
-            1001L
-    );
 
     @Test
     void create() {
-        CarPart carPart1 = carPartService.create(carPart);
-        assertNotNull(carPart1);
-        System.out.println(carPart1);
+        CarPart created = service.create(carPart1);
+        assertNotNull(created);
+        System.out.println(created);
     }
 
     @Test
     void read() {
-        CarPart carPart1 = carPartService.read(carPart.getCarPartId());
+        CarPart read = service.read(carPart1.getCarPartId());
         assertNotNull(carPart1);
-        System.out.println(carPart1);
+        System.out.println(read);
     }
 
     @Test
     void update() {
-        CarPart carPart1 = carPartService.read(carPart.getCarPartId());
+        CarPart update = service.read(carPart1.getCarPartId());
         assertNotNull(carPart1);
         System.out.println(carPart1);
     }
 
     @Test
     void delete() {
-        carPartService.delete(carPart.getCarPartId());
+        service.delete(carPart1.getCarPartId());
     }
 }
