@@ -7,7 +7,6 @@ import java.util.UUID;
 public class Helper {
 
     private static Helper instance;
-
     public static Helper getInstance(){
         if(instance == null){
             instance = new Helper();
