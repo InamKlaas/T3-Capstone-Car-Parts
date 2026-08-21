@@ -6,7 +6,7 @@ import za.ac.cput.carpartmarket.Domain.Order;
 import za.ac.cput.carpartmarket.Service.OrderService;
 
 @RestController
-@RequestMapping
+@RequestMapping("/orders")
 public class OrderController {
     private OrderService orderService;
 
@@ -15,23 +15,23 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @PostMapping("/create")
+    @PostMapping
     public Order create(@RequestBody Order order){
         return orderService.create(order);
     }
 
-    @GetMapping("/read/{orders}")
-    public Order read(@PathVariable("orderId") Long orderId){
+    @GetMapping("/{id}")
+    public Order read(@PathVariable("id") Long orderId){
         return orderService.read(orderId);
     }
 
-    @PutMapping("/update")
+    @PutMapping
     public Order update(@RequestBody Order order){
         return orderService.update(order);
     }
 
-    @DeleteMapping("/delete/{orderId}")
-    public void delete(@PathVariable("orderId") Long orderId){
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable("id") Long orderId){
         orderService.delete(orderId);
     }
 }

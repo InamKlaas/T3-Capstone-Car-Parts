@@ -7,10 +7,13 @@ import za.ac.cput.carpartmarket.Service.CarPartService;
 
 import java.util.List;
 
+@RestController
+@RequestMapping("/carparts")
 public class CarPartController {
 
     private CarPartService service;
 
+    @Autowired
     public CarPartController(CarPartService service){
         this.service = service;
     }
