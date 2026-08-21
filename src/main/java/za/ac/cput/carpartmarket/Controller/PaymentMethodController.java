@@ -8,6 +8,8 @@ import za.ac.cput.carpartmarket.Service.PaymentMethodService;
 
 import java.util.List;
 
+@RestController
+@RequestMapping("/Payments")
 public class PaymentMethodController {
 
     private PaymentMethodService service;
@@ -19,13 +21,13 @@ public class PaymentMethodController {
     @PostMapping("/create")
     public PaymentMethod create(@RequestBody PaymentMethod payment){return service.create(payment);}
 
-    @GetMapping("/read/{employeeId}")
+    @GetMapping("/read/{methodId}")
     public PaymentMethod read(@PathVariable String methodId){return service.read(methodId);}
 
     @PutMapping("/update")
     public PaymentMethod update(@RequestBody PaymentMethod payment){return service.update(payment);}
 
-    @DeleteMapping("/delete/{employeeId}")
+    @DeleteMapping("/delete/{methodId}")
     public boolean delete(@PathVariable String methodId){return service.delete(methodId);}
 
     @GetMapping("/getall")
