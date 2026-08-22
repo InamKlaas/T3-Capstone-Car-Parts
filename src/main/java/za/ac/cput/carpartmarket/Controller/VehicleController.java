@@ -22,7 +22,7 @@ public class VehicleController {
     }
 
     @GetMapping("/{id}")
-    public Vehicle read(@PathVariable("id") Long vehicleId){
+    public Vehicle read(@PathVariable("id") String vehicleId){
         return vehicleService.read(vehicleId);
     }
 
@@ -32,7 +32,7 @@ public class VehicleController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable("id") Long vehicleId){
+    public void deleteById(@PathVariable("id") String vehicleId){
         vehicleService.delete(vehicleId);
     }
 

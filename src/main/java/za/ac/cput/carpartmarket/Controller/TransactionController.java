@@ -22,7 +22,7 @@ public class TransactionController {
     }
 
     @GetMapping("/{id}")
-    public Transaction read(@PathVariable("id") Long transactionId){
+    public Transaction read(@PathVariable("id") String transactionId){
         return transactionService.read(transactionId);
     }
 
@@ -32,7 +32,7 @@ public class TransactionController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable("id") Long transactionId){
+    public void delete(@PathVariable("id") String transactionId){
         transactionService.delete(transactionId);
     }
 }
