@@ -20,14 +20,14 @@ import static org.junit.jupiter.api.Assertions.*;
 class CarPartControllerTest {
 
     private static CarPart carPart = CarPartFactory.createCarPart(
-            1001L,
+            "1001L",
             "Brake Pad",
             "High performance brake pad",
             350.00,
             10,
             "Toyota Corolla",
             2L,
-            3L
+            "3L"
     );
 
     @Autowired

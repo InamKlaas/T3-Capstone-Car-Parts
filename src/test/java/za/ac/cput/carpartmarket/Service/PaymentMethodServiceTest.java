@@ -28,7 +28,7 @@ class PaymentMethodServiceTest {
     @BeforeEach
     void setUp() {
          Buyer buyer = BuyerFactory.createBuyer(
-                112L,
+                "112L",
                 NameFactory.createName("Vera", "Doja"),
                 "Car Parts"
         );

@@ -29,22 +29,22 @@ class TransactionControllerTest {
 
     private static Name name = NameFactory.createName("Vera","Doja");
     private static Buyer buyer = BuyerFactory.createBuyer(
-            1L,
+            "N02",
             name,
             "Brake pads"
     );
 
     private static Order order = OrderFactory.createOrder(
-            2L,
+            "O1",
             buyer,
             "Pending",
             LocalDateTime.of(2020,3,23,0,0),
             1500.00,
-            11L
+            "D01"
     );
 
     private static Transaction transaction = TransactionFactory.createTransaction(
-            1L,
+            "T01",
             LocalDateTime.of(2020,3,23,0,0),
             order,
             1500.00

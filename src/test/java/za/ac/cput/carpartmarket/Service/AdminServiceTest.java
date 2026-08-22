@@ -25,7 +25,7 @@ class AdminServiceTest {
     @Test
     @Order(1)
     void a_create() {
-        admin = AdminFactory.createAdmin(101L, "SUPER_ADMIN", "READ_WRITE");
+        admin = AdminFactory.createAdmin("101L", "SUPER_ADMIN", "READ_WRITE");
         assertNotNull(admin);
 
         Admin created = adminService.create(admin);

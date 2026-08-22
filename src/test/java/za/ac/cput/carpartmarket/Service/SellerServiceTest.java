@@ -19,7 +19,7 @@ class SellerServiceTest {
     private SellerService sellerService;
 
     private static final Seller seller = SellerFactory.createSeller(
-            113L,
+            "113L",
             NameFactory.createName("John", "Doe"),
             "Car Parts"
     );
@@ -41,7 +41,7 @@ class SellerServiceTest {
     @Test
     void update() {
         Seller updatedSeller = SellerFactory.createSeller(
-                113L,
+                "113L",
                 NameFactory.createName("John", "Smith"),
                 "Engine Parts"
         );
