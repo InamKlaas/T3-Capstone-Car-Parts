@@ -22,13 +22,13 @@ public class CarPartController {
     public CarPart create(@RequestBody CarPart carPart){return service.create(carPart);}
 
     @GetMapping("/read/{carPartId}")
-    public CarPart read(@PathVariable Long carPartId){return service.read(carPartId);}
+    public CarPart read(@PathVariable String carPartId){return service.read(carPartId);}
 
     @PutMapping("/update")
     public CarPart update(@RequestBody CarPart carPart){return service.update(carPart);}
 
     @DeleteMapping("/delete/{carPartId}")
-    public boolean delete(@PathVariable Long carPartId){return service.delete(carPartId);}
+    public boolean delete(@PathVariable String carPartId){return service.delete(carPartId);}
 
     @GetMapping("/getall")
     public List<CarPart> getall(){return service.getall();}

@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import za.ac.cput.carpartmarket.Domain.Vehicle;
 
 @Repository
-public interface VehicleRepository extends JpaRepository<Vehicle,Long> {
+public interface VehicleRepository extends JpaRepository<Vehicle,String> {
 }

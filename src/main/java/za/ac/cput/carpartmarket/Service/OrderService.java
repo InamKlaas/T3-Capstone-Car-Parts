@@ -6,7 +6,7 @@ import za.ac.cput.carpartmarket.Domain.Order;
 import za.ac.cput.carpartmarket.Repository.OrderRepository;
 
 @Service
-public class OrderService implements IOrderService{
+public class OrderService implements IOrderService {
 
     @Autowired
     private OrderRepository repository;
@@ -17,8 +17,8 @@ public class OrderService implements IOrderService{
     }
 
     @Override
-    public Order read(Long aLong) {
-        return repository.findById(aLong).orElse(null);
+    public Order read(String str) {
+        return repository.findById(str).orElse(null);
     }
 
     @Override
@@ -27,8 +27,8 @@ public class OrderService implements IOrderService{
     }
 
     @Override
-    public boolean delete(Long l) {
-  repository.deleteById(l);
-  return true;
+    public boolean delete(String l) {
+        repository.deleteById(l);
+        return true;
     }
 }

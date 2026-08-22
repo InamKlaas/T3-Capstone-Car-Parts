@@ -35,11 +35,11 @@ public class Admin extends User {
     }
 
     public static class Builder {
-        private Long userid;
+        private String userid;
         private String role;
         private String permissions;
 
-        public Builder setUserid(Long userid) {
+        public Builder setUserid(String userid) {
             this.userid = userid;
             return this;
         }

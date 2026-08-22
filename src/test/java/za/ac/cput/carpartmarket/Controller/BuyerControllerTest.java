@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @AutoConfigureTestRestTemplate
 @TestMethodOrder(MethodOrderer.MethodName.class)
-class BuyerControllerTest {
+class lBuyerControllerTest {
 
     private static Name name = new Name.Builder()
             .setFirstName("Vera")
@@ -28,7 +28,7 @@ class BuyerControllerTest {
             .build();
 
     private static Buyer buyer = BuyerFactory.createBuyer(
-            112L,
+            "112L",
             name,
             "Brake pads"
     );

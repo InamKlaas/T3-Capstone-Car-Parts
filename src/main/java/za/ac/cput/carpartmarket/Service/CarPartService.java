@@ -19,13 +19,13 @@ public class CarPartService implements ICarPartService {
     public CarPart create(CarPart carPart){return this.repository.save(carPart);}
 
     @Override
-    public CarPart read(Long id){return this.repository.findById(id).orElse(null);}
+    public CarPart read(String id){return this.repository.findById(id).orElse(null);}
 
     @Override
     public CarPart update(CarPart carPart){return this.repository.save(carPart);}
 
     @Override
-    public boolean delete(Long id){
+    public boolean delete(String id){
         this.repository.deleteById(id);
         return true;
     }

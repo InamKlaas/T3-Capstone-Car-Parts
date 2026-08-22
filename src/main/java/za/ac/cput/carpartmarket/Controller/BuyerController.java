@@ -22,7 +22,7 @@ public class BuyerController {
     }
 
     @GetMapping("/read/{userid}")
-    public Buyer read(@PathVariable("userid") Long userid) {
+    public Buyer read(@PathVariable("userid") String userid) {
         return buyerService.read(userid);
     }
 
@@ -32,7 +32,7 @@ public class BuyerController {
     }
 
     @DeleteMapping("/delete/{userid}")
-    public void delete(@PathVariable("userid") Long userid) {
+    public void delete(@PathVariable("userid") String userid) {
         buyerService.delete(userid);
     }
 }

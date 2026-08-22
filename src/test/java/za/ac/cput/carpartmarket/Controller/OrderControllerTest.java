@@ -29,18 +29,18 @@ class OrderControllerTest {
             .build();
 
     private static Buyer buyer = BuyerFactory.createBuyer(
-            1L,
+            "1L",
             name,
             "Brake pads"
     );
 
     private static Order order = OrderFactory.createOrder(
-            2L,
+            "2L",
             buyer,
             "Pending",
-            LocalDateTime.of(2020, 3,23,0,0),
+            LocalDateTime.of(2020, 3, 23, 0, 0),
             1500.00,
-            11L
+            "11L"
     );
 
     String BASE_URL = "http://localhost:8080/orders";
@@ -50,8 +50,17 @@ class OrderControllerTest {
 
     @Test
     void a_create() {
+
+        ResponseEntity<Buyer> buyerResponse = restTemplate.postForEntity(
+                "http://localhost:8080/buyer/create", buyer, Buyer.class);
+        assertEquals(HttpStatus.OK, buyerResponse.getStatusCode());
+        buyer = buyerResponse.getBody();
+        System.out.println("Saved buyer: " + buyer);
+
+        Order orderToSave = new Order.Builder().copy(order).setBuyer(buyer).build();
+
         String url = BASE_URL;
-        ResponseEntity<Order> postResponse = restTemplate.postForEntity(url, order, Order.class);
+        ResponseEntity<Order> postResponse = restTemplate.postForEntity(url, orderToSave, Order.class);
         assertNotNull(postResponse);
         assertNotNull(postResponse.getBody());
         assertEquals(HttpStatus.OK, postResponse.getStatusCode());
@@ -62,7 +71,7 @@ class OrderControllerTest {
 
     @Test
     void b_read() {
-        String url= BASE_URL + "/" + order.getOrderId();
+        String url = BASE_URL + "/" + order.getOrderId();
         System.out.println("URL: " + url);
         ResponseEntity<Order> response = restTemplate.getForEntity(url, Order.class);
         assertEquals(order.getOrderId(), response.getBody().getOrderId());
@@ -83,13 +92,12 @@ class OrderControllerTest {
         System.out.println(response.getBody());
         order = response.getBody();
         System.out.println("Update data: " + order);
-
     }
 
     @Test
     @Disabled
     void d_delete() {
-        String url= BASE_URL + "/" + order.getOrderId();
+        String url = BASE_URL + "/" + order.getOrderId();
         System.out.println("URL: " + url);
         restTemplate.delete(url);
         ResponseEntity<Order> response = restTemplate.getForEntity(url, Order.class);

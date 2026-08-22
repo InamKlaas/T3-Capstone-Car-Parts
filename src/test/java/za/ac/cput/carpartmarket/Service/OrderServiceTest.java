@@ -25,7 +25,7 @@ class OrderServiceTest {
     @BeforeAll
     static void setUp(@Autowired BuyerService buyerService){
         Buyer buyer = BuyerFactory.createBuyer(
-                112L,
+                "112L",
                 NameFactory.createName("Vera", "Doja"),
                 "Car pad"
         );
@@ -33,11 +33,11 @@ class OrderServiceTest {
         Buyer savedBuyer = buyerService.create(buyer);
 
         order = OrderFactory.createOrder(
-                501L,
+                "501L",
                 savedBuyer, "pending",
                 LocalDateTime.of(2020, 9, 23, 0, 0),
                 2345678.00,
-                2L
+                "2L"
         );
     }
 

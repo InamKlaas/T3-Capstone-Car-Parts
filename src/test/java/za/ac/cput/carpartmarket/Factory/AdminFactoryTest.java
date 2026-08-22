@@ -9,7 +9,7 @@ class AdminFactoryTest {
 
     @Test
     void createAdmin_validData_returnsAdmin() {
-        Admin admin = AdminFactory.createAdmin(101L, "SUPER_ADMIN", "READ_WRITE");
+        Admin admin = AdminFactory.createAdmin("101L", "SUPER_ADMIN", "READ_WRITE");
 
         assertNotNull(admin);
         assertNotNull(admin.getUserid());
@@ -26,25 +26,25 @@ class AdminFactoryTest {
 
     @Test
     void createAdmin_nullRole_returnsNull() {
-        Admin admin = AdminFactory.createAdmin(101L, null, "READ_WRITE");
+        Admin admin = AdminFactory.createAdmin("101L", null, "READ_WRITE");
         assertNull(admin);
     }
 
     @Test
     void createAdmin_emptyRole_returnsNull() {
-        Admin admin = AdminFactory.createAdmin(101L, "   ", "READ_WRITE");
+        Admin admin = AdminFactory.createAdmin("101L", "   ", "READ_WRITE");
         assertNull(admin);
     }
 
     @Test
     void createAdmin_nullPermissions_returnsNull() {
-        Admin admin = AdminFactory.createAdmin(101L, "SUPER_ADMIN", null);
+        Admin admin = AdminFactory.createAdmin("101L", "SUPER_ADMIN", null);
         assertNull(admin);
     }
 
     @Test
     void createAdmin_emptyPermissions_returnsNull() {
-        Admin admin = AdminFactory.createAdmin(101L, "SUPER_ADMIN", "");
+        Admin admin = AdminFactory.createAdmin("101L", "SUPER_ADMIN", "");
         assertNull(admin);
     }
 }

@@ -21,6 +21,18 @@ class PaymentMethodServiceTest {
 
     @Autowired
     private PaymentMethodService service;
+    @Autowired
+    private BuyerService buyerService;
+    PaymentMethod payment;
+
+    @BeforeEach
+    void setUp() {
+         Buyer buyer = BuyerFactory.createBuyer(
+                "112L",
+                NameFactory.createName("Vera", "Doja"),
+                "Car Parts"
+        );
+        Buyer buyer1 = buyerService.create(buyer);
 
 //    @Autowired
 //    private BuyerService buyerService;

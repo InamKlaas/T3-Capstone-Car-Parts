@@ -8,9 +8,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class AddressFactoryTest {
 
-    private static Address a1 = AddressFactory.createAddress("65", Long.valueOf(728), "Belhar", "Cape Town", "Western Cape", 6925, "South Africa");
-    private static Address a2 = AddressFactory.createAddress("65", Long.valueOf(728), "Belhar", "Cape Town", "Western Cape", 625, "South Africa");
-    private static Address a3 = AddressFactory.createAddress(null, Long.valueOf(728), "Belhar", "Cape Town", "Western Cape", 6925, "South Africa");
+    private static Address a1 = AddressFactory.createAddress("65", String.valueOf(728), "Belhar", "Cape Town", "Western Cape", 6925, "South Africa");
+    private static Address a2 = AddressFactory.createAddress("65", String.valueOf(728), "Belhar", "Cape Town", "Western Cape", 625, "South Africa");
+    private static Address a3 = AddressFactory.createAddress(null, String.valueOf(728), "Belhar", "Cape Town", "Western Cape", 6925, "South Africa");
 
 
     @Test
