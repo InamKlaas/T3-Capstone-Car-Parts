@@ -12,19 +12,19 @@ class TransactionFactoryTest {
     void createTransaction() {
 
         Transaction transaction = TransactionFactory.createTransaction(
-                12L,
+                "12L",
                 LocalDateTime.of(2020, 3, 22, 0, 0),
                 OrderFactory.createOrder(
-                        334L,
+                        "334L",
                         BuyerFactory.createBuyer(
-                                4L,
+                                "4L",
                                 NameFactory.createName("Vera", "Doja"),
                                 "Car Parts"
                         ),
                         "pending",
                         LocalDateTime.of(2020, 3, 23, 0, 0),
                         2345678.00,
-                        2L
+                        "2L"
                 ),
                 4445678.00
         );

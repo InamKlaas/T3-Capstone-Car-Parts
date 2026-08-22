@@ -20,7 +20,7 @@ class AddressServiceTest {
 
     private static Address address = AddressFactory.createAddress(
             "65",
-            98765421012345L,
+            "98",
             "Belhar",
             "Cape Town",
             "Western Cape",

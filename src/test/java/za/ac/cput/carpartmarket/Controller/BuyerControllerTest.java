@@ -28,7 +28,7 @@ class lBuyerControllerTest {
             .build();
 
     private static Buyer buyer = BuyerFactory.createBuyer(
-            112L,
+            "112L",
             name,
             "Brake pads"
     );

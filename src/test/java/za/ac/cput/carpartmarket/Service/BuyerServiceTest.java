@@ -19,7 +19,7 @@ class BuyerServiceTest {
     private BuyerService buyerService;
 
     private static final Buyer buyer = BuyerFactory.createBuyer(
-            112L,
+            "112",
             NameFactory.createName("Vera", "Doja"),
             "Car Parts"
     );
@@ -41,7 +41,7 @@ class BuyerServiceTest {
     @Test
     void update() {
         Buyer updatedBuyer = BuyerFactory.createBuyer(
-                112L,
+                "112L",
                 NameFactory.createName("Vera", "Smith"),
                 "Engine Parts"
         );

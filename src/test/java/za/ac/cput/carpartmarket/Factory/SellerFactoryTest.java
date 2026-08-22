@@ -10,7 +10,7 @@ class SellerFactoryTest {
     @Test
     void createSeller() {
         Seller seller = SellerFactory.createSeller(
-                113L,
+                "113L",
                 NameFactory.createName("John", "Doe"),
                 "Car Parts"
         );
@@ -36,7 +36,7 @@ class SellerFactoryTest {
     @Test
     void createSellerWithNullSellerName() {
         Seller seller = SellerFactory.createSeller(
-                113L,
+                "113L",
                 null,
                 "Car Parts"
         );
@@ -49,7 +49,7 @@ class SellerFactoryTest {
     @Test
     void createSellerWithNullSellingPart() {
         Seller seller = SellerFactory.createSeller(
-                113L,
+                "113L",
                 NameFactory.createName("John", "Doe"),
                 null
         );
