@@ -5,29 +5,45 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.resttestclient.TestRestTemplate;
 import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureTestRestTemplate;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import za.ac.cput.carpartmarket.Domain.Buyer;
+import za.ac.cput.carpartmarket.Domain.Login;
 import za.ac.cput.carpartmarket.Factory.BuyerFactory;
+import za.ac.cput.carpartmarket.Factory.LoginFactory;
 import za.ac.cput.carpartmarket.Factory.NameFactory;
+
+import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@SpringBootTest(
+        webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT
+)
 @AutoConfigureTestRestTemplate
 @TestMethodOrder(MethodOrderer.MethodName.class)
-class BuyerControllerTest {
+class LoginControllerTest {
 
-    private static Buyer buyer = BuyerFactory.createBuyer(
+    private static final Buyer buyer = BuyerFactory.createBuyer(
             112L,
             NameFactory.createName("Lulo", "Kolisi"),
             "Brake Pads"
     );
 
-    private final String BASE_URL = "http://localhost:8080/buyers";
+    private static Login login = LoginFactory.createLogin(
+            201L,
+            buyer,
+            "lulo@gmail.com",
+            "password123",
+            LocalDateTime.of(2026, 8, 22, 10, 30),
+            "SUCCESS"
+    );
+
+    private final String BASE_URL =
+            "http://localhost:8080/login";
 
     @Autowired
     private TestRestTemplate restTemplate;
@@ -37,82 +53,71 @@ class BuyerControllerTest {
 
         String url = BASE_URL + "/create";
 
-        ResponseEntity<Buyer> response =
+        ResponseEntity<Login> response =
                 restTemplate.postForEntity(
                         url,
-                        buyer,
-                        Buyer.class
+                        login,
+                        Login.class
                 );
 
         assertNotNull(response);
         assertNotNull(response.getBody());
         assertEquals(HttpStatus.OK, response.getStatusCode());
 
-        buyer = response.getBody();
+        login = response.getBody();
 
-        System.out.println("Saved Buyer: " + buyer);
+        System.out.println("Saved Login: " + login);
     }
 
     @Test
     void b_read() {
 
         String url =
-                BASE_URL + "/read/" + buyer.getUserId();
+                BASE_URL + "/read/" + login.getLoginId();
 
-        System.out.println("URL: " + url);
-
-        ResponseEntity<Buyer> response =
+        ResponseEntity<Login> response =
                 restTemplate.getForEntity(
                         url,
-                        Buyer.class
+                        Login.class
                 );
 
         assertNotNull(response.getBody());
-
         assertEquals(
-                buyer.getUserId(),
-                response.getBody().getUserId()
+                login.getLoginId(),
+                response.getBody().getLoginId()
         );
 
-        System.out.println("Read Buyer: " + response.getBody());
+        System.out.println("Read Login: " + response.getBody());
     }
 
     @Test
     void c_update() {
 
-        Buyer updatedBuyer = new Buyer.Builder()
-                .setUserid(buyer.getUserId())
-                .setBuyerName(
-                        NameFactory.createName("Lulo", "Mokoena")
-                )
-                .setBuyingPart("Engine Parts")
+        Login updatedLogin = new Login.Builder()
+                .copy(login)
+                .setStatus("FAILED")
                 .build();
 
         String url = BASE_URL + "/update";
 
-        System.out.println("URL: " + url);
-
-        restTemplate.put(url, updatedBuyer);
+        restTemplate.put(url, updatedLogin);
 
         String readUrl =
-                BASE_URL + "/read/" + buyer.getUserId();
+                BASE_URL + "/read/" + login.getLoginId();
 
-        ResponseEntity<Buyer> response =
+        ResponseEntity<Login> response =
                 restTemplate.getForEntity(
                         readUrl,
-                        Buyer.class
+                        Login.class
                 );
 
         assertNotNull(response.getBody());
 
-        buyer = response.getBody();
+        login = response.getBody();
 
-        System.out.println("Updated Buyer: " + buyer);
+        assertEquals("FAILED", login.getStatus());
 
-        assertEquals(
-                "Engine Parts",
-                buyer.getBuyingPart()
-        );
+        System.out.println("Updated Login: " + login);
     }
 
     @Test
@@ -120,12 +125,10 @@ class BuyerControllerTest {
     void d_delete() {
 
         String url =
-                BASE_URL + "/delete/" + buyer.getUserId();
-
-        System.out.println("URL: " + url);
+                BASE_URL + "/delete/" + login.getLoginId();
 
         restTemplate.delete(url);
 
-        System.out.println("Delete: true");
+        System.out.println("Login deleted");
     }
 }
