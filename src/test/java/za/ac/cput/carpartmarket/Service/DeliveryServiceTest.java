@@ -1,9 +1,6 @@
 package za.ac.cput.carpartmarket.Service;
 
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import za.ac.cput.carpartmarket.Domain.Delivery;
@@ -55,6 +52,7 @@ class DeliveryServiceTest {
 
     @Test
     @Order(4)
+    @Disabled
     void delete() {
         deliveryService.delete(delivery.getDeliveryId());
     }

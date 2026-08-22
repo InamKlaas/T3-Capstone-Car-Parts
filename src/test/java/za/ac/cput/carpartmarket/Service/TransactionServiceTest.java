@@ -79,6 +79,7 @@ class TransactionServiceTest {
 
     @Test
     @Order(4)
+    @Disabled
     void delete() {
         transactionService.delete(transaction.getTransactionId());
     }

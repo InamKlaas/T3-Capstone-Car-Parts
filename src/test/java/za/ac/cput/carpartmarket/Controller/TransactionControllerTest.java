@@ -22,12 +22,13 @@ import za.ac.cput.carpartmarket.Factory.TransactionFactory;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @AutoConfigureTestRestTemplate
 @TestMethodOrder(MethodOrderer.MethodName.class)
 class TransactionControllerTest {
 
-    private static Name name = NameFactory.createName("Vera","Doja");
+    private static Name name = NameFactory.createName("Vera", "Doja");
     private static Buyer buyer = BuyerFactory.createBuyer(
             "N02",
             name,
@@ -38,17 +39,12 @@ class TransactionControllerTest {
             "O1",
             buyer,
             "Pending",
-            LocalDateTime.of(2020,3,23,0,0),
+            LocalDateTime.of(2020, 3, 23, 0, 0),
             1500.00,
             "D01"
     );
 
-    private static Transaction transaction = TransactionFactory.createTransaction(
-            "T01",
-            LocalDateTime.of(2020,3,23,0,0),
-            order,
-            1500.00
-    );
+    private static Transaction transaction;
 
     String BASE_URL = "http://localhost:8080/transactions";
 
@@ -57,6 +53,29 @@ class TransactionControllerTest {
 
     @Test
     void a_create() {
+
+        ResponseEntity<Buyer> buyerResponse = restTemplate.postForEntity(
+                "http://localhost:8080/buyer/create", buyer, Buyer.class);
+        assertEquals(HttpStatus.OK, buyerResponse.getStatusCode());
+        buyer = buyerResponse.getBody();
+        System.out.println("Saved buyer: " + buyer);
+
+
+        Order orderToSave = new Order.Builder().copy(order).setBuyer(buyer).build();
+        ResponseEntity<Order> orderResponse = restTemplate.postForEntity(
+                "http://localhost:8080/orders", orderToSave, Order.class);
+        assertEquals(HttpStatus.OK, orderResponse.getStatusCode());
+        order = orderResponse.getBody();
+        System.out.println("Saved order: " + order);
+
+
+        transaction = TransactionFactory.createTransaction(
+                "T01",
+                LocalDateTime.of(2020, 3, 23, 0, 0),
+                order,
+                1500.00
+        );
+
         String url = BASE_URL;
         System.out.println("URL: " + url);
         ResponseEntity<Transaction> postResponse = restTemplate.postForEntity(url, transaction, Transaction.class);
