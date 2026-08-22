@@ -18,8 +18,15 @@ class AddressServiceTest {
     @Autowired
     private AddressService service;
 
-//    private static Address address = AddressFactory.createAddress( "65", 8765421012345L, "Belhar", "Cape Town", "Western Cape", 5084, "South Africa");
-    private Address address = AddressFactory.createAddress( "65", 8765421012345L, "Belhar", "Cape Town", "Western Cape", 5084, "South Africa");
+    private static Address address = AddressFactory.createAddress(
+            "65",
+            "98",
+            "Belhar",
+            "Cape Town",
+            "Western Cape",
+            5084,
+            "South Africa"
+    );
 
     @Test
     void a_create() {

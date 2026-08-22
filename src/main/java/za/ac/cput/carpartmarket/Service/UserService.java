@@ -17,7 +17,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User read(Long id) {
+    public User read(String id) {
         return repository.findById(id).orElse(null);
     }
 
@@ -27,7 +27,7 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public boolean delete(Long id) {
+    public boolean delete(String id) {
         repository.deleteById(id);
         return true;
     }

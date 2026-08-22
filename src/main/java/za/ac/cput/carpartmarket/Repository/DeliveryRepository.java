@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 import za.ac.cput.carpartmarket.Domain.Delivery;
 
 @Repository
-public interface DeliveryRepository extends JpaRepository<Delivery, Long> {
+public interface DeliveryRepository extends JpaRepository<Delivery, String> {
 
     Delivery findByTrackingNumber(String trackingNumber);
 }

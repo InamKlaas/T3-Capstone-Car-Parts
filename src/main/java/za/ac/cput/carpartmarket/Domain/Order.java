@@ -8,14 +8,14 @@ import java.time.LocalDateTime;
 @Table(name = "orders")  // Change from "order"
 public class Order {
     @Id
-    private Long orderId;
+    private String orderId;
     private LocalDateTime orderDate;
     @ManyToOne
     @JoinColumn(name = "buyer_id")
     private Buyer buyer;
     private double totalAmount;
     private String status;
-    private Long deliveryId;
+    private String deliveryId;
 
     protected Order() {
     }
@@ -29,7 +29,7 @@ public class Order {
         this.deliveryId = builder.deliveryId;
     }
 
-    public Long getOrderId() {
+    public String getOrderId() {
         return orderId;
     }
 
@@ -49,7 +49,7 @@ public class Order {
         return totalAmount;
     }
 
-    public Long getDeliveryId() {
+    public String getDeliveryId() {
         return deliveryId;
     }
 
@@ -66,14 +66,14 @@ public class Order {
     }
 
     public static class Builder {
-        private Long orderId;
+        private String orderId;
         private LocalDateTime orderDate;
         private Buyer buyer;
         private double totalAmount;
         private String status;
-        private Long deliveryId;
+        private String deliveryId;
 
-        public Builder setOrderId(Long orderId) {
+        public Builder setOrderId(String orderId) {
             this.orderId = orderId;
             return this;
         }
@@ -98,7 +98,7 @@ public class Order {
             return this;
         }
 
-        public Builder setDeliveryId(Long deliveryId) {
+        public Builder setDeliveryId(String deliveryId) {
             this.deliveryId = deliveryId;
             return this;
         }

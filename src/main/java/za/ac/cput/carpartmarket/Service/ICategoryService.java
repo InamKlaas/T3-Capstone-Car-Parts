@@ -4,7 +4,7 @@ import za.ac.cput.carpartmarket.Domain.Category;
 
 import java.util.List;
 
-public interface ICategoryService {
+public interface ICategoryService extends IService<Category,String> {
 
     Category create(Category category);
 

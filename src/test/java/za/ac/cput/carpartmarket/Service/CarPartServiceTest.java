@@ -18,7 +18,7 @@ class CarPartServiceTest {
 
     @Autowired
     private CarPartService service;
-    private static CarPart carPart1 = CarPartFactory.createCarPart(73637372L, "side Mirror", "white Toyota Corolla", 150.00, 10, "Toyota Corolla", 1001L, 2001L);
+    private static CarPart carPart1 = CarPartFactory.createCarPart("73637372L", "side Mirror", "white Toyota Corolla", 150.00, 10, "Toyota Corolla", 1001L, "2001L");
 
 
     @Test

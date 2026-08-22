@@ -19,7 +19,7 @@ public class DeliveryService implements IDeliveryService {
     }
 
     @Override
-    public Delivery read(Long deliveryId) {
+    public Delivery read(String deliveryId) {
         return repository.findById(deliveryId).orElse(null);
     }
 
@@ -29,7 +29,7 @@ public class DeliveryService implements IDeliveryService {
     }
 
     @Override
-    public boolean delete(Long carPartId) {
+    public boolean delete(String carPartId) {
         repository.deleteById(carPartId);
         return true;
     }

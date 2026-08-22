@@ -7,7 +7,7 @@ import za.ac.cput.carpartmarket.Util.Helper;
 
 public class BuyerFactory {
 
-    public static Buyer createBuyer(Long userid, Name buyerName, String buyingPart) {
+    public static Buyer createBuyer(String userid, Name buyerName, String buyingPart) {
         if (userid == null){
             return null;
         }

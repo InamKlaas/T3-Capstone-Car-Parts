@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 public class OrderFactory {
 
-    public static Order createOrder(Long orderId, Buyer buyer, String status, LocalDateTime orderDate, double totalAmount,Long deliveryId) {
+    public static Order createOrder(String orderId, Buyer buyer, String status, LocalDateTime orderDate, double totalAmount, String deliveryId) {
 
         if(Helper.isEmptyOrNull(orderId)){
             return null;

@@ -21,10 +21,6 @@ public class Helper {
         return false;
     }
 
-    public static boolean isEmptyOrNull(Long value){
-        return value == null || value <=0;
-    }
-
     public static boolean isNotEmptyOrNull(String str){
         if (str == null || str.isEmpty()){
             return false;
@@ -32,10 +28,6 @@ public class Helper {
         return true;
     }
 
-    public static boolean isNotEmptyOrNull(Long value){
-        return value != null && value >0;
-    }
-    
     public static boolean isValidEmail(String email){
         EmailValidator emailValidator = EmailValidator.getInstance();
         if(!emailValidator.isValid(email)){

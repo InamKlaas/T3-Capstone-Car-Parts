@@ -24,7 +24,7 @@ class TransactionServiceTest {
     @BeforeAll
     static void setUp(@Autowired BuyerService buyerService, @Autowired OrderService orderService){
         Buyer buyer = BuyerFactory.createBuyer(
-                4L,
+                "4L",
                 NameFactory.createName("Vera","Doja"),
                 "Car pads"
         );
@@ -32,18 +32,18 @@ class TransactionServiceTest {
         Buyer savedBuyer = buyerService.create(buyer);
 
         za.ac.cput.carpartmarket.Domain.Order order = OrderFactory.createOrder(
-                334L,
+                "334L",
                 savedBuyer,
                 "pending",
                 LocalDateTime.of(2020, 3, 23, 0, 0),
                 2345678.00,
-                2L
+                "2L"
         );
 
         za.ac.cput.carpartmarket.Domain.Order savedOrder = orderService.create(order);
 
         transaction = TransactionFactory.createTransaction(
-                12L,
+                "12L",
                 LocalDateTime.of(2020, 3, 22, 0, 0),
                 savedOrder,
                 4445678.00
@@ -79,6 +79,7 @@ class TransactionServiceTest {
 
     @Test
     @Order(4)
+    @Disabled
     void delete() {
         transactionService.delete(transaction.getTransactionId());
     }

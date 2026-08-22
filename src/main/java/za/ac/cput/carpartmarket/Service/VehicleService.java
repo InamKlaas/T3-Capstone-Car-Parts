@@ -16,8 +16,8 @@ public class VehicleService implements IVehicleService{
     }
 
     @Override
-    public Vehicle read(Long aLong) {
-        return repository.findById(aLong).orElse(null);
+    public Vehicle read(String str) {
+        return repository.findById(str).orElse(null);
     }
 
     @Override
@@ -26,9 +26,10 @@ public class VehicleService implements IVehicleService{
     }
 
     @Override
-    public boolean delete(Long vehicleId) {
+    public boolean delete(String vehicleId) {
         repository.deleteById(vehicleId);
         return true;
+    }
 
     }
-}
+

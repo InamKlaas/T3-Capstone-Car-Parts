@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
  class CarPartFactoryTest {
 
-     private static CarPart carPart = CarPartFactory.createCarPart(73637372L, "side Mirror", "white Toyota Corolla", 150.00, 10, "Toyota Corolla", 1001L, 2001L);
+     private static CarPart carPart = CarPartFactory.createCarPart("73637372L", "side Mirror", "white Toyota Corolla", 150.00, 10, "Toyota Corolla", 1001L, "2001L");
 
      @Test
      public void createCarPart() {

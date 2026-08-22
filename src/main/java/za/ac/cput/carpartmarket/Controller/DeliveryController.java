@@ -20,13 +20,13 @@ public class DeliveryController {
     public Delivery create(@RequestBody Delivery delivery){return service.create(delivery);}
 
     @GetMapping("/read/{deliveryId}")
-    public Delivery read(@PathVariable Long deliveryId){return service.read(deliveryId);}
+    public Delivery read(@PathVariable String deliveryId){return service.read(deliveryId);}
 
     @PutMapping("/update")
     public Delivery update(@RequestBody Delivery delivery){return service.update(delivery);}
 
     @DeleteMapping("/delete/{deliveryId}")
-    public boolean delete(@PathVariable Long deliveryId){return service.delete(deliveryId);}
+    public boolean delete(@PathVariable String deliveryId){return service.delete(deliveryId);}
 
     @GetMapping("/getall")
     public List<Delivery> getall(){return service.getall();}

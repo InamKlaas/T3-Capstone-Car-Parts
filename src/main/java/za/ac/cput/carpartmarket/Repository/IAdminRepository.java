@@ -6,8 +6,7 @@ import za.ac.cput.carpartmarket.Domain.Delivery;
 
 import java.util.List;
 
-public interface IAdminRepository extends JpaRepository<Admin,Long> {
+public interface IAdminRepository extends JpaRepository<Admin,String> {
 
-    Admin findByUserid(Long userid);
 
 }

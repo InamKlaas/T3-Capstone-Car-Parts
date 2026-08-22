@@ -6,9 +6,9 @@ import jakarta.persistence.Id;
 public class Delivery {
 
     @Id
-    private Long deliveryId;
-    private Long orderId;
-    private Long addressId;
+    private String deliveryId;
+    private String orderId;
+    private String addressId;
     private String courierName;
     private String trackingNumber;
     private String deliveryDate;
@@ -30,15 +30,15 @@ public class Delivery {
         this.deliveryCost = builder.deliveryCost;
     }
 
-    public Long getDeliveryId() {
+    public String getDeliveryId() {
         return deliveryId;
     }
 
-    public Long getOrderId() {
+    public String getOrderId() {
         return orderId;
     }
 
-    public Long getAddressId() {
+    public String getAddressId() {
         return addressId;
     }
 
@@ -77,26 +77,26 @@ public class Delivery {
     }
 
     public static class Builder{
-        private Long deliveryId;
-        private Long orderId;
-        private Long addressId;
+        private String deliveryId;
+        private String orderId;
+        private String addressId;
         private String courierName;
         private String trackingNumber;
         private String deliveryDate;
         private String deliveryStatus;
         private Double deliveryCost;
 
-        public Builder setDeliveryId(Long deliveryId) {
+        public Builder setDeliveryId(String deliveryId) {
             this.deliveryId = deliveryId;
             return this;
         }
 
-        public Builder setOrderId(Long orderId) {
+        public Builder setOrderId(String orderId) {
             this.orderId = orderId;
             return this;
         }
 
-        public Builder setAddressId(Long addressId) {
+        public Builder setAddressId(String addressId) {
             this.addressId = addressId;
             return this;
         }
