@@ -7,6 +7,8 @@ import za.ac.cput.carpartmarket.Service.AddressService;
 
 import java.util.List;
 
+@RestController
+@RequestMapping("/Address")
 public class AddressController {
 
     private AddressService service;
@@ -18,13 +20,13 @@ public class AddressController {
     @PostMapping("/create")
     public Address create(@RequestBody Address address){return service.create(address);}
 
-    @GetMapping("/read/{employeeId}")
+    @GetMapping("/read/{streetNumber}")
     public Address read(@PathVariable String streetNumber){return service.read(streetNumber);}
 
     @PutMapping("/update")
     public Address update(@RequestBody Address streetNumber){return service.update(streetNumber);}
 
-    @DeleteMapping("/delete/{employeeId}")
+    @DeleteMapping("/delete/{streetNumber}")
     public boolean delete(@PathVariable String streetNumber){return service.delete(streetNumber);}
 
     @GetMapping("/getall")
