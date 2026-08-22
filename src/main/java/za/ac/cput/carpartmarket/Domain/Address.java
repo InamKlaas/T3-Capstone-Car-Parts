@@ -70,7 +70,7 @@ public class Address {
 
     public static class Builder{
         private String streetNumber;
-        private Long userId;
+        private String userId;
         private String suburb;
         private String city;
         private String province;
@@ -82,7 +82,7 @@ public class Address {
             return this;
         }
 
-        public Builder setUserId(Long userId) {
+        public Builder setUserId(String userId) {
             this.userId = userId;
             return this;
         }

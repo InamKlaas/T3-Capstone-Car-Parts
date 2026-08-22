@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 public abstract class User {
 
     @Id
-    protected Long userid;
+    protected String userid;
 
     @Embedded
     protected Name name;
@@ -22,7 +22,7 @@ public abstract class User {
     }
 
 
-    public Long getUserid() {
+    public String getUserid() {
         return userid;
     }
 

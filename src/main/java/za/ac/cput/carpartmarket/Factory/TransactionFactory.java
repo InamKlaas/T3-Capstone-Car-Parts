@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 public class TransactionFactory {
 
-    public static Transaction createTransaction(Long transactionId, LocalDateTime transactionDate, Order order,double amount){
+    public static Transaction createTransaction(String transactionId, LocalDateTime transactionDate, Order order, double amount){
         if(Helper.isEmptyOrNull(transactionId)){
             return null;
         }

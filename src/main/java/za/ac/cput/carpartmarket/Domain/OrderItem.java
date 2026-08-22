@@ -7,9 +7,9 @@ import jakarta.persistence.Id;
 
 public class OrderItem {
     @Id
-    private Long orderItemId;
-    private Long orderId;
-    private Long partId;
+    private String orderItemId;
+    private String orderId;
+    private String partId;
     private String quantity;
     private Double unitPrice;
     private Double subTotal;
@@ -27,15 +27,15 @@ public class OrderItem {
         this.subTotal = builder.subTotal;
     }
 
-    public Long getOrderItemId() {
+    public String getOrderItemId() {
         return orderItemId;
     }
 
-    public Long getOrderId() {
+    public String getOrderId() {
         return orderId;
     }
 
-    public Long getPartId() {
+    public String getPartId() {
         return partId;
     }
 
@@ -64,24 +64,24 @@ public class OrderItem {
     }
 
     public static class Builder {
-        private Long orderItemId;
-        private Long orderId;
-        private Long partId;
+        private String orderItemId;
+        private String orderId;
+        private String partId;
         private String quantity;
         private Double unitPrice;
         private Double subTotal;
 
-        public Builder setOrderItemId(Long orderItemId) {
+        public Builder setOrderItemId(String orderItemId) {
             this.orderItemId = orderItemId;
             return this;
         }
 
-        public Builder setOrderId(Long orderId) {
+        public Builder setOrderId(String orderId) {
             this.orderId = orderId;
             return this;
         }
 
-        public Builder setPartId(Long partId) {
+        public Builder setPartId(String partId) {
             this.partId = partId;
             return this;
         }

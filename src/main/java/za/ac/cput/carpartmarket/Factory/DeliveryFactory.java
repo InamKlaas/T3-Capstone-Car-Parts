@@ -5,7 +5,7 @@ import za.ac.cput.carpartmarket.Util.Helper;
 
 public class DeliveryFactory {
 
-    public static Delivery createDelivery(Long deliveryId, Long orderId, Long addressId, String courierName, String trackingNumber, String deliveryDate, String deliveryStatus, Double deliveryCost) {
+    public static Delivery createDelivery(String deliveryId, String orderId, String addressId, String courierName, String trackingNumber, String deliveryDate, String deliveryStatus, Double deliveryCost) {
 
         if (Helper.isNullOrEmpty(courierName) || Helper.isNullOrEmpty(trackingNumber) || Helper.isNullOrEmpty(deliveryDate) || Helper.isNullOrEmpty(deliveryStatus))
             return null;

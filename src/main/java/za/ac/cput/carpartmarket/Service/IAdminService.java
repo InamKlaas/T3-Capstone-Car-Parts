@@ -7,11 +7,11 @@ import java.util.List;
 public interface IAdminService {
     Admin create(Admin admin);
 
-    Admin read(Long id);
+    Admin read(String id);
 
     Admin update(Admin admin);
 
-    boolean delete(Long id);
+    boolean delete(String id);
 
     List<Admin> getAll();
 }

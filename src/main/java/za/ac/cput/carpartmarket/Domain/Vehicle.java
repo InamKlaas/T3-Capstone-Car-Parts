@@ -10,7 +10,7 @@ import jakarta.persistence.Id;
 public class Vehicle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long vehicleId;
+    private String vehicleId;
     private String model;
     private int year;
     private String engineType;
@@ -28,7 +28,7 @@ public class Vehicle {
         this.fuelType = builder.fuelType;
     }
 
-    public Long getVehicleId() {
+    public String getVehicleId() {
         return vehicleId;
     }
 
@@ -60,13 +60,13 @@ public class Vehicle {
     }
 
     public static class Builder{
-        private Long vehicleId;
+        private String vehicleId;
         private String model;
         private int year;
         private String engineType;
         private String fuelType;
 
-        public Builder setVehicleId(Long vehicleId) {
+        public Builder setVehicleId(String vehicleId) {
             this.vehicleId = vehicleId;
             return this;
         }
