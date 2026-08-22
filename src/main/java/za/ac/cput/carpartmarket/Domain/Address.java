@@ -7,7 +7,7 @@ import jakarta.persistence.Id;
 public class Address {
     @Id
     private String streetNumber;
-    private Long userId;
+    private String userId;
     private String suburb;
     private String city;
     private String province;
@@ -31,7 +31,7 @@ public class Address {
         return streetNumber;
     }
 
-    public Long getUserId() {
+    public String getUserId() {
         return userId;
     }
 
