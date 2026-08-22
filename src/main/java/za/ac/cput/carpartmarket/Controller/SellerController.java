@@ -22,7 +22,7 @@ public class SellerController {
     }
 
     @GetMapping("/read/{sellerId}")
-    public Seller read(@PathVariable("sellerId") Long sellerId) {
+    public Seller read(@PathVariable("sellerId") String sellerId) {
         return sellerService.read(sellerId);
     }
 
@@ -32,7 +32,7 @@ public class SellerController {
     }
 
     @DeleteMapping("/delete/{sellerId}")
-    public void delete(@PathVariable("sellerId") Long sellerId) {
+    public void delete(@PathVariable("sellerId") String sellerId) {
         sellerService.delete(sellerId);
     }
 }
