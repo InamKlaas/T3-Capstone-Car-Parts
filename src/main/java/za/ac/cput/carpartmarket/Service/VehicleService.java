@@ -29,6 +29,7 @@ public class VehicleService implements IVehicleService{
     public boolean delete(Long vehicleId) {
         repository.deleteById(vehicleId);
         return true;
+    }
 
     }
-}
+

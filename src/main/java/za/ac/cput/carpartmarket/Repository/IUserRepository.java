@@ -5,6 +5,6 @@ import za.ac.cput.carpartmarket.Domain.User;
 
 import java.util.List;
 
-public interface IUserRepository extends JpaRepository<User,Long> {
+public interface IUserRepository extends JpaRepository<User,String> {
 
 }

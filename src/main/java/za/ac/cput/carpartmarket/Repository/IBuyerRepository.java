@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import za.ac.cput.carpartmarket.Domain.Buyer;
 
 @Repository
-public interface IBuyerRepository extends JpaRepository<Buyer, Long> {
+public interface IBuyerRepository extends JpaRepository<Buyer, String> {
 }

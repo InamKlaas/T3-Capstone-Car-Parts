@@ -6,7 +6,7 @@ import za.ac.cput.carpartmarket.Domain.Order;
 import za.ac.cput.carpartmarket.Repository.OrderRepository;
 
 @Service
-public class OrderService implements IOrderService{
+public class OrderService implements IOrderService {
 
     @Autowired
     private OrderRepository repository;
@@ -28,7 +28,7 @@ public class OrderService implements IOrderService{
 
     @Override
     public boolean delete(Long l) {
-  repository.deleteById(l);
-  return true;
+        repository.deleteById(l);
+        return true;
     }
 }
