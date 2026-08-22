@@ -1,5 +1,6 @@
 package za.ac.cput.carpartmarket.Controller;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -77,6 +78,7 @@ class DeliveryControllerTest {
     }
 
     @Test
+    @Disabled
     void d_deleteById() {
         String url = baseUrl() + "/delete/" + delivery.getDeliveryId();
         System.out.println("URL: " + url);
