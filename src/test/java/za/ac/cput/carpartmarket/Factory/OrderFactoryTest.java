@@ -12,16 +12,16 @@ class OrderFactoryTest {
     @Test
     void createOrder() {
         Order order = OrderFactory.createOrder(
-                501L,
+                "501L",
                 BuyerFactory.createBuyer(
-                        112L,
+                        "112L",
                         NameFactory.createName("Vera", "Doja"),
                         "Car Parts"
                 ),
                 "pending",
                 LocalDateTime.of(2020, 9, 23, 0, 0),
                 2345678.00,
-                2L
+                "2L"
         );
 
         assertNotNull(order);

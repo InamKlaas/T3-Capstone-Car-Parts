@@ -29,18 +29,18 @@ class OrderControllerTest {
             .build();
 
     private static Buyer buyer = BuyerFactory.createBuyer(
-            1L,
+            "1L",
             name,
             "Brake pads"
     );
 
     private static Order order = OrderFactory.createOrder(
-            2L,
+            "2L",
             buyer,
             "Pending",
             LocalDateTime.of(2020, 3,23,0,0),
             1500.00,
-            11L
+            "11L"
     );
 
     String BASE_URL = "http://localhost:8080/orders";
