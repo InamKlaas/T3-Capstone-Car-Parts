@@ -1,10 +1,13 @@
 package za.ac.cput.carpartmarket.Domain;
 
+import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 
 public class Login {
-
+    @Id
     private Long loginId;
+
     private User user;
     private String email;
     private String password;
