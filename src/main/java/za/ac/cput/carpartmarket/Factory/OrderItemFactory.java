@@ -5,7 +5,7 @@ import za.ac.cput.carpartmarket.Util.Helper;
 
 public class OrderItemFactory {
 
-    public static OrderItem createOrderItem(Long orderItemId, Long orderId, Long partId,
+    public static OrderItem createOrderItem(String orderItemId, String orderId, String partId,
                                             String quantity, Double unitPrice, Double subTotal) {
         if (Helper.isEmptyOrNull(orderItemId)) {
             return null;

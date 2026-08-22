@@ -2,13 +2,13 @@ package za.ac.cput.carpartmarket.Service;
 
 import za.ac.cput.carpartmarket.Domain.User;
 
-public interface IUserService {
+public interface IUserService extends IService<User, String> {
 
     User create(User user);
 
-    User read(Long id);
+    User read(String id);
 
     User update(User user);
 
-    boolean delete(Long id);
+    boolean delete(String id);
 }

@@ -19,8 +19,8 @@ public class SellerService implements ISellerService {
     }
 
     @Override
-    public Seller read(Long aLong) {
-        return repository.findById(aLong).orElse(null);
+    public Seller read(String str) {
+        return repository.findById(str).orElse(null);
     }
 
     @Override
@@ -29,7 +29,7 @@ public class SellerService implements ISellerService {
     }
 
     @Override
-    public boolean delete(Long l) {
+    public boolean delete(String l) {
         repository.deleteById(l);
         return false;
     }

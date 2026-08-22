@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Entity
 public class Transaction {
     @Id
-    private Long transactionId;
+    private String transactionId;
     private LocalDateTime transactionDate;
     @ManyToOne
     @JoinColumn(name = "order_order_id")
@@ -33,7 +33,7 @@ public class Transaction {
 
     }
 
-    public Long getTransactionId() {
+    public String getTransactionId() {
         return transactionId;
     }
 
@@ -60,12 +60,12 @@ public class Transaction {
     }
 
     public static class Builder {
-        private Long transactionId;
+        private String transactionId;
         private LocalDateTime transactionDate;
         private Order order;
         private double amount;
 
-        public Builder setTransactionId(Long transactionId) {
+        public Builder setTransactionId(String transactionId) {
             this.transactionId = transactionId;
             return this;
         }

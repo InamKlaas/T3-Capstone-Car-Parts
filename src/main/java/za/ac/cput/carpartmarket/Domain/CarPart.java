@@ -6,14 +6,14 @@ import jakarta.persistence.Id;
 @Entity
 public class CarPart {
     @Id
-    private Long carPartId;
+    private String carPartId;
     private String partName;
     private String description;
     private Double price;
     private int stockQuantity;
     private String model;
     private Long categoryId;
-    private Long sellerId;
+    private String sellerId;
 
     protected CarPart(){
 
@@ -30,7 +30,7 @@ public class CarPart {
         this.sellerId = builder.sellerId;
     }
 
-    public Long getCarPartId() {
+    public String getCarPartId() {
         return carPartId;
     }
 
@@ -58,7 +58,7 @@ public class CarPart {
         return categoryId;
     }
 
-    public Long getSellerId() {
+    public String getSellerId() {
         return sellerId;
     }
 
@@ -77,16 +77,16 @@ public class CarPart {
     }
 
     public static class Builder{
-        private Long carPartId;
+        private String carPartId;
         private String partName;
         private String description;
         private Double price;
         private int stockQuantity;
         private String model;
         private Long categoryId;
-        private Long sellerId;
+        private String sellerId;
 
-        public Builder setCarPartId(Long carPartId) {
+        public Builder setCarPartId(String carPartId) {
             this.carPartId = carPartId;
             return this;
         }
@@ -121,7 +121,7 @@ public class CarPart {
             return this;
         }
 
-        public Builder setSellerId(Long sellerId) {
+        public Builder setSellerId(String sellerId) {
             this.sellerId = sellerId;
             return this;
         }

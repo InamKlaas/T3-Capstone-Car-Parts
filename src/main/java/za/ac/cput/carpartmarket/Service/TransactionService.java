@@ -17,8 +17,8 @@ public class TransactionService implements ITransactionService{
     }
 
     @Override
-    public Transaction read(Long aLong) {
-        return repository.findById(aLong).orElse(null);
+    public Transaction read(String str) {
+        return repository.findById(str).orElse(null);
     }
 
     @Override
@@ -27,7 +27,7 @@ public class TransactionService implements ITransactionService{
     }
 
     @Override
-    public boolean delete(Long transactionId) {
+    public boolean delete(String transactionId) {
         repository.deleteById(transactionId);
         return true;
 
