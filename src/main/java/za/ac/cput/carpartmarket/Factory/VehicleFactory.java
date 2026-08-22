@@ -6,7 +6,7 @@ import za.ac.cput.carpartmarket.Util.Helper;
 public class VehicleFactory {
 
     public static Vehicle createVehicle(int year, String model, String engineType, String fuelType){
-               if (year <= 0) {
+        if (year <= 0) {
             return null;
         }
         if (Helper.isEmptyOrNull(model)) {
@@ -20,6 +20,7 @@ public class VehicleFactory {
         }
 
         return new Vehicle.Builder()
+                .setVehicleId(Helper.generateId())
                 .setYear(year)
                 .setModel(model)
                 .setEngineType(engineType)

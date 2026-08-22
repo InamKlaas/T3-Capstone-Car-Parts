@@ -21,9 +21,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class DeliveryControllerTest {
 
     private static Delivery delivery = DeliveryFactory.createDelivery(
-            9483L,
-            373383L,
-            9393L,
+            "9483L",
+            "373383L",
+            "9393L",
             "Courier Guy",
             "TRK123456",
             "2026-06-30",

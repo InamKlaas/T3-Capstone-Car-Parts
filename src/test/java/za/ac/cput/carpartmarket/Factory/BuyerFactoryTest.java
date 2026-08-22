@@ -10,7 +10,7 @@ class BuyerFactoryTest {
     @Test
     void createBuyer() {
         Buyer buyer = BuyerFactory.createBuyer(
-                112L,
+                "112L",
                 NameFactory.createName("Vera", "Doja"),
                 "Car Parts"
         );
@@ -36,7 +36,7 @@ class BuyerFactoryTest {
     @Test
     void createBuyerWithNullBuyerName() {
         Buyer buyer = BuyerFactory.createBuyer(
-                112L,
+                "112L",
                 null,
                 "Car Parts"
         );
@@ -49,7 +49,7 @@ class BuyerFactoryTest {
     @Test
     void createBuyerWithNullUser() {
         Buyer buyer = BuyerFactory.createBuyer(
-                112L,
+                "112L",
                 NameFactory.createName("Vera", "Doja"),
                 null
         );

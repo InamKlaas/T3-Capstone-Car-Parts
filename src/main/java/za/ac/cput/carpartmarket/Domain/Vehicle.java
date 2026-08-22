@@ -9,7 +9,6 @@ import jakarta.persistence.Id;
 
 public class Vehicle {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String vehicleId;
     private String model;
     private int year;
