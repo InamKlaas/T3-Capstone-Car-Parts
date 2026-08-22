@@ -27,7 +27,7 @@ public class AdminController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Admin> read(@PathVariable String id) {
-        Admin admin = service.read(Long.parseLong(id));
+        Admin admin = service.read(id);
         if (admin != null) {
             return ResponseEntity.ok(admin);
         } else {
@@ -46,7 +46,7 @@ public class AdminController {
 
         Admin updated = new Admin.Builder()
                 .copy(admin)
-                .setUserid(Long.parseLong(id))
+                .setUserid(id)
                 .build();
 
         return ResponseEntity.ok(service.update(updated));
@@ -54,7 +54,7 @@ public class AdminController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable String id) {
-        service.delete(Long.parseLong(id));
+        service.delete(id);
         return ResponseEntity.noContent().build();
     }
 }
