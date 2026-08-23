@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 @Entity
 
-@Table(name = "orders")  // Change from "order"
+@Table(name = "orders")
 public class Order {
     @Id
     private String orderId;

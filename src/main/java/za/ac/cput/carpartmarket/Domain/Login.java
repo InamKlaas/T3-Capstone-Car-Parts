@@ -3,11 +3,13 @@ package za.ac.cput.carpartmarket.Domain;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
-
+@Entity
+@Table(name = "login")
 public class Login {
     @Id
     private Long loginId;
-
+    @ManyToOne
+    @JoinColumn(name = "login_id")
     private User user;
     private String email;
     private String password;

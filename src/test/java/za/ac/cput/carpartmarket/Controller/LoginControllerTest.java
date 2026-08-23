@@ -21,14 +21,14 @@ import java.time.LocalDateTime;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(
-        webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT
+        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
 )
 @AutoConfigureTestRestTemplate
 @TestMethodOrder(MethodOrderer.MethodName.class)
 class LoginControllerTest {
 
     private static final Buyer buyer = BuyerFactory.createBuyer(
-            112L,
+            "112L",
             NameFactory.createName("Lulo", "Kolisi"),
             "Brake Pads"
     );
