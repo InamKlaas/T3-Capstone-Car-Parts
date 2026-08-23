@@ -4,15 +4,22 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
+@Entity
 public class Login {
     @Id
     private Long loginId;
 
+    @ManyToOne
+    @JoinColumn(name = "user_userid")
     private User user;
     private String email;
     private String password;
     private LocalDateTime loginDate;
     private String status;
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     protected Login() {
     }

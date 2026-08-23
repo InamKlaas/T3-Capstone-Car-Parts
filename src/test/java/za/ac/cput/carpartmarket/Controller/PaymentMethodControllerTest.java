@@ -78,24 +78,4 @@ class PaymentMethodControllerTest {
         restTemplate.delete(url);
         System.out.println("Delete: true");
     }
-
-    @Test
-    void create() {
-    }
-
-    @Test
-    void read() {
-    }
-
-    @Test
-    void update() {
-    }
-
-    @Test
-    void delete() {
-    }
-
-    @Test
-    void getall() {
-    }
 }

@@ -10,16 +10,11 @@ public class PaymentMethodFactory {
         if (Helper.isNullOrEmpty(methodId) || Helper.isNullOrEmpty(type) || Helper.isNullOrEmpty(provider))
             return null;
 
-        if (!Helper.isValidCvv(cvv)){
-            return null;
-        }
-
         return new PaymentMethod.Builder()
                 .setMethodId(methodId)
                 .setBuyer(buyer)
                 .setType(type)
                 .setProvider(provider)
-                .setcvv(cvv)
                 .build();
     }
 }

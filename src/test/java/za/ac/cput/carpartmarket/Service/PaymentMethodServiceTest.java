@@ -21,37 +21,19 @@ class PaymentMethodServiceTest {
 
     @Autowired
     private PaymentMethodService service;
-    @Autowired
-    private BuyerService buyerService;
-    PaymentMethod payment;
 
-    @BeforeEach
-    void setUp() {
-         Buyer buyer = BuyerFactory.createBuyer(
-                "112L",
-                NameFactory.createName("Vera", "Doja"),
-                "Car Parts"
-        );
-        Buyer buyer1 = buyerService.create(buyer);
-
-//    @Autowired
-//    private BuyerService buyerService;
-//    PaymentMethod payment;
+//    private PaymentMethod payment;
+//    private Buyer buyer;
 
 //    @BeforeEach
-//    void setUp() {
-//         Buyer buyer = BuyerFactory.createBuyer(
-//                112L,
-//                NameFactory.createName("Vera", "Doja"),
-//                "Car Parts"
-//        );
-//        Buyer buyer1 = buyerService.create(buyer);
-//
-//          payment = PaymentMethodFactory.createPaymentFactory("838HJ", buyer1, "transaction", "FNB", 746);
+//    void setUp(){
+//        buyer = BuyerFactory.createBuyer("HFH8", NameFactory.createName("Vera", "Doja"), "Car Parts");
+//        payment = PaymentMethodFactory.createPaymentFactory("UH83", buyer, "transaction", "FNB", 738);
 //
 //    }
     private static Buyer buyer;
-    private PaymentMethod payment = PaymentMethodFactory.createPaymentFactory("JDH87", buyer, "transaction", "FNB", 738 );
+           private PaymentMethod payment = PaymentMethodFactory.createPaymentFactory("UH83", buyer, "transaction", "FNB", 738);
+
 
     @Test
     void a_create(){

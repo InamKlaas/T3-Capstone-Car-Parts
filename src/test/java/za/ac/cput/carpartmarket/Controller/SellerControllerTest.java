@@ -57,7 +57,7 @@ class SellerControllerTest {
     void b_read() {
 
         String url =
-                BASE_URL + "/read/" + seller.getUserId();
+                BASE_URL + "/read/" + seller.getUserid();
 
         System.out.println("URL: " + url);
 
@@ -70,8 +70,8 @@ class SellerControllerTest {
         assertNotNull(response.getBody());
 
         assertEquals(
-                seller.getUserId(),
-                response.getBody().getUserId()
+                seller.getUserid(),
+                response.getBody().getUserid()
         );
 
         System.out.println("Read Seller: " + response.getBody());
@@ -81,7 +81,7 @@ class SellerControllerTest {
     void c_update() {
 
         Seller updatedSeller = SellerFactory.createSeller(
-                seller.getUserId(),
+                seller.getUserid(),
                 NameFactory.createName("Lulo", "Mokoena"),
                 "Engine Parts"
         );
@@ -93,7 +93,7 @@ class SellerControllerTest {
         restTemplate.put(url, updatedSeller);
 
         String readUrl =
-                BASE_URL + "/read/" + seller.getUserId();
+                BASE_URL + "/read/" + seller.getUserid();
 
         ResponseEntity<Seller> response =
                 restTemplate.getForEntity(
@@ -118,7 +118,7 @@ class SellerControllerTest {
     void d_delete() {
 
         String url =
-                BASE_URL + "/delete/" + seller.getUserId();
+                BASE_URL + "/delete/" + seller.getUserid();
 
         System.out.println("URL: " + url);
 

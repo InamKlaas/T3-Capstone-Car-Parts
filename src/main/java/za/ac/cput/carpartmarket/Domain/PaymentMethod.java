@@ -15,7 +15,6 @@ public class PaymentMethod {
     private Buyer buyer;
     private String type;
     private String provider;
-    private int cvv;
 
     public PaymentMethod() {}
 
@@ -24,7 +23,6 @@ public class PaymentMethod {
         this.buyer = builder.buyer;
         this.type = builder.type;
         this.provider = builder.provider;
-        this.cvv = builder.cvv;
     }
 
     public String getMethodId() {
@@ -43,10 +41,6 @@ public class PaymentMethod {
         return provider;
     }
 
-    public int getcvv() {
-        return cvv;
-    }
-
     @Override
     public String toString() {
         return "PaymentMethod{" +
@@ -54,7 +48,6 @@ public class PaymentMethod {
                 ", buyer=" + buyer +
                 ", type='" + type + '\'' +
                 ", provider='" + provider + '\'' +
-                ", cvv=" + cvv +
                 '}';
     }
 
@@ -63,7 +56,6 @@ public class PaymentMethod {
         private Buyer buyer;
         private String type;
         private String provider;
-        private int cvv;
 
         public Builder setMethodId(String methodId) {
             this.methodId = methodId;
@@ -85,17 +77,11 @@ public class PaymentMethod {
             return this;
         }
 
-        public Builder setcvv(int cvv) {
-            this.cvv = cvv;
-            return this;
-        }
-
         public Builder copy(PaymentMethod paymentMethod){
             this.methodId = paymentMethod.methodId;
             this.buyer = paymentMethod.buyer;
             this.type = paymentMethod.type;
             this.provider = paymentMethod.provider;
-            this.cvv = paymentMethod.cvv;
             return this;
         }
 
