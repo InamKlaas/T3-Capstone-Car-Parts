@@ -16,7 +16,7 @@ import za.ac.cput.carpartmarket.Factory.SellerFactory;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureTestRestTemplate
 @TestMethodOrder(MethodOrderer.MethodName.class)
 class SellerControllerTest {

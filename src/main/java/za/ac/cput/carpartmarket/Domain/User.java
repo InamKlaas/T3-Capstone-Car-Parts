@@ -36,6 +36,16 @@ public abstract class User {
     }
 
 
+    protected User(String userid, Name name, String email, String password, String phoneNumber, String createdAt) {
+        this.userid = userid;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.createdAt = createdAt;
+    }
+
+
     public String getUserid() {
         return userid;
     }
