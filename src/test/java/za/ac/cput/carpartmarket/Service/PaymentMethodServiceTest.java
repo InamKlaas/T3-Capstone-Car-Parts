@@ -34,9 +34,24 @@ class PaymentMethodServiceTest {
         );
         Buyer buyer1 = buyerService.create(buyer);
 
-          payment = PaymentMethodFactory.createPaymentFactory("838HJ", buyer1, "transaction", "FNB", 746);
+//    @Autowired
+//    private BuyerService buyerService;
+//    PaymentMethod payment;
 
-    }
+//    @BeforeEach
+//    void setUp() {
+//         Buyer buyer = BuyerFactory.createBuyer(
+//                112L,
+//                NameFactory.createName("Vera", "Doja"),
+//                "Car Parts"
+//        );
+//        Buyer buyer1 = buyerService.create(buyer);
+//
+//          payment = PaymentMethodFactory.createPaymentFactory("838HJ", buyer1, "transaction", "FNB", 746);
+//
+//    }
+    private static Buyer buyer;
+    private PaymentMethod payment = PaymentMethodFactory.createPaymentFactory("JDH87", buyer, "transaction", "FNB", 738 );
 
     @Test
     void a_create(){

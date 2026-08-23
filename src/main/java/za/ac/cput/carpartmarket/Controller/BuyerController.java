@@ -22,7 +22,7 @@ public class BuyerController {
     }
 
     @GetMapping("/read/{userid}")
-    public Buyer read(@PathVariable("userid") String userid) {
+    public Buyer read(@PathVariable("userid") Long userid) {
         return buyerService.read(userid);
     }
 
