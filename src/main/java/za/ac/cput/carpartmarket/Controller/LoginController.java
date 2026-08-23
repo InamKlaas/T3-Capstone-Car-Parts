@@ -22,7 +22,7 @@ public class LoginController {
     }
 
     @GetMapping("/read/{loginId}")
-    public Login read(@PathVariable("loginId") Long loginId) {
+    public Login read(@PathVariable("loginId") String loginId) {
         return loginService.read(loginId);
     }
 
@@ -32,7 +32,7 @@ public class LoginController {
     }
 
     @DeleteMapping("/delete/{loginId}")
-    public void delete(@PathVariable("loginId") Long loginId) {
+    public void delete(@PathVariable("loginId") String loginId) {
         loginService.delete(loginId);
     }
 }

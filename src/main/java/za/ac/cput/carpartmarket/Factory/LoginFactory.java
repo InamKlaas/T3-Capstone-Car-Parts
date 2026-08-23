@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 public class LoginFactory {
 
     public static Login createLogin(
-            Long loginId,
+            String loginId,
             User user,
             String email,
             String password,

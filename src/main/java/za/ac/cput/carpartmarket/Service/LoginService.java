@@ -12,22 +12,19 @@ public class LoginService implements ILoginService {
     private ILoginRepository repository;
 
     @Override
-    public Login create(Login login) {
-        return repository.save(login);
+    public Login create(Login login) { return repository.save(login);}
+
+
+    @Override
+    public Login read(String loginId) {
+        return (Login) repository.findById(loginId).orElse(null);
     }
 
     @Override
-    public Login read(Long loginId) {
-        return repository.findById(loginId).orElse(null);
-    }
+    public Login update(Login login) { return repository.save(login);}
 
     @Override
-    public Login update(Login login) {
-        return repository.save(login);
-    }
-
-    @Override
-    public boolean delete(Long loginId) {
+    public boolean delete(String loginId) {
         repository.deleteById(loginId);
         return true;
     }

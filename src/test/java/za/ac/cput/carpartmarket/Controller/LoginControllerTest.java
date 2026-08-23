@@ -28,7 +28,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class LoginControllerTest {
 
     private static final Buyer buyer = BuyerFactory.createBuyer(
-            112L,
+            String.valueOf(112L),
             NameFactory.createName("Lulo", "Kolisi"),
             "Brake Pads"
     );
