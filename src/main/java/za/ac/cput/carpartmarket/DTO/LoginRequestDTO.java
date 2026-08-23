@@ -1,5 +1,9 @@
 package za.ac.cput.carpartmarket.DTO;
 
+/*
+* LoginRequestDTO.java
+*/
+
 public class LoginRequestDTO {
     private String email;
     private String password;
