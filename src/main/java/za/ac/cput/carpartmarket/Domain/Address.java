@@ -5,6 +5,7 @@ import jakarta.persistence.Id;
 
 @Entity
 public class Address {
+
     @Id
     private String streetNumber;
     private String userId;
