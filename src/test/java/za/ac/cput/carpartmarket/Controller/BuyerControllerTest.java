@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class BuyerControllerTest {
 
     private static Buyer buyer = BuyerFactory.createBuyer(
-            112L,
+            "112L",
             NameFactory.createName("Lulo", "Kolisi"),
             "Brake Pads"
     );
@@ -57,7 +57,7 @@ class BuyerControllerTest {
     void b_read() {
 
         String url =
-                BASE_URL + "/read/" + buyer.getUserId();
+                BASE_URL + "/read/" + buyer.getUserid();
 
         System.out.println("URL: " + url);
 
@@ -70,8 +70,8 @@ class BuyerControllerTest {
         assertNotNull(response.getBody());
 
         assertEquals(
-                buyer.getUserId(),
-                response.getBody().getUserId()
+                buyer.getUserid(),
+                response.getBody().getUserid()
         );
 
         System.out.println("Read Buyer: " + response.getBody());
@@ -81,7 +81,7 @@ class BuyerControllerTest {
     void c_update() {
 
         Buyer updatedBuyer = new Buyer.Builder()
-                .setUserid(buyer.getUserId())
+                .setUserid(buyer.getUserid())
                 .setBuyerName(
                         NameFactory.createName("Lulo", "Mokoena")
                 )
@@ -95,7 +95,7 @@ class BuyerControllerTest {
         restTemplate.put(url, updatedBuyer);
 
         String readUrl =
-                BASE_URL + "/read/" + buyer.getUserId();
+                BASE_URL + "/read/" + buyer.getUserid();
 
         ResponseEntity<Buyer> response =
                 restTemplate.getForEntity(
@@ -120,7 +120,7 @@ class BuyerControllerTest {
     void d_delete() {
 
         String url =
-                BASE_URL + "/delete/" + buyer.getUserId();
+                BASE_URL + "/delete/" + buyer.getUserid();
 
         System.out.println("URL: " + url);
 

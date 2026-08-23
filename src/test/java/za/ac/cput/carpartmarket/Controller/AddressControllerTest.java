@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.MethodName.class)
 class AddressControllerTest {
 
-    private static Address address = AddressFactory.createAddress("28", 92298394L, "Hout Bay", "Cape Town", "Estern Cape", 7382, "South Africa");
+    private static Address address = AddressFactory.createAddress("28", "92298394L", "Hout Bay", "Cape Town", "Estern Cape", 7382, "South Africa");
 
     @Autowired
     private TestRestTemplate restTemplate;
