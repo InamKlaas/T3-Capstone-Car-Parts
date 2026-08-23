@@ -16,6 +16,10 @@ public class Login {
     private LocalDateTime loginDate;
     private String status;
 
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     protected Login() {
     }
 

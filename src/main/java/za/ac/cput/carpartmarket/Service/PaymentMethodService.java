@@ -2,9 +2,7 @@ package za.ac.cput.carpartmarket.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import za.ac.cput.carpartmarket.Domain.Address;
 import za.ac.cput.carpartmarket.Domain.PaymentMethod;
-import za.ac.cput.carpartmarket.Repository.AddressRepository;
 import za.ac.cput.carpartmarket.Repository.PaymentMethodRepository;
 
 import java.util.List;

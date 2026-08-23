@@ -1,10 +1,24 @@
 package za.ac.cput.carpartmarket.Domain;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.persistence.*;
 
 
+//@Entity
+//@Inheritance(strategy = InheritanceType.JOINED)
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "userType"
+)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = Buyer.class, name = "buyer"),
+        @JsonSubTypes.Type(value = Seller.class, name = "seller"),
+        @JsonSubTypes.Type(value = Admin.class, name = "admin")
+})
 public abstract class User {
 
     @Id

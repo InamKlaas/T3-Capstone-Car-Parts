@@ -36,7 +36,8 @@ class PaymentMethodServiceTest {
 
    }
     private static Buyer buyer;
-    private PaymentMethod payment = PaymentMethodFactory.createPaymentFactory("JDH87", buyer, "transaction", "FNB", 738 );
+           private PaymentMethod payment = PaymentMethodFactory.createPaymentFactory("UH83", buyer, "transaction", "FNB", 738);
+
 
     @Test
     void a_create(){
