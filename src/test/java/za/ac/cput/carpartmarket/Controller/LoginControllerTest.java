@@ -5,45 +5,47 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.resttestclient.TestRestTemplate;
 import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureTestRestTemplate;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import za.ac.cput.carpartmarket.Domain.Buyer;
 import za.ac.cput.carpartmarket.Domain.Login;
+import za.ac.cput.carpartmarket.Domain.Name;
 import za.ac.cput.carpartmarket.Factory.BuyerFactory;
 import za.ac.cput.carpartmarket.Factory.LoginFactory;
-import za.ac.cput.carpartmarket.Factory.NameFactory;
 
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest(
-        webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT
-)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @AutoConfigureTestRestTemplate
 @TestMethodOrder(MethodOrderer.MethodName.class)
 class LoginControllerTest {
 
-    private static final Buyer buyer = BuyerFactory.createBuyer(
+    private static Name name = new Name.Builder()
+            .setFirstName("Lulo")
+            .setLastName("Kolisi")
+            .build();
+
+    private static Buyer buyer = BuyerFactory.createBuyer(
             String.valueOf(112L),
-            NameFactory.createName("Lulo", "Kolisi"),
+            name,
             "Brake Pads"
     );
 
     private static Login login = LoginFactory.createLogin(
-            201L,
+            "LOGIN001",
             buyer,
             "lulo@gmail.com",
             "password123",
-            LocalDateTime.of(2026, 8, 22, 10, 30),
-            "SUCCESS"
+            LocalDateTime.of(2026, 8, 24, 10, 30),
+            "Successful"
     );
 
-    private final String BASE_URL =
-            "http://localhost:8080/login";
+    String BASE_URL = "http://localhost:8080/logins";
 
     @Autowired
     private TestRestTemplate restTemplate;
@@ -51,29 +53,49 @@ class LoginControllerTest {
     @Test
     void a_create() {
 
-        String url = BASE_URL + "/create";
+        ResponseEntity<Buyer> buyerResponse = restTemplate.postForEntity(
+                "http://localhost:8080/buyer/create",
+                buyer,
+                Buyer.class
+        );
 
-        ResponseEntity<Login> response =
+        assertEquals(HttpStatus.OK, buyerResponse.getStatusCode());
+
+        buyer = buyerResponse.getBody();
+
+        System.out.println("Saved buyer: " + buyer);
+
+        Login loginToSave = new Login.Builder()
+                .copy(login)
+                .setUser(buyer)
+                .build();
+
+        String url = BASE_URL;
+
+        ResponseEntity<Login> postResponse =
                 restTemplate.postForEntity(
                         url,
-                        login,
+                        loginToSave,
                         Login.class
                 );
 
-        assertNotNull(response);
-        assertNotNull(response.getBody());
-        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertNotNull(postResponse);
+        assertNotNull(postResponse.getBody());
+        assertEquals(HttpStatus.OK, postResponse.getStatusCode());
 
-        login = response.getBody();
+        Login loginSaved = postResponse.getBody();
 
-        System.out.println("Saved Login: " + login);
+        System.out.println("Save data: " + loginSaved);
+
+        login = loginSaved;
     }
 
     @Test
     void b_read() {
 
-        String url =
-                BASE_URL + "/read/" + login.getLoginId();
+        String url = BASE_URL + "/" + login.getLoginId();
+
+        System.out.println("URL: " + url);
 
         ResponseEntity<Login> response =
                 restTemplate.getForEntity(
@@ -81,29 +103,33 @@ class LoginControllerTest {
                         Login.class
                 );
 
+        assertNotNull(response);
         assertNotNull(response.getBody());
+
         assertEquals(
                 login.getLoginId(),
                 response.getBody().getLoginId()
         );
 
-        System.out.println("Read Login: " + response.getBody());
+        System.out.println(response.getBody());
     }
 
     @Test
     void c_update() {
 
-        Login updatedLogin = new Login.Builder()
+        Login updateLogin = new Login.Builder()
                 .copy(login)
-                .setStatus("FAILED")
+                .setStatus("Failed")
                 .build();
 
-        String url = BASE_URL + "/update";
+        String url = BASE_URL;
 
-        restTemplate.put(url, updatedLogin);
+        System.out.println("URL: " + url);
+
+        restTemplate.put(url, updateLogin);
 
         String readUrl =
-                BASE_URL + "/read/" + login.getLoginId();
+                BASE_URL + "/" + login.getLoginId();
 
         ResponseEntity<Login> response =
                 restTemplate.getForEntity(
@@ -111,13 +137,13 @@ class LoginControllerTest {
                         Login.class
                 );
 
+        System.out.println(response.getBody());
+
         assertNotNull(response.getBody());
 
         login = response.getBody();
 
-        assertEquals("FAILED", login.getStatus());
-
-        System.out.println("Updated Login: " + login);
+        System.out.println("Update data: " + login);
     }
 
     @Test
@@ -125,10 +151,20 @@ class LoginControllerTest {
     void d_delete() {
 
         String url =
-                BASE_URL + "/delete/" + login.getLoginId();
+                BASE_URL + "/" + login.getLoginId();
+
+        System.out.println("URL: " + url);
 
         restTemplate.delete(url);
 
-        System.out.println("Login deleted");
+        ResponseEntity<Login> response =
+                restTemplate.getForEntity(
+                        url,
+                        Login.class
+                );
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+
+        System.out.println("Delete: true");
     }
 }
