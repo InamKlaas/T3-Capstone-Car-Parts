@@ -38,7 +38,7 @@ public class Login {
         return status;
     }
 
-    public Long getLoginId() {
+    public String getLoginId() {
         return loginId;
     }
 
@@ -68,14 +68,14 @@ public class Login {
 
     public static class Builder {
 
-        private Long loginId;
+        private String loginId;
         private User user;
         private String email;
         private String password;
         private LocalDateTime loginDate;
         private String status;
 
-        public Builder setLoginId(Long loginId) {
+        public Builder setLoginId(String loginId) {
             this.loginId = loginId;
             return this;
         }
