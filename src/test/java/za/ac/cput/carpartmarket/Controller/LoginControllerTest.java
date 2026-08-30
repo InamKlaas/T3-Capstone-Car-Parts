@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.boot.resttestclient.TestRestTemplate;
 import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureTestRestTemplate;
 import org.springframework.http.HttpStatus;
@@ -34,7 +35,7 @@ class LoginControllerTest {
     );
 
     private static Login login = LoginFactory.createLogin(
-            201L,
+            "201L",
             buyer,
             "lulo@gmail.com",
             "password123",
@@ -42,16 +43,20 @@ class LoginControllerTest {
             "SUCCESS"
     );
 
-    private final String BASE_URL =
-            "http://localhost:8080/login";
+    @LocalServerPort
+    private int port;
 
     @Autowired
     private TestRestTemplate restTemplate;
 
+    private String baseUrl() {
+        return "http://localhost:" + port + "/login";
+    }
+
     @Test
     void a_create() {
 
-        String url = BASE_URL + "/create";
+        String url = baseUrl() + "/create";
 
         ResponseEntity<Login> response =
                 restTemplate.postForEntity(
@@ -73,7 +78,7 @@ class LoginControllerTest {
     void b_read() {
 
         String url =
-                BASE_URL + "/read/" + login.getLoginId();
+                baseUrl() + "/read/" + login.getLoginId();
 
         ResponseEntity<Login> response =
                 restTemplate.getForEntity(
@@ -98,12 +103,12 @@ class LoginControllerTest {
                 .setStatus("FAILED")
                 .build();
 
-        String url = BASE_URL + "/update";
+        String url = baseUrl() + "/update";
 
         restTemplate.put(url, updatedLogin);
 
         String readUrl =
-                BASE_URL + "/read/" + login.getLoginId();
+                baseUrl() + "/read/" + login.getLoginId();
 
         ResponseEntity<Login> response =
                 restTemplate.getForEntity(
@@ -125,7 +130,7 @@ class LoginControllerTest {
     void d_delete() {
 
         String url =
-                BASE_URL + "/delete/" + login.getLoginId();
+                baseUrl() + "/delete/" + login.getLoginId();
 
         restTemplate.delete(url);
 

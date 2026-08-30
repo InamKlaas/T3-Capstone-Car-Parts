@@ -16,8 +16,10 @@ public class LoginService implements ILoginService {
         return repository.save(login);
     }
 
+
+
     @Override
-    public Login read(Long loginId) {
+    public Login read(String loginId) {
         return repository.findById(loginId).orElse(null);
     }
 
@@ -26,8 +28,10 @@ public class LoginService implements ILoginService {
         return repository.save(login);
     }
 
+
+
     @Override
-    public boolean delete(Long loginId) {
+    public boolean delete(String loginId) {
         repository.deleteById(loginId);
         return true;
     }

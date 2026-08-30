@@ -29,7 +29,7 @@ class LoginServiceTest {
     );
 
     private static final Login login = LoginFactory.createLogin(
-            201L,
+            "201L",
             buyer,
             "lulo@gmail.com",
             "password123",
