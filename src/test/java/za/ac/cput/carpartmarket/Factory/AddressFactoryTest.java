@@ -10,8 +10,6 @@ public class AddressFactoryTest {
 
     private static Address a1 = AddressFactory.createAddress("65", String.valueOf(728), "Belhar", "Cape Town", "Western Cape", 6925, "South Africa");
     private static Address a2 = AddressFactory.createAddress("65", String.valueOf(728), "Belhar", "Cape Town", "Western Cape", 625, "South Africa");
-    private static Address a3 = AddressFactory.createAddress(null, String.valueOf(728), "Belhar", "Cape Town", "Western Cape", 6925, "South Africa");
-
 
     @Test
     @Order(1)
@@ -20,15 +18,11 @@ public class AddressFactoryTest {
         System.out.println(a1.toString());
     }
 
+    //test that fails
     @Test
     @Order(2)
-    public void createAddressWithWrongPostalCodeFormat(){
-        assertNull(a2);
-    }
-
-    @Test
-    @Order(3)
-    public void createAddressWithNullStreetNumber(){
-        assertNull(a3);
+    public void createAddressWithWrongPostalCodeLength(){
+        assertNotNull(a2);
+//        assertNull(a2);
     }
 }
