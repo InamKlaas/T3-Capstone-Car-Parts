@@ -8,7 +8,7 @@ import za.ac.cput.carpartmarket.Service.AddressService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/Address")
+@RequestMapping("/Addresses")
 public class AddressController {
 
     private AddressService service;
