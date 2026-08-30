@@ -10,10 +10,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import za.ac.cput.carpartmarket.Domain.Address;
-import za.ac.cput.carpartmarket.Domain.CarPart;
 import za.ac.cput.carpartmarket.Factory.AddressFactory;
-import za.ac.cput.carpartmarket.Factory.CarPartFactory;
 
+//import static org.junit.jupiter.api.Assertions.assertEquals;
+//import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -21,13 +21,20 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.MethodName.class)
 class AddressControllerTest {
 
-    private static Address address = AddressFactory.createAddress("28", "92298394L", "Hout Bay", "Cape Town", "Estern Cape", 7382, "South Africa");
+    private static Address address = AddressFactory.createAddress(
+            "73",
+            "TT45",
+            "Bellville",
+            "Cape Town",
+            "western Cape",
+            6473,
+            "South Africa");
 
     @Autowired
     private TestRestTemplate restTemplate;
 
     private String baseUrl() {
-        return restTemplate.getRootUri() + "/Address";
+        return restTemplate.getRootUri() + "/addresses";
     }
 
     @Test
@@ -43,7 +50,6 @@ class AddressControllerTest {
         address = addressSaved;
     }
 
-
     @Test
     void b_read() {
         String url = baseUrl() + "/read/" + address.getStreetNumber();
@@ -52,7 +58,6 @@ class AddressControllerTest {
         assertEquals(address.getStreetNumber(), response.getBody().getStreetNumber());
         System.out.println(response.getBody());
     }
-
 
     @Test
     void c_update() {
@@ -71,7 +76,6 @@ class AddressControllerTest {
         System.out.println("Update data: " + address);
     }
 
-
     @Test
     void d_deleteById() {
         String url = baseUrl() + "/delete/" + address.getStreetNumber();
@@ -79,17 +83,4 @@ class AddressControllerTest {
         restTemplate.delete(url);
         System.out.println("Delete: true");
     }
-
-//    @Test
-//    void e_getall() {
-//        String url = baseUrl() + "/getall";
-//        ResponseEntity<Address> response = restTemplate.postForEntity(url, address, Address.class);
-//        assertNotNull(response);
-//        assertNotNull(response.getBody());
-//        System.out.println("get all");
-//        for(Address adr: response.getBody()){
-//            System.out.println(adr);
-//        }
-
-//    }
 }
