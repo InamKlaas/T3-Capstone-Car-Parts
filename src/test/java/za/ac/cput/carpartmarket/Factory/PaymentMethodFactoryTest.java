@@ -22,9 +22,11 @@ public class PaymentMethodFactoryTest {
         System.out.println(b1.toString());
     }
 
+    //test that fails
     @Test
     @Order(2)
     public void createPaymentMethodWithWrongCvvFormat(){
-        assertNull(b2);
+        assertNotNull(b2);
+//        assertNull(b2);
     }
 }
