@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class LoginFactoryTest {
 
     private static final Buyer buyer = BuyerFactory.createBuyer(
-            String.valueOf(112L),
+            "112L",
             NameFactory.createName("Lulo", "Kolisi"),
             "Brake Pads"
     );
@@ -20,7 +20,7 @@ class LoginFactoryTest {
     void createLogin() {
 
         Login login = LoginFactory.createLogin(
-                String.valueOf(201L),
+                201L,
                 buyer,
                 "lulo@gmail.com",
                 "password123",
@@ -52,7 +52,7 @@ class LoginFactoryTest {
     void createLoginWithNullUser() {
 
         Login login = LoginFactory.createLogin(
-                String.valueOf(201L),
+                201L,
                 null,
                 "lulo@gmail.com",
                 "password123",
@@ -68,7 +68,7 @@ class LoginFactoryTest {
     void createLoginWithNullEmail() {
 
         Login login = LoginFactory.createLogin(
-                String.valueOf(201L),
+                201L,
                 buyer,
                 null,
                 "password123",
@@ -84,7 +84,7 @@ class LoginFactoryTest {
     void createLoginWithNullPassword() {
 
         Login login = LoginFactory.createLogin(
-                String.valueOf(201L),
+                201L,
                 buyer,
                 "lulo@gmail.com",
                 null,
@@ -100,7 +100,7 @@ class LoginFactoryTest {
     void createLoginWithNullLoginDate() {
 
         Login login = LoginFactory.createLogin(
-                String.valueOf(201L),
+                201L,
                 buyer,
                 "lulo@gmail.com",
                 "password123",
@@ -116,7 +116,7 @@ class LoginFactoryTest {
     void createLoginWithNullStatus() {
 
         Login login = LoginFactory.createLogin(
-                String.valueOf(201L),
+                201L,
                 buyer,
                 "lulo@gmail.com",
                 "password123",

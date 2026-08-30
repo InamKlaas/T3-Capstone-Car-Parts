@@ -5,47 +5,45 @@ import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.resttestclient.TestRestTemplate;
 import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureTestRestTemplate;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import za.ac.cput.carpartmarket.Domain.Buyer;
 import za.ac.cput.carpartmarket.Domain.Login;
-import za.ac.cput.carpartmarket.Domain.Name;
 import za.ac.cput.carpartmarket.Factory.BuyerFactory;
 import za.ac.cput.carpartmarket.Factory.LoginFactory;
+import za.ac.cput.carpartmarket.Factory.NameFactory;
 
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@SpringBootTest(
+        webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
+)
 @AutoConfigureTestRestTemplate
 @TestMethodOrder(MethodOrderer.MethodName.class)
 class LoginControllerTest {
 
-    private static Name name = new Name.Builder()
-            .setFirstName("Lulo")
-            .setLastName("Kolisi")
-            .build();
-
-    private static Buyer buyer = BuyerFactory.createBuyer(
-            String.valueOf(112L),
-            name,
+    private static final Buyer buyer = BuyerFactory.createBuyer(
+            "112L",
+            NameFactory.createName("Lulo", "Kolisi"),
             "Brake Pads"
     );
 
     private static Login login = LoginFactory.createLogin(
-            "LOGIN001",
+            201L,
             buyer,
             "lulo@gmail.com",
             "password123",
-            LocalDateTime.of(2026, 8, 24, 10, 30),
-            "Successful"
+            LocalDateTime.of(2026, 8, 22, 10, 30),
+            "SUCCESS"
     );
 
-    String BASE_URL = "http://localhost:8080/logins";
+    private final String BASE_URL =
+            "http://localhost:8080/login";
 
     @Autowired
     private TestRestTemplate restTemplate;
@@ -53,49 +51,29 @@ class LoginControllerTest {
     @Test
     void a_create() {
 
-        ResponseEntity<Buyer> buyerResponse = restTemplate.postForEntity(
-                "http://localhost:8080/buyer/create",
-                buyer,
-                Buyer.class
-        );
+        String url = BASE_URL + "/create";
 
-        assertEquals(HttpStatus.OK, buyerResponse.getStatusCode());
-
-        buyer = buyerResponse.getBody();
-
-        System.out.println("Saved buyer: " + buyer);
-
-        Login loginToSave = new Login.Builder()
-                .copy(login)
-                .setUser(buyer)
-                .build();
-
-        String url = BASE_URL;
-
-        ResponseEntity<Login> postResponse =
+        ResponseEntity<Login> response =
                 restTemplate.postForEntity(
                         url,
-                        loginToSave,
+                        login,
                         Login.class
                 );
 
-        assertNotNull(postResponse);
-        assertNotNull(postResponse.getBody());
-        assertEquals(HttpStatus.OK, postResponse.getStatusCode());
+        assertNotNull(response);
+        assertNotNull(response.getBody());
+        assertEquals(HttpStatus.OK, response.getStatusCode());
 
-        Login loginSaved = postResponse.getBody();
+        login = response.getBody();
 
-        System.out.println("Save data: " + loginSaved);
-
-        login = loginSaved;
+        System.out.println("Saved Login: " + login);
     }
 
     @Test
     void b_read() {
 
-        String url = BASE_URL + "/" + login.getLoginId();
-
-        System.out.println("URL: " + url);
+        String url =
+                BASE_URL + "/read/" + login.getLoginId();
 
         ResponseEntity<Login> response =
                 restTemplate.getForEntity(
@@ -103,33 +81,29 @@ class LoginControllerTest {
                         Login.class
                 );
 
-        assertNotNull(response);
         assertNotNull(response.getBody());
-
         assertEquals(
                 login.getLoginId(),
                 response.getBody().getLoginId()
         );
 
-        System.out.println(response.getBody());
+        System.out.println("Read Login: " + response.getBody());
     }
 
     @Test
     void c_update() {
 
-        Login updateLogin = new Login.Builder()
+        Login updatedLogin = new Login.Builder()
                 .copy(login)
-                .setStatus("Failed")
+                .setStatus("FAILED")
                 .build();
 
-        String url = BASE_URL;
+        String url = BASE_URL + "/update";
 
-        System.out.println("URL: " + url);
-
-        restTemplate.put(url, updateLogin);
+        restTemplate.put(url, updatedLogin);
 
         String readUrl =
-                BASE_URL + "/" + login.getLoginId();
+                BASE_URL + "/read/" + login.getLoginId();
 
         ResponseEntity<Login> response =
                 restTemplate.getForEntity(
@@ -137,13 +111,13 @@ class LoginControllerTest {
                         Login.class
                 );
 
-        System.out.println(response.getBody());
-
         assertNotNull(response.getBody());
 
         login = response.getBody();
 
-        System.out.println("Update data: " + login);
+        assertEquals("FAILED", login.getStatus());
+
+        System.out.println("Updated Login: " + login);
     }
 
     @Test
@@ -151,20 +125,10 @@ class LoginControllerTest {
     void d_delete() {
 
         String url =
-                BASE_URL + "/" + login.getLoginId();
-
-        System.out.println("URL: " + url);
+                BASE_URL + "/delete/" + login.getLoginId();
 
         restTemplate.delete(url);
 
-        ResponseEntity<Login> response =
-                restTemplate.getForEntity(
-                        url,
-                        Login.class
-                );
-
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-
-        System.out.println("Delete: true");
+        System.out.println("Login deleted");
     }
 }

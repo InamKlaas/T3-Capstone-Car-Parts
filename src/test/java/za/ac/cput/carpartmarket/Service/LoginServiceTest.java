@@ -23,13 +23,13 @@ class LoginServiceTest {
     private LoginService loginService;
 
     private static final Buyer buyer = BuyerFactory.createBuyer(
-            String.valueOf(112L),
+            "112L",
             NameFactory.createName("Lulo", "Kolisi"),
             "Brake Pads"
     );
 
     private static final Login login = LoginFactory.createLogin(
-            String.valueOf(201L),
+            201L,
             buyer,
             "lulo@gmail.com",
             "password123",
