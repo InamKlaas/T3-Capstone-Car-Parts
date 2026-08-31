@@ -9,7 +9,7 @@ public class Login {
     @Id
     private String loginId;
     @ManyToOne
-    @JoinColumn(name = "login_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "userid")
     private User user;
     private String email;
     private String password;
