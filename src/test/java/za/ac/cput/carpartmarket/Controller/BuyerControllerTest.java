@@ -25,13 +25,13 @@ class BuyerControllerTest {
     private TestRestTemplate restTemplate;
 
     private static Buyer buyer = BuyerFactory.createBuyer(
-            "112L",
+            "112eL",
             NameFactory.createName("Lulo", "Kolisi"),
             "Brake Pads"
     );
 
 //    private final String BASE_URL = "http://localhost:8080/buyers";
-    private String baseUrl(){return restTemplate.getRootUri() + "/buyers";}
+    private String baseUrl(){return restTemplate.getRootUri() + "/buyerss";}
 
     @Test
     void a_create() {
