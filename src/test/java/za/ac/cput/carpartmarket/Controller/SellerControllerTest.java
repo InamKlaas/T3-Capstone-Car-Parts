@@ -16,7 +16,7 @@ import za.ac.cput.carpartmarket.Factory.SellerFactory;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @AutoConfigureTestRestTemplate
 @TestMethodOrder(MethodOrderer.MethodName.class)
 class SellerControllerTest {
@@ -27,7 +27,7 @@ class SellerControllerTest {
             "Car Parts"
     );
 
-    private final String BASE_URL = "http://localhost:8080/sellers";
+    private final String BASE_URL = "http://localhost:8080/seller";
 
     @Autowired
     private TestRestTemplate restTemplate;
@@ -123,7 +123,6 @@ class SellerControllerTest {
         System.out.println("URL: " + url);
 
         restTemplate.delete(url);
-
         System.out.println("Delete: true");
     }
 }
