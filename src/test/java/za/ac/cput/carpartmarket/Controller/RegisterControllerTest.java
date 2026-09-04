@@ -88,7 +88,7 @@ class RegisterControllerTest {
 
     @Test
     void c_update() {
-        assertNotNull(register, "Register must be created first");
+        assertNotNull(register, "Register must be created first ");
 
         Register updateRegister = new Register.Builder()
                 .copy(register)

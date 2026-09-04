@@ -63,7 +63,7 @@ class CarPartControllerTest {
     void c_update() {
         CarPart updateCarPart = new CarPart.Builder()
                 .copy(carPart)
-                .setPartName("Clutch Kit")
+                .setPartName("Clutch Kits")
                 .build();
         String url = baseUrl() + "/update";
         System.out.println("URL: " + url);

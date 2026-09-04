@@ -81,7 +81,7 @@ class OrderControllerTest {
     @Test
     void c_update() {
         Order updateOrder = new Order.Builder().copy(order)
-                .setStatus("Shipped")
+                .setStatus("Shipped ")
                 .build();
         String url = BASE_URL;
         System.out.println("URL: " + url);

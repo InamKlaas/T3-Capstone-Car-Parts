@@ -57,7 +57,7 @@ class VehicleControllerTest {
     void c_update() {
         Vehicle updateVehicle = new Vehicle.Builder()
                 .copy(vehicle)
-                .setFuelType("Diesel")
+                .setFuelType("Diesel ")
                 .build();
         String url = BASE_URL;
         System.out.println("URL: " + url);

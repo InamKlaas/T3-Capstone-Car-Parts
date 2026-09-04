@@ -100,7 +100,7 @@ class LoginControllerTest {
 
         Login updatedLogin = new Login.Builder()
                 .copy(login)
-                .setStatus("FAILED")
+                .setStatus("FAILEd")
                 .build();
 
         String url = baseUrl() + "/update";

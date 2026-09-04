@@ -59,7 +59,7 @@ class BuyerControllerTest {
     void c_update() {
         Buyer updateBuyer = new Buyer.Builder()
                 .copy(buyer)
-                .setPassword("password")
+                .setPassword("passwords")
                 .build();
         String url = baseUrl() + "/update";
         System.out.println("URL: " + url);

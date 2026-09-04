@@ -59,7 +59,7 @@ class AddressControllerTest {
     void c_update() {
         Address updateAddress = new Address.Builder()
                 .copy(address)
-                .setCity("Mount Frere")
+                .setCity("Mount Frerer")
                 .build();
         String url = baseUrl() + "/update";
         System.out.println("URL: " + url);

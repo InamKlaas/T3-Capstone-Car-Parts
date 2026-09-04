@@ -83,7 +83,7 @@ class PaymentMethodControllerTest {
 
     @Test
     void c_update() {
-        assertNotNull(payment, "payment must be created first");
+        assertNotNull(payment, "payment must be created first ");
 
         PaymentMethod updatePaymentMethod = new PaymentMethod.Builder()
                 .copy(payment)

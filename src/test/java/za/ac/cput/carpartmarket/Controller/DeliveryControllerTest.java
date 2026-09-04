@@ -64,7 +64,7 @@ class DeliveryControllerTest {
     void c_update() {
         Delivery updateDelivery = new Delivery.Builder()
                 .copy(delivery)
-                .setDeliveryStatus("Delivered")
+                .setDeliveryStatus("Delivereds")
                 .build();
         String url = baseUrl() + "/update";
         System.out.println("URL: " + url);

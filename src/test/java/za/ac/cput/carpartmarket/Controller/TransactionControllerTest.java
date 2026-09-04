@@ -90,7 +90,7 @@ class TransactionControllerTest {
     @Test
     void b_read() {
         String url = BASE_URL + "/" + transaction.getTransactionId();
-        System.out.println("URL: " + url);
+        System.out.println("URL:" + url);
         ResponseEntity<Transaction> response = restTemplate.getForEntity(url, Transaction.class);
         assertEquals(transaction.getTransactionId(), response.getBody().getTransactionId());
         System.out.println(response.getBody());

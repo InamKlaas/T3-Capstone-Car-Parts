@@ -53,7 +53,7 @@ class RoleControllerTest {
     void c_update() {
         Role updateRole = new Role.Builder()
                 .setRoleId("Z02")
-                .setRoleName("Seller")
+                .setRoleName("Sellers")
                 .build();
         String url = BASE_URL;
         System.out.println("URL: " + url);

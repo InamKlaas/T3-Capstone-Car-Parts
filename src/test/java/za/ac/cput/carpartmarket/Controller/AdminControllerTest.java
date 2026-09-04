@@ -100,7 +100,7 @@ class AdminControllerTest {
 
         Admin updatedAdmin = new Admin.Builder()
                 .copy(admin)
-                .setRole("Moderator")
+                .setRole("Moderators")
                 .setPermissions("READ_ONLY")
                 .build();
 

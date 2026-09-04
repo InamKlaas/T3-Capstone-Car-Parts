@@ -99,7 +99,7 @@ class CategoryControllerTest {
 
         Category updatedCategory = new Category.Builder()
                 .copy(category)
-                .setCategoryName("Engine Parts")
+                .setCategoryName("Engine Part")
                 .setDescription("Pistons, gaskets, belts, and related components")
                 .build();
 

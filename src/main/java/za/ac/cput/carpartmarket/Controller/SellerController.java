@@ -6,7 +6,7 @@ import za.ac.cput.carpartmarket.Domain.Seller;
 import za.ac.cput.carpartmarket.Service.SellerService;
 
 @RestController
-@RequestMapping("/seller")
+@RequestMapping("/sellers")
 public class SellerController {
 
     private final SellerService sellerService;
