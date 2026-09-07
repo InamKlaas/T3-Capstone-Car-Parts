@@ -1,6 +1,7 @@
 package za.ac.cput.carpartmarket.Service;
 
 import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ class BuyerServiceTest {
     );
 
     @Test
+    @Order(1)
     void create() {
         Buyer buyer1 = buyerService.create(buyer);
         assertNotNull(buyer1);
@@ -32,6 +34,7 @@ class BuyerServiceTest {
     }
 
     @Test
+    @Order(2)
     void read() {
         Buyer buyer1 = buyerService.read(buyer.getUserid());
         assertNotNull(buyer1);
@@ -39,7 +42,9 @@ class BuyerServiceTest {
     }
 
     @Test
-    void update() {
+    @Order(3)
+    void update()
+    {
         Buyer updatedBuyer = BuyerFactory.createBuyer(
                 "112L",
                 NameFactory.createName("Vera", "Smith"),
@@ -52,6 +57,7 @@ class BuyerServiceTest {
     }
 
     @Test
+    @Order(4)
     void delete() {
         buyerService.delete(buyer.getUserid());
     }

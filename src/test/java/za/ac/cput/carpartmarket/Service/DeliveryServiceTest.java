@@ -15,15 +15,15 @@ class DeliveryServiceTest {
     @Autowired
     private DeliveryService deliveryService;
 
-    private static Delivery delivery = DeliveryFactory.createDelivery(
-            "9483L",
-            "3L",
-            "9393L",
+    private static final Delivery delivery = DeliveryFactory.createDelivery(
+            "DEL-001",
+            "ORD-001",
+            "ADDR-001",
             "Courier Guy",
             "TRK123456",
             "2026-06-30",
             "In Transit",
-            15.00
+            150.00
     );
 
     @Test

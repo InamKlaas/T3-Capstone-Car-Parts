@@ -1,10 +1,7 @@
 package za.ac.cput.carpartmarket.Service;
 
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import za.ac.cput.carpartmarket.Domain.Buyer;
@@ -14,6 +11,7 @@ import za.ac.cput.carpartmarket.Factory.NameFactory;
 import za.ac.cput.carpartmarket.Factory.PaymentMethodFactory;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.MethodName.class)
@@ -23,7 +21,7 @@ class PaymentMethodServiceTest {
     private PaymentMethodService service;
     @Autowired
     private BuyerService buyerService;
-   // PaymentMethod payment;
+
 
     @BeforeEach
     void setUp() {
@@ -60,9 +58,13 @@ class PaymentMethodServiceTest {
         System.out.println();
     }
 
-//    @Test
-//    void delete() {
-//    }
+    @Test
+    @Disabled
+    void d_delete() {
+        service.delete(payment.getMethodId());
+        PaymentMethod deleted = service.read(payment.getMethodId());
+        assertNull(deleted);
+    }
 
     @Test
     void e_getall() {
