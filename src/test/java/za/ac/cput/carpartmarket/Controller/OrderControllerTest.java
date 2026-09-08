@@ -1,8 +1,10 @@
 package za.ac.cput.carpartmarket.Controller;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.resttestclient.TestRestTemplate;
@@ -21,6 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @AutoConfigureTestRestTemplate
 @TestMethodOrder(MethodOrderer.MethodName.class)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class OrderControllerTest {
 
     private static Name name = new Name.Builder()
@@ -43,24 +46,30 @@ class OrderControllerTest {
             "11L"
     );
 
-    String BASE_URL = "http://localhost:8080/orders";
-
     @Autowired
     private TestRestTemplate restTemplate;
 
-    @Test
-    void a_create() {
+    private String baseUrl(){return restTemplate.getRootUri() + "/orders";}
 
-        ResponseEntity<Buyer> buyerResponse = restTemplate.postForEntity(
-                "http://localhost:8080/buyer/create", buyer, Buyer.class);
+    private String buyerUrl(){return restTemplate.getRootUri() + "/buyerss";}
+
+    @BeforeAll
+    void setUp() {
+        String url = buyerUrl() + "/create";
+        System.out.println("URL: " + url);
+        ResponseEntity<Buyer> buyerResponse = restTemplate.postForEntity(url, buyer, Buyer.class);
         assertEquals(HttpStatus.OK, buyerResponse.getStatusCode());
         buyer = buyerResponse.getBody();
         System.out.println("Saved buyer: " + buyer);
 
-        Order orderToSave = new Order.Builder().copy(order).setBuyer(buyer).build();
+        order = new Order.Builder().copy(order).setBuyer(buyer).build();
+    }
 
-        String url = BASE_URL;
-        ResponseEntity<Order> postResponse = restTemplate.postForEntity(url, orderToSave, Order.class);
+    @Test
+    void a_create() {
+        String url = baseUrl();
+        System.out.println("URL: " + url);
+        ResponseEntity<Order> postResponse = restTemplate.postForEntity(url, order, Order.class);
         assertNotNull(postResponse);
         assertNotNull(postResponse.getBody());
         assertEquals(HttpStatus.OK, postResponse.getStatusCode());
@@ -71,7 +80,7 @@ class OrderControllerTest {
 
     @Test
     void b_read() {
-        String url = BASE_URL + "/" + order.getOrderId();
+        String url = baseUrl() + "/" + order.getOrderId();
         System.out.println("URL: " + url);
         ResponseEntity<Order> response = restTemplate.getForEntity(url, Order.class);
         assertEquals(order.getOrderId(), response.getBody().getOrderId());
@@ -80,15 +89,16 @@ class OrderControllerTest {
 
     @Test
     void c_update() {
-        Order updateOrder = new Order.Builder().copy(order)
-                .setStatus("Shipped ")
+        Order updateOrder = new Order.Builder()
+                .copy(order)
+                .setStatus("Shipped")
                 .build();
-        String url = BASE_URL;
+        String url = baseUrl();
         System.out.println("URL: " + url);
         restTemplate.put(url, updateOrder);
 
-        String readUr1 = BASE_URL + "/" + order.getOrderId();
-        ResponseEntity<Order> response = restTemplate.getForEntity(readUr1, Order.class);
+        String readUrl = baseUrl() + "/" + order.getOrderId();
+        ResponseEntity<Order> response = restTemplate.getForEntity(readUrl, Order.class);
         System.out.println(response.getBody());
         order = response.getBody();
         System.out.println("Update data: " + order);
@@ -97,11 +107,10 @@ class OrderControllerTest {
     @Test
     @Disabled
     void d_delete() {
-        String url = BASE_URL + "/" + order.getOrderId();
+        String url = baseUrl() + "/" + order.getOrderId();
         System.out.println("URL: " + url);
         restTemplate.delete(url);
-        ResponseEntity<Order> response = restTemplate.getForEntity(url, Order.class);
-        assertEquals(HttpStatus.OK, response.getStatusCode());
         System.out.println("Delete: true");
     }
+
 }

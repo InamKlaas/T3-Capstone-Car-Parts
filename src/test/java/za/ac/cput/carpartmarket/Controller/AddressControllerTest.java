@@ -79,8 +79,13 @@ class AddressControllerTest {
         restTemplate.delete(url);
         System.out.println("Delete: true");
     }
-
-//    @Test
-//    void getall() {
-//    }
-}
+    @Test
+    void e_getall() {
+        String url = baseUrl() + "/getall";
+        System.out.println("URL: " + url);
+        ResponseEntity<Address[]> response = restTemplate.getForEntity(url, Address[].class);
+        assertNotNull(response);
+        assertNotNull(response.getBody());
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        System.out.println("All addresses: " + address);
+    }}
