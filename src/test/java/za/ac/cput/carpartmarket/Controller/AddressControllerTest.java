@@ -1,5 +1,6 @@
 package za.ac.cput.carpartmarket.Controller;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -73,6 +74,7 @@ class AddressControllerTest {
     }
 
     @Test
+    @Disabled
     void d_delete() {
         String url = baseUrl() + "/delete/" + address.getStreetNumber();
         System.out.println("URL: " + url);

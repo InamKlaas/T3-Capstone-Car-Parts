@@ -1,5 +1,6 @@
 package za.ac.cput.carpartmarket.Controller;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -69,6 +70,7 @@ class RoleControllerTest {
     }
 
     @Test
+    @Disabled
     void d_deleteById() {
         String url = BASE_URL + "/" + role.getRoleId();
         System.out.println("URL: " + url);

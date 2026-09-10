@@ -1,11 +1,6 @@
 package za.ac.cput.carpartmarket.Controller;
 
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.resttestclient.TestRestTemplate;
 import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureTestRestTemplate;
@@ -20,7 +15,7 @@ import za.ac.cput.carpartmarket.Factory.OrderFactory;
 import java.time.LocalDateTime;
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureTestRestTemplate
 @TestMethodOrder(MethodOrderer.MethodName.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -51,7 +46,7 @@ class OrderControllerTest {
 
     private String baseUrl(){return restTemplate.getRootUri() + "/orders";}
 
-    private String buyerUrl(){return restTemplate.getRootUri() + "/buyerss";}
+    private String buyerUrl(){return restTemplate.getRootUri() + "/buyers";}
 
     @BeforeAll
     void setUp() {
@@ -110,6 +105,9 @@ class OrderControllerTest {
         String url = baseUrl() + "/" + order.getOrderId();
         System.out.println("URL: " + url);
         restTemplate.delete(url);
+
+        ResponseEntity<Order> response = restTemplate.getForEntity(url, Order.class);
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
         System.out.println("Delete: true");
     }
 

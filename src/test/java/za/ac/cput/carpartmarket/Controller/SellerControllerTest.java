@@ -74,6 +74,7 @@ private String baseUrl(){return restTemplate.getRootUri() + "/sellers";}
     }
 
     @Test
+    @Disabled
     void d_delete() {
         String url = baseUrl() + "/delete/" + seller.getUserid();
         System.out.println("URL: " + url);

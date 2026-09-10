@@ -15,7 +15,7 @@ import za.ac.cput.carpartmarket.Factory.CategoryFactory;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureTestRestTemplate
 @TestMethodOrder(MethodOrderer.MethodName.class)
 class CategoryControllerTest {
@@ -25,122 +25,86 @@ class CategoryControllerTest {
             "Brake pads, discs, calipers, and related components"
     );
 
-    private final String BASE_URL = "http://localhost:8080/api/categories";
+    private final String BASE_URL = "/api/categories";
 
     @Autowired
     private TestRestTemplate restTemplate;
 
     @Test
     void a_create() {
-
         String url = BASE_URL;
 
         ResponseEntity<Category> response =
-                restTemplate.postForEntity(
-                        url,
-                        category,
-                        Category.class
-                );
+                restTemplate.postForEntity(url, category, Category.class);
 
         assertNotNull(response);
         assertNotNull(response.getBody());
         assertEquals(HttpStatus.OK, response.getStatusCode());
 
         category = response.getBody();
-
         System.out.println("Saved Category: " + category);
     }
 
     @Test
     void b_read() {
-
-        String url =
-                BASE_URL + "/" + category.getCategoryId();
-
+        String url = BASE_URL + "/" + category.getCategoryId();
         System.out.println("URL: " + url);
 
         ResponseEntity<Category> response =
-                restTemplate.getForEntity(
-                        url,
-                        Category.class
-                );
+                restTemplate.getForEntity(url, Category.class);
 
         assertNotNull(response.getBody());
-
-        assertEquals(
-                category.getCategoryId(),
-                response.getBody().getCategoryId()
-        );
-
+        assertEquals(category.getCategoryId(), response.getBody().getCategoryId());
         System.out.println("Read Category: " + response.getBody());
     }
 
     @Test
     void c_getAll() {
-
         String url = BASE_URL;
-
         System.out.println("URL: " + url);
 
         ResponseEntity<Category[]> response =
-                restTemplate.getForEntity(
-                        url,
-                        Category[].class
-                );
+                restTemplate.getForEntity(url, Category[].class);
 
         assertNotNull(response.getBody());
         assertTrue(response.getBody().length > 0);
-
         System.out.println("All Categories: " + response.getBody().length);
     }
 
     @Test
     void d_update() {
-
         Category updatedCategory = new Category.Builder()
                 .copy(category)
-                .setCategoryName("Engine Part")
+                .setCategoryName("Engine Parts")
                 .setDescription("Pistons, gaskets, belts, and related components")
                 .build();
 
         String url = BASE_URL + "/" + category.getCategoryId();
-
         System.out.println("URL: " + url);
 
         restTemplate.put(url, updatedCategory);
 
-        String readUrl =
-                BASE_URL + "/" + category.getCategoryId();
-
+        String readUrl = BASE_URL + "/" + category.getCategoryId();
         ResponseEntity<Category> response =
-                restTemplate.getForEntity(
-                        readUrl,
-                        Category.class
-                );
+                restTemplate.getForEntity(readUrl, Category.class);
 
         assertNotNull(response.getBody());
-
         category = response.getBody();
-
         System.out.println("Updated Category: " + category);
 
-        assertEquals(
-                "Engine Parts",
-                category.getCategoryName()
-        );
+        assertEquals("Engine Parts", category.getCategoryName());
     }
 
     @Test
     @Disabled
     void e_delete() {
-
-        String url =
-                BASE_URL + "/" + category.getCategoryId();
-
+        String url = BASE_URL + "/" + category.getCategoryId();
         System.out.println("URL: " + url);
 
         restTemplate.delete(url);
 
+        ResponseEntity<Category> response = restTemplate.getForEntity(url, Category.class);
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
         System.out.println("Delete: true");
     }
 }

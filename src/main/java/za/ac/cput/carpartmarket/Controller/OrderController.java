@@ -1,6 +1,7 @@
 package za.ac.cput.carpartmarket.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import za.ac.cput.carpartmarket.Domain.Order;
 import za.ac.cput.carpartmarket.Service.OrderService;
@@ -21,8 +22,12 @@ public class OrderController {
     }
 
     @GetMapping("/{id}")
-    public Order read(@PathVariable("id") String orderId){
-        return orderService.read(orderId);
+    public ResponseEntity<Order> read(@PathVariable("id") String orderId){
+        Order order = orderService.read(orderId);
+        if (order == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(order);
     }
 
     @PutMapping

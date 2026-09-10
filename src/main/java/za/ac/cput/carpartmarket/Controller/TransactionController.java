@@ -1,6 +1,7 @@
 package za.ac.cput.carpartmarket.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import za.ac.cput.carpartmarket.Domain.Transaction;
 import za.ac.cput.carpartmarket.Service.TransactionService;
@@ -22,8 +23,12 @@ public class TransactionController {
     }
 
     @GetMapping("/{id}")
-    public Transaction read(@PathVariable("id") String transactionId){
-        return transactionService.read(transactionId);
+    public ResponseEntity<Transaction> read(@PathVariable("id") String transactionId){
+        Transaction transaction = transactionService.read(transactionId);
+        if (transaction == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(transaction);
     }
 
     @PutMapping

@@ -23,7 +23,7 @@ import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureTestRestTemplate
 @TestMethodOrder(MethodOrderer.MethodName.class)
 class TransactionControllerTest {
@@ -46,28 +46,25 @@ class TransactionControllerTest {
 
     private static Transaction transaction;
 
-    String BASE_URL = "http://localhost:8080/transactions";
+    String BASE_URL = "/transactions";
 
     @Autowired
     private TestRestTemplate restTemplate;
 
     @Test
     void a_create() {
-
         ResponseEntity<Buyer> buyerResponse = restTemplate.postForEntity(
-                "http://localhost:8080/buyer/create", buyer, Buyer.class);
+                "/buyers/create", buyer, Buyer.class);
         assertEquals(HttpStatus.OK, buyerResponse.getStatusCode());
         buyer = buyerResponse.getBody();
         System.out.println("Saved buyer: " + buyer);
 
-
         Order orderToSave = new Order.Builder().copy(order).setBuyer(buyer).build();
         ResponseEntity<Order> orderResponse = restTemplate.postForEntity(
-                "http://localhost:8080/orders", orderToSave, Order.class);
+                "/orders", orderToSave, Order.class);
         assertEquals(HttpStatus.OK, orderResponse.getStatusCode());
         order = orderResponse.getBody();
         System.out.println("Saved order: " + order);
-
 
         transaction = TransactionFactory.createTransaction(
                 "T01",
@@ -118,8 +115,9 @@ class TransactionControllerTest {
         String url = BASE_URL + "/" + transaction.getTransactionId();
         System.out.println("URL: " + url);
         restTemplate.delete(url);
+
         ResponseEntity<Transaction> response = restTemplate.getForEntity(url, Transaction.class);
-        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
         System.out.println("Delete: true");
     }
 }

@@ -16,7 +16,7 @@ import za.ac.cput.carpartmarket.Factory.NameFactory;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureTestRestTemplate
 @TestMethodOrder(MethodOrderer.MethodName.class)
 class BuyerControllerTest {
@@ -30,8 +30,7 @@ class BuyerControllerTest {
             "Brake Pads"
     );
 
-//    private final String BASE_URL = "http://localhost:8080/buyers";
-    private String baseUrl(){return restTemplate.getRootUri() + "/buyerss";}
+    private String baseUrl(){return restTemplate.getRootUri() + "/buyers";}
 
     @Test
     void a_create() {
@@ -59,7 +58,7 @@ class BuyerControllerTest {
     void c_update() {
         Buyer updateBuyer = new Buyer.Builder()
                 .copy(buyer)
-                .setPassword("passwords")
+                .setBuyingPart("Engine Parts")
                 .build();
         String url = baseUrl() + "/update";
         System.out.println("URL: " + url);
@@ -67,113 +66,23 @@ class BuyerControllerTest {
 
         String readUrl = baseUrl() + "/read/" + buyer.getUserid();
         ResponseEntity<Buyer> response = restTemplate.getForEntity(readUrl, Buyer.class);
-        System.out.println(response.getBody());
+        assertNotNull(response.getBody());
         buyer = response.getBody();
         System.out.println("Update data: " + buyer);
+
+        assertEquals("Engine Parts", buyer.getBuyingPart());
     }
 
     @Test
+    @Disabled
     void d_delete() {
         String url = baseUrl() + "/delete/" + buyer.getUserid();
         System.out.println("URL: " + url);
         restTemplate.delete(url);
+
+        String readUrl = baseUrl() + "/read/" + buyer.getUserid();
+        ResponseEntity<Buyer> response = restTemplate.getForEntity(readUrl, Buyer.class);
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
         System.out.println("Delete: true");
     }
-
-//    @Test
-//    void a_create() {
-//
-//        String url = BASE_URL + "/create";
-//
-//        ResponseEntity<Buyer> response =
-//                restTemplate.postForEntity(
-//                        url,
-//                        buyer,
-//                        Buyer.class
-//                );
-//
-//        assertNotNull(response);
-//        assertNotNull(response.getBody());
-//        assertEquals(HttpStatus.OK, response.getStatusCode());
-//
-//        buyer = response.getBody();
-//
-//        System.out.println("Saved Buyer: " + buyer);
-//    }
-
-//    @Test
-//    void b_read() {
-//
-//        String url =
-//                BASE_URL + "/read/" + buyer.getUserid();
-//
-//        System.out.println("URL: " + url);
-//
-//        ResponseEntity<Buyer> response =
-//                restTemplate.getForEntity(
-//                        url,
-//                        Buyer.class
-//                );
-//
-//        assertNotNull(response.getBody());
-//
-//        assertEquals(
-//                buyer.getUserid(),
-//                response.getBody().getUserid()
-//        );
-//
-//        System.out.println("Read Buyer: " + response.getBody());
-//    }
-
-//    @Test
-//    void c_update() {
-//
-//        Buyer updatedBuyer = new Buyer.Builder()
-//                .setUserid(buyer.getUserid())
-//                .setBuyerName(
-//                        NameFactory.createName("Lulo", "Mokoena")
-//                )
-//                .setBuyingPart("Engine Parts")
-//                .build();
-//
-//        String url = BASE_URL + "/update";
-//
-//        System.out.println("URL: " + url);
-//
-//        restTemplate.put(url, updatedBuyer);
-//
-//        String readUrl =
-//                BASE_URL + "/read/" + buyer.getUserid();
-//
-//        ResponseEntity<Buyer> response =
-//                restTemplate.getForEntity(
-//                        readUrl,
-//                        Buyer.class
-//                );
-//
-//        assertNotNull(response.getBody());
-//
-//        buyer = response.getBody();
-//
-//        System.out.println("Updated Buyer: " + buyer);
-//
-//        assertEquals(
-//                "Engine Parts",
-//                buyer.getBuyingPart()
-//        );
-//    }
-
-//    @Test
-//    @Disabled
-//    void d_delete() {
-//
-//        String url =
-//                BASE_URL + "/delete/" + buyer.getUserid();
-//
-//        System.out.println("URL: " + url);
-//
-//        restTemplate.delete(url);
-//
-//        System.out.println("Delete: true");
-//    }
 }

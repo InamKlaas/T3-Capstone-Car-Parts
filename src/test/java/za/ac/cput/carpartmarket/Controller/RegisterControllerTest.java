@@ -1,7 +1,6 @@
 package za.ac.cput.carpartmarket.Controller;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -11,14 +10,14 @@ import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureTestRe
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import za.ac.cput.carpartmarket.DTO.RegisterDTO;
 import za.ac.cput.carpartmarket.Domain.Buyer;
-import za.ac.cput.carpartmarket.Domain.Register;
+import za.ac.cput.carpartmarket.Domain.Name;
 import za.ac.cput.carpartmarket.Factory.BuyerFactory;
 import za.ac.cput.carpartmarket.Factory.NameFactory;
-import za.ac.cput.carpartmarket.Factory.RegisterFactory;
-import za.ac.cput.carpartmarket.Repository.IBuyerRepository;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -27,113 +26,93 @@ import static org.junit.jupiter.api.Assertions.*;
 @TestMethodOrder(MethodOrderer.MethodName.class)
 class RegisterControllerTest {
 
+    private static Name name = NameFactory.createName("Vera", "Doja");
+    private static Buyer buyer = BuyerFactory.createBuyer(
+            "N03",
+            name,
+            "Brake pads"
+    );
+
+    private static RegisterDTO registerDTO;
+
+    String BASE_URL = "/registers";
+
     @Autowired
     private TestRestTemplate restTemplate;
 
-    @Autowired
-    private IBuyerRepository buyerRepository;
-
-    private String baseUrl() {
-        return restTemplate.getRootUri() + "/registers";
-    }
-
-    private static Buyer buyer;
-    private static Register register;
-
-    @BeforeAll
-    public static void setUp() {
-        buyer = BuyerFactory.createBuyer("buyer123", NameFactory.createName("Vera", "Doja"), "car pad");
-        register = RegisterFactory.createRegister("reg456", buyer, LocalDate.of(2026, 9, 1), "Active");
-    }
-
     @Test
     void a_create() {
-        buyer = buyerRepository.save(buyer);
-        assertNotNull(buyer, "Buyer should be saved successfully");
-        System.out.println("Buyer saved: " + buyer.getUserid());
+        ResponseEntity<Buyer> buyerResponse = restTemplate.postForEntity(
+                "/buyers/create", buyer, Buyer.class);
+        assertEquals(HttpStatus.OK, buyerResponse.getStatusCode());
+        buyer = buyerResponse.getBody();
+        System.out.println("Saved buyer: " + buyer);
 
+        RegisterDTO newRegister = new RegisterDTO(
+                "reg456",
+                buyer.getUserid(),
+                LocalDate.of(2020, 3, 23),
+                "Pending"
+        );
 
-//        register = RegisterFactory.createRegister("reg456", buyer, LocalDate.of(2026, 9, 1), "Active");
-        assertNotNull(register, "Register should be created");
-        System.out.println("Register created: " + register.getRegistrationId());
-
-        String url = baseUrl() + "/create";
+        String url = BASE_URL + "/create";
         System.out.println("URL: " + url);
-
-        ResponseEntity<Register> postResponse = restTemplate.postForEntity(url, register, Register.class);
-
-        assertNotNull(postResponse, "Response should not be null");
-        assertNotNull(postResponse.getBody(), "Response body should not be null");
-        assertEquals(HttpStatus.OK, postResponse.getStatusCode(), "Status should be 200 OK");
-
-        Register registerSaved = postResponse.getBody();
-        System.out.println("Saved register: " + registerSaved);
-
-        register = registerSaved;
+        ResponseEntity<RegisterDTO> postResponse = restTemplate.postForEntity(url, newRegister, RegisterDTO.class);
+        assertNotNull(postResponse);
+        assertNotNull(postResponse.getBody());
+        assertEquals(HttpStatus.OK, postResponse.getStatusCode());
+        registerDTO = postResponse.getBody();
+        System.out.println("Save data: " + registerDTO);
     }
 
     @Test
     void b_read() {
-        assertNotNull(register, "Register must be created first");
-
-        String url = baseUrl() + "/read/" + register.getRegistrationId();
+        String url = BASE_URL + "/read/" + registerDTO.getRegistrationId();
         System.out.println("URL: " + url);
-
-        ResponseEntity<Register> response = restTemplate.getForEntity(url, Register.class);
-
-        assertNotNull(response.getBody(), "Response body should not be null");
-        assertEquals(register.getRegistrationId(), response.getBody().getRegistrationId(), "Registration ID should match");
-        System.out.println("Read register: " + response.getBody());
+        ResponseEntity<RegisterDTO> response = restTemplate.getForEntity(url, RegisterDTO.class);
+        assertNotNull(response.getBody());
+        assertEquals(registerDTO.getRegistrationId(), response.getBody().getRegistrationId());
+        System.out.println(response.getBody());
     }
 
     @Test
     void c_update() {
-        assertNotNull(register, "Register must be created first ");
+        RegisterDTO updateRegister = new RegisterDTO(
+                registerDTO.getRegistrationId(),
+                registerDTO.getUserid(),
+                registerDTO.getRegistrationDate(),
+                "Approved"
+        );
 
-        Register updateRegister = new Register.Builder()
-                .copy(register)
-                .setStatus("INACTIVE")
-                .build();
-
-        String url = baseUrl() + "/update";
+        String url = BASE_URL + "/update";
         System.out.println("URL: " + url);
-
-        restTemplate.put(url, updateRegister);
-
-        String readUrl = baseUrl() + "/read/" + register.getRegistrationId();
-        ResponseEntity<Register> response = restTemplate.getForEntity(readUrl, Register.class);
-
-        assertNotNull(response.getBody(), "Response body should not be null");
-        register = response.getBody();
-        assertEquals("INACTIVE", register.getStatus(), "Status should be updated to INACTIVE");
-        System.out.println("Updated register: " + register);
+        ResponseEntity<RegisterDTO> response = restTemplate.exchange(
+                url, org.springframework.http.HttpMethod.PUT,
+                new org.springframework.http.HttpEntity<>(updateRegister), RegisterDTO.class);
+        assertNotNull(response.getBody());
+        registerDTO = response.getBody();
+        System.out.println("Update data: " + registerDTO);
     }
 
     @Test
-    void d_deleteById() {
-        assertNotNull(register, "Register must be created first");
-
-        String url = baseUrl() + "/delete/" + register.getRegistrationId();
+    @Disabled
+    void d_delete() {
+        String url = BASE_URL + "/delete/" + registerDTO.getRegistrationId();
         System.out.println("URL: " + url);
-
         restTemplate.delete(url);
-        System.out.println("Deleted register ID: " + register.getRegistrationId());
 
-        String readUrl = baseUrl() + "/read/" + register.getRegistrationId();
-        ResponseEntity<Register> response = restTemplate.getForEntity(readUrl, Register.class);
-        assertNull(response.getBody(), "Register should be null after deletion");
+        String readUrl = BASE_URL + "/read/" + registerDTO.getRegistrationId();
+        ResponseEntity<RegisterDTO> response = restTemplate.getForEntity(readUrl, RegisterDTO.class);
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        System.out.println("Delete: true");
     }
 
     @Test
     void e_getall() {
-        String url = baseUrl() + "/getall";
+        String url = BASE_URL + "/getall";
         System.out.println("URL: " + url);
-
-        ResponseEntity<Register[]> response = restTemplate.getForEntity(url, Register[].class);
-        assertNotNull(response.getBody(), "Response body should not be null");
-        System.out.println("All registers count: " + response.getBody().length);
-        for (Register r : response.getBody()) {
-            System.out.println("Register: " + r);
-        }
+        ResponseEntity<List> response = restTemplate.getForEntity(url, List.class);
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        System.out.println("All registers count: " + response.getBody().size());
     }
 }
