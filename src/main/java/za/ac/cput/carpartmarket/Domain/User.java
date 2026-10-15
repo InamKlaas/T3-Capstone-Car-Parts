@@ -60,6 +60,8 @@ public abstract class User {
         return createdAt;
     }
 
+    public void setPassword(String password) { this.password = password; } //added
+
     @Override
     public String toString() {
         return "User{" +

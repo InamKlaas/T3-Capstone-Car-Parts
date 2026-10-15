@@ -11,6 +11,8 @@ import za.ac.cput.carpartmarket.Domain.*;
 import za.ac.cput.carpartmarket.Repository.IUserRepository;
 import java.util.UUID;
 
+import za.ac.cput.carpartmarket.Service.LoginService; //new
+
 import java.util.Optional;
 
 @RestController
@@ -21,6 +23,9 @@ public class AuthController {
     @Autowired
     private IUserRepository userRepository;
 
+    @Autowired
+    private LoginService loginService; //added
+
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequestDTO request){
         Optional<User> userOpt = userRepository.findByEmail(request.getEmail());
@@ -29,6 +34,8 @@ public class AuthController {
         }
         User user = userOpt.get();
         String role = getRole(user);
+
+        loginService.recordLogin(user, request.getEmail(), "SUCCESS");
 
         UserResponseDTO response = new UserResponseDTO(
                 user.getUserid(),
@@ -124,6 +131,22 @@ public class AuthController {
                 saved.getEmail(),"admin"
         );
         return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/reset-password")
+    public ResponseEntity<?> resetPassword(@RequestBody ResetPasswordDTO request) {
+        Optional<User> userOpt = userRepository.findByEmail(request.getEmail());
+
+        if (userOpt.isEmpty()) {
+            return ResponseEntity.status(404).body("No account found with that email");
+        }
+
+        User user = userOpt.get();
+
+        user.setPassword(request.getNewPassword());
+        userRepository.save(user);
+
+        return ResponseEntity.ok("Password reset successful");
     }
 
     private String getRole(User user){
