@@ -1,7 +1,9 @@
 package za.ac.cput.carpartmarket.Domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 
 @Entity
 public class CarPart {
@@ -14,6 +16,11 @@ public class CarPart {
     private String model;
     private Long categoryId;
     private String sellerId;
+    private String status;
+
+    @Lob
+//    @Column(columnDefinition = "TEXT")
+    private String image;
 
     protected CarPart(){
 
@@ -28,6 +35,8 @@ public class CarPart {
         this.model = builder.model;
         this.categoryId = builder.categoryId;
         this.sellerId = builder.sellerId;
+        this.status = builder.status;
+        this.image = builder.image;
     }
 
     public String getCarPartId() {
@@ -62,6 +71,14 @@ public class CarPart {
         return sellerId;
     }
 
+    public String getStatus() { return status; }
+
+    public String getImage() { return image; }
+
+    public void setStatus(String status) { this.status = status; }
+
+//    public void setImage(String image) { this.image = image; }
+
     @Override
     public String toString() {
         return "CarPart{" +
@@ -73,6 +90,8 @@ public class CarPart {
                 ", model='" + model + '\'' +
                 ", categoryId=" + categoryId +
                 ", sellerId=" + sellerId +
+                ", status=" + status +
+                ", image=" + image +
                 '}';
     }
 
@@ -85,6 +104,8 @@ public class CarPart {
         private String model;
         private Long categoryId;
         private String sellerId;
+        private String status;
+        private String image;
 
         public Builder setCarPartId(String carPartId) {
             this.carPartId = carPartId;
@@ -126,6 +147,16 @@ public class CarPart {
             return this;
         }
 
+        public Builder setStatus(String status) {
+            this.status = status;
+            return this;
+        }
+
+        public Builder setImage(String image){
+            this.image = image;
+            return this;
+        }
+
         public Builder copy(CarPart carPart){
             this.carPartId = carPart.carPartId;
             this.partName = carPart.partName;
@@ -135,6 +166,8 @@ public class CarPart {
             this.model = carPart.model;
             this.categoryId = carPart.categoryId;
             this.sellerId = carPart.sellerId;
+            this.status = carPart.status;
+            this.image = carPart.image;
             return this;
         }
 
