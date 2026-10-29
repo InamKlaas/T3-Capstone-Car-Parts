@@ -2,6 +2,7 @@ package za.ac.cput.carpartmarket.Controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,6 +12,7 @@ import za.ac.cput.carpartmarket.Domain.*;
 import za.ac.cput.carpartmarket.Repository.IUserRepository;
 import java.util.UUID;
 
+import za.ac.cput.carpartmarket.Service.JwtService;
 import za.ac.cput.carpartmarket.Service.LoginService; //new
 
 import java.util.Optional;
@@ -21,15 +23,22 @@ import java.util.Optional;
 public class AuthController {
 
     @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private JwtService jwtService;
+
+    @Autowired
     private IUserRepository userRepository;
 
     @Autowired
-    private LoginService loginService; //added
+    private LoginService loginService;
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequestDTO request){
         Optional<User> userOpt = userRepository.findByEmail(request.getEmail());
-        if(userOpt.isEmpty()|| !userOpt.get().getPassword().equals(request.getPassword())){
+
+        if(userOpt.isEmpty()|| !passwordEncoder.matches(request.getPassword(), userOpt.get().getPassword())){
             return ResponseEntity.status(401).body("Wrong email or password");
         }
         User user = userOpt.get();
@@ -37,12 +46,15 @@ public class AuthController {
 
         loginService.recordLogin(user, request.getEmail(), "SUCCESS");
 
+        String token = jwtService.generateToken(user.getEmail(), role);
+
         UserResponseDTO response = new UserResponseDTO(
                 user.getUserid(),
                 user.getName().getFirstName(),
                 user.getName().getLastName(),
                 user.getEmail(),
-                role
+                role,
+                token
         );
         return ResponseEntity.ok(response);
     }
@@ -59,10 +71,10 @@ public class AuthController {
                 .build();
 
         Buyer buyer = new Buyer.Builder()
-                .setUserid(java.util.UUID.randomUUID().toString())
+                .setUserid(UUID.randomUUID().toString())
                 .setBuyerName(buyerName)
                 .setEmail(request.getEmail())
-                .setPassword(request.getPassword())
+                .setPassword(passwordEncoder.encode(request.getPassword()))
                 .setBuyingPart(request.getBuyingPart())
                 .build();
 
@@ -70,7 +82,7 @@ public class AuthController {
 
         UserResponseDTO response = new UserResponseDTO(
                 saved.getUserid(), saved.getBuyerName().getFirstName(),saved.getBuyerName().getLastName(),
-                saved.getEmail(),"buyer"
+                saved.getEmail(),"buyer", null
         );
         return ResponseEntity.ok(response);
     }
@@ -90,7 +102,7 @@ public class AuthController {
                 .setUserid(java.util.UUID.randomUUID().toString())
                 .setSellerName(sellerName)
                 .setEmail(request.getEmail())
-                .setPassword(request.getPassword())
+                .setPassword(passwordEncoder.encode(request.getPassword()))
                 .setSellingPart(request.getSellingPart())
                 .build();
 
@@ -98,7 +110,7 @@ public class AuthController {
 
         UserResponseDTO response = new UserResponseDTO(
                 saved.getUserid(), saved.getSellerName().getFirstName(),saved.getSellerName().getLastName(),
-                saved.getEmail(),"seller"
+                saved.getEmail(),"seller", null
         );
         return ResponseEntity.ok(response);
     }
@@ -118,7 +130,7 @@ public class AuthController {
                 .setUserid(java.util.UUID.randomUUID().toString())
                 .setName(adminName)
                 .setEmail(request.getEmail())
-                .setPassword(request.getPassword())
+                .setPassword(passwordEncoder.encode(request.getPassword()))
                 .setPhoneNumber(request.getPhoneNumber())
                 .setRole(request.getRole())
                 .setPermissions(request.getPermissions())
@@ -128,7 +140,7 @@ public class AuthController {
 
         UserResponseDTO response = new UserResponseDTO(
                 saved.getUserid(), saved.getName().getFirstName(),saved.getName().getLastName(),
-                saved.getEmail(),"admin"
+                saved.getEmail(),"admin", null
         );
         return ResponseEntity.ok(response);
     }
@@ -143,7 +155,7 @@ public class AuthController {
 
         User user = userOpt.get();
 
-        user.setPassword(request.getNewPassword());
+        user.setPassword(passwordEncoder.encode(request.getNewPassword()));
         userRepository.save(user);
 
         return ResponseEntity.ok("Password reset successful");

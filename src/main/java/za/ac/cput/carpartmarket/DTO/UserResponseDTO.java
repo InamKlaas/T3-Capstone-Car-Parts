@@ -6,13 +6,15 @@ public class UserResponseDTO {
     private String lastName;
     private String email;
     private String role;
+    private String token;
 
-    public UserResponseDTO(String userid, String firstName, String lastName, String email, String role) {
+    public UserResponseDTO(String userid, String firstName, String lastName, String email, String role,String token) {
         this.userid = userid;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.role = role;
+        this.token = token;
     }
 
     public String getUserid() {
@@ -34,6 +36,7 @@ public class UserResponseDTO {
     public String getRole() {
         return role;
     }
+    public String getToken() {return token;}
 
     public void setUserid(String userid) {
         this.userid = userid;
@@ -54,4 +57,7 @@ public class UserResponseDTO {
     public void setRole(String role) {
         this.role = role;
     }
+
+    public void setToken(String token) {this.token = token;}
+
 }
