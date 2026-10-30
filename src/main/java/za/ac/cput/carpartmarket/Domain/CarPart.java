@@ -17,9 +17,10 @@ public class CarPart {
     private Long categoryId;
     private String sellerId;
     private String status;
+    private String partCondition;
 
     @Lob
-//    @Column(columnDefinition = "TEXT")
+
     private String image;
 
     protected CarPart(){
@@ -37,6 +38,7 @@ public class CarPart {
         this.sellerId = builder.sellerId;
         this.status = builder.status;
         this.image = builder.image;
+        this.partCondition = builder.partCondition;
     }
 
     public String getCarPartId() {
@@ -75,9 +77,11 @@ public class CarPart {
 
     public String getImage() { return image; }
 
+    public String getPartCondition() { return partCondition; }
+
     public void setStatus(String status) { this.status = status; }
 
-//    public void setImage(String image) { this.image = image; }
+
 
     @Override
     public String toString() {
@@ -91,6 +95,7 @@ public class CarPart {
                 ", categoryId=" + categoryId +
                 ", sellerId=" + sellerId +
                 ", status=" + status +
+                ", partCondition=" + partCondition +
                 ", image=" + image +
                 '}';
     }
@@ -106,6 +111,7 @@ public class CarPart {
         private String sellerId;
         private String status;
         private String image;
+        private String partCondition;
 
         public Builder setCarPartId(String carPartId) {
             this.carPartId = carPartId;
@@ -152,6 +158,11 @@ public class CarPart {
             return this;
         }
 
+        public Builder setPartCondition(String partCondition) {
+            this.partCondition = partCondition;
+            return this;
+        }
+
         public Builder setImage(String image){
             this.image = image;
             return this;
@@ -167,6 +178,7 @@ public class CarPart {
             this.categoryId = carPart.categoryId;
             this.sellerId = carPart.sellerId;
             this.status = carPart.status;
+            this.partCondition = carPart.partCondition;
             this.image = carPart.image;
             return this;
         }

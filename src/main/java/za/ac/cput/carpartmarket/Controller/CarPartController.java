@@ -37,6 +37,7 @@ public class CarPartController {
                 .setModel(incoming.getModel())
                 .setCategoryId(incoming.getCategoryId())
                 .setSellerId(incoming.getSellerId())
+                .setPartCondition(incoming.getPartCondition())
                 .setImage(incoming.getImage())
                 .setStatus("PENDING")
                 .build();

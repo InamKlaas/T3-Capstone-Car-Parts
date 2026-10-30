@@ -30,7 +30,8 @@ class CarPartControllerTest {
             2L,
             "3L",
             "Approved",
-            "IMG"
+            "IMG",
+            "Used"
     );
 
     @Autowired

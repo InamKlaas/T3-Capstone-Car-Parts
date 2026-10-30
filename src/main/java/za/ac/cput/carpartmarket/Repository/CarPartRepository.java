@@ -9,7 +9,5 @@ import java.util.List;
 @Repository
 public interface CarPartRepository extends JpaRepository<CarPart, String> {
 
-//    CarPart findByPartName(String partName);
-//    List<CarPart> findByStatus(String status);
-//    List<CarPart> findBySellerEmail(String sellerEmail);
+
 }
