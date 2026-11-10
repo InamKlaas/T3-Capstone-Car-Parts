@@ -48,7 +48,6 @@ public class LoginService implements ILoginService {
                 .setLoginId(UUID.randomUUID().toString())
                 .setUser(user)
                 .setEmail(email)
-                .setPassword(user.getPassword())   // hashed password only, never raw
                 .setLoginDate(LocalDateTime.now())
                 .setStatus(status)
                 .build();
