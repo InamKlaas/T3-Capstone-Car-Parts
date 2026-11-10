@@ -38,6 +38,7 @@ public class SecurityConfig {
                                 "/api/auth/login",
                                 "/api/auth/register/buyer",
                                 "/api/auth/register/seller",
+                                "/api/auth/forgot-password",
                                 "/api/auth/reset-password").permitAll()
                         // Only an admin can create another admin (the first one comes from AdminSeeder)
                         .requestMatchers(HttpMethod.POST, "/api/auth/register/admin").hasRole("ADMIN")

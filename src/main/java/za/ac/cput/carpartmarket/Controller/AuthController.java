@@ -14,6 +14,7 @@ import java.util.UUID;
 
 import za.ac.cput.carpartmarket.Service.JwtService;
 import za.ac.cput.carpartmarket.Service.LoginService; //new
+import za.ac.cput.carpartmarket.Service.PasswordResetService;
 
 import java.util.Optional;
 
@@ -21,6 +22,9 @@ import java.util.Optional;
 @RequestMapping("/api/auth")
 
 public class AuthController {
+
+    @Autowired
+    private PasswordResetService passwordResetService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -145,32 +149,46 @@ public class AuthController {
         return ResponseEntity.ok(response);
     }
 
+    // Step 1: request a code. Same reply whether or not the account exists.
+    @PostMapping("/forgot-password")
+    public ResponseEntity<?> forgotPassword(@RequestBody ResetPasswordDTO request) {
+        String email = request.getEmail() == null ? "" : request.getEmail().trim().toLowerCase();
+
+        if (userRepository.findByEmail(email).isPresent()) {
+            passwordResetService.issueCode(email);
+        }
+        return ResponseEntity.ok("If an account exists for that email, a reset code has been sent.");
+    }
+
+    // Step 2: reset with the code
     @PostMapping("/reset-password")
     public ResponseEntity<?> resetPassword(@RequestBody ResetPasswordDTO request) {
-        Optional<User> userOpt = userRepository.findByEmail(request.getEmail());
+        String email = request.getEmail() == null ? "" : request.getEmail().trim().toLowerCase();
 
+        if (request.getNewPassword() == null || request.getNewPassword().length() < 6) {
+            return ResponseEntity.badRequest().body("Password must be at least 6 characters.");
+        }
+
+        if (!passwordResetService.verifyAndConsume(email, request.getCode())) {
+            return ResponseEntity.badRequest().body("Invalid or expired code.");
+        }
+
+        Optional<User> userOpt = userRepository.findByEmail(email);
         if (userOpt.isEmpty()) {
-            return ResponseEntity.status(404).body("No account found with that email");
+            return ResponseEntity.badRequest().body("Invalid or expired code.");
         }
 
         User user = userOpt.get();
-
         user.setPassword(passwordEncoder.encode(request.getNewPassword()));
         userRepository.save(user);
 
         return ResponseEntity.ok("Password reset successful");
     }
 
-    private String getRole(User user){
-        if(user instanceof Admin){
-            return "admin";
-        }
-        if(user instanceof Seller){
-            return "seller";
-        }
-        if(user instanceof Buyer){
-            return "buyer";
-        }
+    private String getRole(User user) {
+        if (user instanceof Admin) return "admin";
+        if (user instanceof Seller) return "seller";
+        if (user instanceof Buyer) return "buyer";
         return "unknown";
     }
 }
