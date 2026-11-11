@@ -56,11 +56,11 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.PUT, "/carparts/update").hasAnyRole("SELLER", "ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/carparts/delete/**").hasAnyRole("SELLER", "ADMIN")
 
-                        // ---------- Orders ----------
+                        // ---------- Orders (ownership checked in the controller) ----------
                         .requestMatchers(HttpMethod.POST, "/orders").hasRole("BUYER")
-                        .requestMatchers(HttpMethod.GET, "/orders/**").authenticated()
-                        .requestMatchers(HttpMethod.PUT, "/orders").hasAnyRole("SELLER", "ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/orders/*/ship").hasAnyRole("SELLER", "ADMIN")
                         .requestMatchers(HttpMethod.DELETE, "/orders/**").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/orders", "/orders/**").authenticated()
 
                         // ---------- Categories: anyone reads, admins change ----------
                         .requestMatchers(HttpMethod.GET, "/api/categories/**").permitAll()
